@@ -2,7 +2,7 @@
 -- initialize mod
 local mod = {
 	id = "Template Island",
-	name = "Template Island",
+	name = "Nautilus",
 	description = "An attempt to make adding a new island if not easy, at least accessible!",
 	icon = "scripts/icon.png",
 	dependencies = {"easyEdit"}
