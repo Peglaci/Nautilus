@@ -1,15 +1,15 @@
 
 -- create mission list
-local missionList = easyEdit.missionList:add("example_mission_list_id")
+local missionList = easyEdit.missionList:add("Nautilus_mission_list_id")
 
-missionList.name = "Example"
+missionList.name = "Nautilus"
 
 local HIGH_THREAT = true
 local LOW_THREAT = false
 
--- add our missions to the mission list
-missionList:addMission("Mission_Fence", HIGH_THREAT)
-missionList:addMission("Mission_Piston", HIGH_THREAT)
+--[[ add our missions to the mission list like so
+missionList:addMission("Mission_Easy", LOW_THREAT)
+missionList:addMission("Mission_Hard", HIGH_THREAT)]]
 missionList:addMission("Mission_Train", HIGH_THREAT)
 missionList:addMission("Mission_Laser", LOW_THREAT)
 missionList:addMission("Mission_Wind", LOW_THREAT)

@@ -1,8 +1,8 @@
 
 -- create structure list
-local structureList = easyEdit.structureList:add("example_structure_list_id")
+local structureList = easyEdit.structureList:add("Nautilus_structure_list_id")
 
-structureList.name = "Example"
+structureList.name = "Nautilus"
 
 -- add our structures to the structure list
 structureList:addAssets(

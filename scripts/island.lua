@@ -1,6 +1,6 @@
 
 -- create island
-local island = easyEdit.island:add("example_island_id")
+local island = easyEdit.island:add("Nautilus_island_id")
 
 island.name = "Nautilus"
 

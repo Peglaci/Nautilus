@@ -1,9 +1,9 @@
 
 -- initialize mod
 local mod = {
-	id = "Template Island",
+	id = "Nautilus",
 	name = "Nautilus",
-	description = "An attempt to make adding a new island if not easy, at least accessible!",
+	description = "A subterranean mining operation plagued by Vek, helmed by a man who wants you gone - or else wants your technology. Will you answer the call? ",
 	icon = "scripts/icon.png",
 	dependencies = {"easyEdit"}
 }

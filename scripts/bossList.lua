@@ -1,8 +1,8 @@
 
 -- create boss list
-local bossList = easyEdit.bossList:add("example_boss_list_id")
+local bossList = easyEdit.bossList:add("Nautilus_boss_list_id")
 
-bossList.name = "Example"
+bossList.name = "Nautilus"
 
 -- add our boss missions to the boss list
 bossList:addBoss("Mission_ScorpionBoss")

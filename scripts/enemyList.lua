@@ -1,8 +1,8 @@
 
 -- create enemy list
-local enemyList = easyEdit.enemyList:add("example_enemy_list_id")
+local enemyList = easyEdit.enemyList:add("Nautilus_enemy_list_id")
 
-enemyList.name = "Example"
+enemyList.name = "Nautilus"
 
 -- add our enemies to the enemy list
 enemyList:addEnemy("Scorpion", "Core")
