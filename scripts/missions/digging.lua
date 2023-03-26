@@ -185,8 +185,7 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
   --LOG(GetCurrentMission().DigSite)
   --Mission things
   if mission.DigSite and p1 == mission.DigSite then
-    LOG("hello")
-    ret:AddScript("LOG(\"goodbyg\");GetCurrentMission().DigSite = nil")
+    ret:AddScript("GetCurrentMission().DigSite = nil")
   end
 
   --Reset Terrain and Crack Tile, animations etc.
