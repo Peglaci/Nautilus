@@ -16,14 +16,21 @@ function mod:init()
 	require(self.scriptPath.."tileset")
 	require(self.scriptPath.."bossList")
 	require(self.scriptPath.."enemyList")
-	require(self.scriptPath.."missionList")
+	--require(self.scriptPath.."missionList") Move to /missions/init.lua
 	require(self.scriptPath.."structures")
 	require(self.scriptPath.."structureList")
 	require(self.scriptPath.."island_composite")
+
+	self.libs = {}
+	--self.libs.modApiExt = modapiext
+	self.libs.weaponPreview = require(self.scriptPath.."libs/weaponPreview")
+
+	self.missions = require(self.scriptPath.."missions/init")
+	self.missions:init(self)
 end
 
 function mod:load(options, version)
-	
+
 end
 
 return mod
