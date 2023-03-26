@@ -38,9 +38,9 @@ function Env_Falling_Mountains:MarkSpace(space,active)
 	end
 end
 
-function Env_Final:ApplyStart() --Runs once before the effect
+function Env_Falling_Mountains:ApplyStart() --Runs once before the effect
 	local effect = SkillEffect()
-	effect:AddBoardShake(4) --This didn't work?
+	effect:AddBoardShake(2) --Time
 	Board:AddEffect(effect)
 end
 
