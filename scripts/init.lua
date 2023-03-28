@@ -5,7 +5,11 @@ local mod = {
 	name = "Nautilus",
 	description = "A subterranean mining operation plagued by Vek, helmed by a man who wants you gone - or else wants your technology. Will you answer the call? ",
 	icon = "scripts/icon.png",
-	dependencies = {"easyEdit"}
+	dependencies = {
+		modApiExt = "1.18",
+		memedit = "1.0.2",
+		easyEdit = "2.0.4",
+	},
 }
 
 function mod:init()
@@ -21,9 +25,9 @@ function mod:init()
 	require(self.scriptPath.."structureList")
 	require(self.scriptPath.."island_composite")
 	require(self.scriptPath .."waterfall")
-	
+
 	self.libs = {}
-	--self.libs.modApiExt = modapiext
+	self.libs.modApiExt = modapiext
 	self.libs.weaponPreview = require(self.scriptPath.."libs/weaponPreview")
 
 	self.missions = require(self.scriptPath.."missions/init")
