@@ -20,7 +20,8 @@ function mod:init()
 	require(self.scriptPath.."structures")
 	require(self.scriptPath.."structureList")
 	require(self.scriptPath.."island_composite")
-
+	require(self.scriptPath .."waterfall")
+	
 	self.libs = {}
 	--self.libs.modApiExt = modapiext
 	self.libs.weaponPreview = require(self.scriptPath.."libs/weaponPreview")
