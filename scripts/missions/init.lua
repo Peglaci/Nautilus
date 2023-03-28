@@ -23,6 +23,7 @@ local Nautilus_Missions = {
   {"Incinerator",LOW_THREAT}, --Incomplete
   {"Falling_Mountains",LOW_THREAT}, --Incomplete
   {"Digging",LOW_THREAT}, --Incomplete
+	{"Crumbling",LOW_THREAT}, --Incomplete, testing
 }
 
 function this:init(mod)
@@ -42,7 +43,7 @@ function this:init(mod)
     local threat = table[2]
     require(path..string.lower(name))
     missionList:addMission(mission_name, threat)
-    
+
     --Icons
     local icon = "img/strategy/mission/"..mission_name..".png"
     local small_icon = "img/strategy/mission/small/"..mission_name..".png"
