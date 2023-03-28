@@ -6,15 +6,6 @@ require(mod.scriptPath.."libs/boardEvents")
 local TILESET = "Nautilus_tileset_id"
 local WATERFALL = TILESET .. "_Waterfall"
 
--- -------------
--- -- SPRITES --
--- -------------
-
-modApi:appendAsset("img/combat/tiles_grass/"..WATERFALL.."_U.png",mod.resourcePath.."img/tileset/waterfall_U.png")
-modApi:appendAsset("img/combat/tiles_grass/"..WATERFALL.."_R.png",mod.resourcePath.."img/tileset/waterfall_R.png")
-modApi:appendAsset("img/combat/tiles_grass/"..WATERFALL.."_D.png",mod.resourcePath.."img/tileset/waterfall_D.png")
-modApi:appendAsset("img/combat/tiles_grass/"..WATERFALL.."_L.png",mod.resourcePath.."img/tileset/waterfall_L.png")
-
 ----------------
 -- ANIMATIONS --
 ----------------
@@ -29,19 +20,19 @@ ANIMS[WATERFALL] = Animation:new{
 
 --Perspective of the hole
 ANIMS['0'..WATERFALL] = ANIMS[WATERFALL]:new{
-	Image = "combat/tiles_grass/"..WATERFALL.."_D.png", PosX = -11, PosY = 7
+    Image = "combat/tiles_"..TILESET.."/waterfall_D.png", PosX = -11, PosY = 7
 }
 
 ANIMS['1'..WATERFALL] = ANIMS[WATERFALL]:new{
-	Image = "combat/tiles_grass/"..WATERFALL.."_R.png", PosX = -27, PosY = 7
+    Image = "combat/tiles_"..TILESET.."/waterfall_R.png", PosX = -27, PosY = 7
 }
 
 ANIMS['2'..WATERFALL] = ANIMS[WATERFALL]:new{
-	Image = "combat/tiles_grass/"..WATERFALL.."_U.png", PosX = -28, PosY = 25 
+    Image = "combat/tiles_"..TILESET.."/waterfall_U.png", PosX = -28, PosY = 25 
 }
 
 ANIMS['3'..WATERFALL] = ANIMS[WATERFALL]:new{
-	Image = "combat/tiles_grass/"..WATERFALL.."_L.png", PosX = -10, PosY = 25
+    Image = "combat/tiles_"..TILESET.."/waterfall_L.png", PosX = -10, PosY = 25
 }
 
 local order = {0,3,2,1} -- needed to align waterfall position and sprite display order
