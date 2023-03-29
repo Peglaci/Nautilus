@@ -1,28 +1,28 @@
 
 -- create all of our structures.
 CreateStructure{
-	Id = "Str_Agroforest",
-	Name = "Agroforest",
+	Id = "Str_MaterialsFacility",
+	Name = "Materials Facility",
 	Path = "img/structures/",
-	Image = "agroforest",
+	Image = "materialsfacility",
 	ImageOffset = Point(-28,-8),
 	Reward = REWARD_TECH
 }
 
 CreateStructure{
-	Id = "Str_Depot",
-	Name = "Depot",
+	Id = "Str_ThermalPile",
+	Name = "Thermal Pile",
 	Path = "img/structures/",
-	Image = "depot",
+	Image = "thermalpile",
 	ImageOffset = Point(-17,4),
 	Reward = REWARD_POWER
 }
 
 CreateStructure{
-	Id = "Str_Greenhouse",
-	Name = "Greenhouse",
+	Id = "Str_Mine",
+	Name = "Mine",
 	Path = "img/structures/",
-	Image = "greenhouse",
+	Image = "mine",
 	ImageOffset = Point(-23,0),
 	Reward = REWARD_REP
 }

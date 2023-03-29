@@ -6,9 +6,9 @@ structureList.name = "Nautilus"
 
 -- add our structures to the structure list
 structureList:addAssets(
-	"Str_Agroforest",
-	"Str_Depot",
-	"Str_Greenhouse",
+	"Str_MaterialsFacility",
+	"Str_ThermalPile",
+	"Str_Mine",
 
 	"Str_Robotics",
 	"Str_Research",
@@ -17,4 +17,3 @@ structureList:addAssets(
 	"Str_Power",
 	"Str_Bar"
 )
-

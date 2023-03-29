@@ -1,7 +1,7 @@
 
 return {
 	-- Universal Missions
-	Mission_Train_Briefing = {"With resources running low, managing and transporting them to affected areas becomes an even bigger logistical priority. Defend the electric train that has evolved into our main supply line."},
+	Mission_Train_Briefing = {"TOOT TOOT FUCKER"},
 	Mission_Train_Success = {"The region was decontaminated and the train is still running. By making sure that those supplies reach their destination, you saved many lives today, mon ami."},
 	Mission_Train_Failure = {"Losing our most efficient transportation method is a blow to our survivability. We'll have to allocate resources to fix the train... or salvage what remains."},
 	Mission_Train_Partial = {"The region was decontaminated, but the train is severely damaged. We will start the repairs as soon as possible."},
