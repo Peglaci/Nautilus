@@ -23,7 +23,8 @@ local Nautilus_Missions = {
   {"Incinerator",LOW_THREAT}, --Incomplete
   {"Falling_Mountains",LOW_THREAT}, --Incomplete
   {"Digging",LOW_THREAT}, --Incomplete
-	{"Crumbling",LOW_THREAT}, --Incomplete, testing
+  {"Crumbling",LOW_THREAT}, --Incomplete, testing
+  {"Spikes",LOW_THREAT}, --Incomplete, testing
 }
 
 function this:init(mod)
