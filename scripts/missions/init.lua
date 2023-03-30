@@ -24,6 +24,8 @@ local Nautilus_Missions = {
   {"Falling_Mountains",LOW_THREAT}, --Incomplete
   {"Digging",LOW_THREAT}, --Incomplete
 	{"Crumbling",LOW_THREAT}, --Incomplete, testing
+	{"Walls",HIGH_THREAT}, --Incomplete
+	{"Crystals",HIGH_THREAT}, --ChatGPT, incomplete
 }
 
 function this:init(mod)
