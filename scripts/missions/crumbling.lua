@@ -74,7 +74,6 @@ function Env_Nautilus_Crumbling:Start()
     for j=0,board_size.y-1 do
       local point = Point(i,j)
       if self:PointIsEdge(point) then
-        LOG(point)
         Board:BlockSpawn(point,BLOCKED_TEMP) --Is working?
       end
     end
@@ -109,7 +108,6 @@ function Env_Nautilus_Crumbling:ApplyStart() --Runs once before the effect
       for j=0,board_size.y-1 do
         local point = Point(i,j)
         if self:PointIsEdge(point) then
-          LOG(point)
           Board:BlockSpawn(point,BLOCKED_PERM)--Is working?
         end
       end

@@ -63,12 +63,12 @@ not Board:IsBuilding(space) and
 Objectives:
 In the mission definition, you give it the Objectives() Class
 Here's what I found about it.
-Objectives(string, int)
+Objectives(string, int) The initial creation should use this
 string: Name of the objective. This is what will show up when winning and on the select screen, but not in game
 int: The amount of rep to give. There is no limit, but uh, use caution.
-Objectives(string, int, int)
+Objectives(string, int, int) The return in GetCompletedObjectives can return this to partially complete it
 string: Name of the objective. This is what will show up when winning and on the select screen, but not in game
-int: I actually have no clue
+int: How many to reward
 int: How much rep to give. There is no limit, but uh, use caution.
 There are other types you can use, but I haven't looked into them
 
@@ -78,18 +78,19 @@ Mission:GetCompletedObjectives()
 This is run at the end of the mission to check if you passed the objective
 if you passed, return self.Objectives
 if you failed, return self.Objectives:Failed()
+if you partially won, return a new objecive with the same name, but with the second int, as stated above
 
 Mission:UpdateObjectives()
 This runs during the mission to update the sidebar.
-Use Game:AddObjective(string, int, int, int)
+Use Game:AddObjective(string, int, int, int, optional int)
 string: The string to display. You can use string.format to have it edit itself during the mission, see example
 int: The status, either OBJ_COMPLETE, OBJ_FAILED, or OBJ_STANDARD for neither state
 int: The type of reward, REWARD_REP or REWARD_POWER
 int: How many of the reward. This should match the previous.
+int: How many of those stars are currently failed
 
 What I haven't looked into:
 Multiple Objectives in a mission
-Partially Complete Objectives (acid tank)
 ]]
 
 -- mission Mission_Nautilus_Incinerator
@@ -130,14 +131,14 @@ Global_Texts = {
   TipText_Env_Incinerator = "The incinerator will shred units on it",
 }
 
-TILE_TOOLTIPS = {
-  NAH_Incinerator = {"Incinerator","The incinerator will shred any unit standing here."}
+TILE_TOOLTIPS = { --why is this not working now
+  Nautilus_Incinerator = {"Incinerator","The incinerator will shred any unit standing here."}
 }
 
 function Env_Incinerator:MarkBoard()
   local point = self.Incinerator
   --Board:SetCustomTile(point,"conveyor"..self.BeltsDir[i]..".png")
-  Board:MarkSpaceDesc(point,"NAH_Incinerator",EFFECT_DEADLY) --Text in TILE_TOOLTIPS
+  Board:MarkSpaceDesc(point,"Nautilus_Incinerator",EFFECT_DEADLY) --Text in TILE_TOOLTIPS
   --Board:SetTerrainIcon(point,"arrow_"..self.BeltsDir[i])
 end
 
