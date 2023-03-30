@@ -1,6 +1,5 @@
 local mod = mod_loader.mods[modApi.currentMod]
 local customAnim = require(mod.scriptPath.."libs/customAnim")
-require(mod.scriptPath.."libs/boardEvents")
 
 --waterfall name and tileset
 local TILESET = "Nautilus_tileset_id"
@@ -28,7 +27,7 @@ ANIMS['1'..WATERFALL] = ANIMS[WATERFALL]:new{
 }
 
 ANIMS['2'..WATERFALL] = ANIMS[WATERFALL]:new{
-    Image = "combat/tiles_"..TILESET.."/waterfall_U.png", PosX = -28, PosY = 25 
+    Image = "combat/tiles_"..TILESET.."/waterfall_U.png", PosX = -28, PosY = 25
 }
 
 ANIMS['3'..WATERFALL] = ANIMS[WATERFALL]:new{

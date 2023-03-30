@@ -13,6 +13,8 @@ local mod = {
 }
 
 function mod:init()
+	require(mod.scriptPath.."libs/boardEvents")
+
 	require(self.scriptPath.."island")
 	require(self.scriptPath.."ceo/ceo")
 	require(self.scriptPath.."corporation/pilot")
