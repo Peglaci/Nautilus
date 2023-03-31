@@ -20,11 +20,6 @@ Env_Falling_Mountains = Env_Attack:new{
 	--Image = "env_lightning",
 }
 
-Global_Texts = {
-  TipTitle_Env_Falling_Mountains = "Falling Mountains",
-  TipText_Env_Falling_Mountains = "Mountains fall from the sky, killing any unit it lands on.",
-}
-
 function Env_Falling_Mountains:MarkSpace(space,active)
 	Board:MarkSpaceImage(space,self.CombatIcon, GL_Color(255,226,88,0.75))
 	Board:MarkSpaceDesc(space,"NAH_Falling_Mountain", EFFECT_DEADLY)
@@ -80,13 +75,6 @@ function Env_Falling_Mountains:SelectSpaces()
 
 	return ret
 end
-
-
-local function EVENT_onModsLoaded()
-	TILE_TOOLTIPS.NAH_Falling_Mountain = {"Falling Mountain","A mountain will fall here, killing any unit under it."}
-end
-
-modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
 
 --[[
 function Mission_NAH_Incinerator:GetCompletedObjectives()

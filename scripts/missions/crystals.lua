@@ -1,3 +1,6 @@
+-- mission Mission_Nautilus_Crystals
+--Mission By: NamesAreHard: NAH (and chat GPT)
+
 Mission_Nautilus_Crystals = Mission_Infinite:new{
   Name = "Crystals",
   Crystals = 4,

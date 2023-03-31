@@ -59,6 +59,8 @@ function this:init(mod)
       modApi:appendAsset(small_icon, resourcePath..small_icon)
     end
   end
+
+	require(path.."text")
 end
 
 return this

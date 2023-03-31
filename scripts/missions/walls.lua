@@ -1,12 +1,6 @@
 -- mission Mission_Nautilus_Digging
 --Mission By: NamesAreHard: NAH
---[[
-"Normal Missions"
-Mission Definition:
-Name = Name of the mission
-Objectives = Objective()
 
-]]
 
 
 local mod = mod_loader.mods[modApi.currentMod]
@@ -116,10 +110,3 @@ BoardEvents.onItemRemoved:subscribe(function(loc, removed_item)
     Board:AddEffect(effect)
   end
 end)
-
-
-local function EVENT_onModsLoaded()
-	TILE_TOOLTIPS.NAH_Pressure_Plate_Text = {"Pressure Plate","Triggers security walls to pop up on all 4 sides. Send other enemeis flying."}
-end
-
-modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)

@@ -194,13 +194,6 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
 end
 
 
-local function EVENT_onModsLoaded()
-	TILE_TOOLTIPS.NAH_Dig_Site = {"Dig Site","Excavate the Vek on this spot with the Excavator."}
-end
-
-modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
-
-
 --[[
 
 Spawn Enemy Pawn (plays the emerge animation)

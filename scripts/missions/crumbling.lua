@@ -1,3 +1,6 @@
+-- mission Mission_Nautilus_Crumbling
+--Mission By: NamesAreHard: NAH
+
 local mod = mod_loader.mods[modApi.currentMod]
 
 Mission_Nautilus_Crumbling = Mission_Auto:new{
@@ -22,11 +25,6 @@ Env_Nautilus_Crumbling = Env_Attack:new{
   Planned = {},
   Instant = true,
 	--Image = "env_lightning",
-}
-
-Global_Texts = {
-  TipTitle_Env_Nautilus_Crumbling = "Crumbling Cave",
-  TipText_Env_Nautilus_Crumbling = "The land slowly crumbles from the outside in.",
 }
 
 function Env_Nautilus_Crumbling:IsValidTarget(space)
@@ -136,10 +134,3 @@ function Env_Nautilus_Crumbling:SelectSpaces()
 
   return ret
 end
-
-
-local function EVENT_onModsLoaded()
-	TILE_TOOLTIPS.NAH_Crumbling = {"Crumbling Tile","This tile will crumble out of existence."}
-end
-
-modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
