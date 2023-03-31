@@ -27,6 +27,7 @@ function mod:init()
 	require(self.scriptPath.."structureList")
 	require(self.scriptPath.."island_composite")
 	require(self.scriptPath .."waterfall")
+	require(self.scriptPath.."background")
 
 	self.libs = {}
 	self.libs.modApiExt = modapiext
@@ -38,6 +39,15 @@ end
 
 function mod:load(options, version)
 
+end
+
+function mod:metadata()
+	modApi:addGenerationOption(
+		"Nautilus_CaveBackground",
+		"Cave Background",
+		"Check to turn on the cave background in each mission. Requires a restart.",
+		{ enabled = false } --Change default later
+	)
 end
 
 return mod

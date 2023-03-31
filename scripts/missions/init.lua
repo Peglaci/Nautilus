@@ -52,7 +52,7 @@ function this:init(mod)
     local icon = "img/strategy/mission/"..mission_name..".png"
     local small_icon = "img/strategy/mission/small/"..mission_name..".png"
 
-    if file_exists(resourcePath..icon) then
+    if file_exists(resourcePath..icon) then --Could convert to appendAssets?
       modApi:appendAsset(icon, resourcePath..icon)
     end
     if file_exists(resourcePath..small_icon) then
