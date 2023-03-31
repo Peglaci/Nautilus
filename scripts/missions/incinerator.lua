@@ -131,10 +131,6 @@ Global_Texts = {
   TipText_Env_Incinerator = "The incinerator will shred units on it",
 }
 
-TILE_TOOLTIPS = { --why is this not working now
-  Nautilus_Incinerator = {"Incinerator","The incinerator will shred any unit standing here."}
-}
-
 function Env_Incinerator:MarkBoard()
   local point = self.Incinerator
   --Board:SetCustomTile(point,"conveyor"..self.BeltsDir[i]..".png")
@@ -200,3 +196,9 @@ function Mission_Nautilus_Incinerator:UpdateObjectives()
 	local status = self.Incinerated >= 2 and OBJ_COMPLETE or OBJ_STANDARD
 	Game:AddObjective(string.format("Incinerate 2 Vek\n(%s/2 incinerated)",tostring(self.Incinerated)),status, REWARD_REP, 1)
 end
+
+local function EVENT_onModsLoaded()
+	TILE_TOOLTIPS.Nautilus_Incinerator = {"Incinerator","The incinerator will shred any unit standing here."}
+end
+
+modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)

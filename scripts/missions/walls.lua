@@ -19,11 +19,6 @@ Mission_Nautilus_Walls = Mission_Infinite:new{
   BlockedUnits = {"Jelly_Explode", "Dung"},
 }
 
---Pressure Plates
-TILE_TOOLTIPS = {
-  NAH_Pressure_Plate_Text = {"Pressure Plate","Triggers security walls to pop up on all 4 sides. Send other enemeis flying."}
-}
-
 local mine_damage = SpaceDamage(0)
 
 NAH_Pressure_Plate = {
@@ -121,3 +116,10 @@ BoardEvents.onItemRemoved:subscribe(function(loc, removed_item)
     Board:AddEffect(effect)
   end
 end)
+
+
+local function EVENT_onModsLoaded()
+	TILE_TOOLTIPS.NAH_Pressure_Plate_Text = {"Pressure Plate","Triggers security walls to pop up on all 4 sides. Send other enemeis flying."}
+end
+
+modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)

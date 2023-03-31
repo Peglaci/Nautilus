@@ -29,10 +29,6 @@ Global_Texts = {
   TipText_Env_Nautilus_Crumbling = "The land slowly crumbles from the outside in.",
 }
 
-TILE_TOOLTIPS = {
-  NAH_Crumbling = {"Crumbling Tile","This tile will crumble out of existence."}
-}
-
 function Env_Nautilus_Crumbling:IsValidTarget(space)
   local tile = Board:GetTerrain(space)
 
@@ -120,6 +116,7 @@ function Env_Nautilus_Crumbling:GetAttackEffect(location,effect) --When instant,
 	damage.iTerrain = TERRAIN_HOLE
 	--damage.fDelay = 0.2
   effect:AddDamage(damage)
+  effect:AddScript(string.format("AddCustomWaterfall(%s)",location:GetString()))
   return effect
 end
 
@@ -139,3 +136,10 @@ function Env_Nautilus_Crumbling:SelectSpaces()
 
   return ret
 end
+
+
+local function EVENT_onModsLoaded()
+	TILE_TOOLTIPS.NAH_Crumbling = {"Crumbling Tile","This tile will crumble out of existence."}
+end
+
+modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)

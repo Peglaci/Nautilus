@@ -39,10 +39,6 @@ Mission_Nautilus_Digging = Mission:new{
   PawnId = nil,
 }
 
-TILE_TOOLTIPS = {
-  NAH_Dig_Site = {"Dig Site","Excavate the Vek on this spot with the Excavator."}
-}
-
 function Mission_Nautilus_Digging:IsPointValid(space)
   local tile = Board:GetTerrain(space)
   local dist = Board:GetPawn(self.Excavator):GetSpace():Manhattan(space)
@@ -198,7 +194,11 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
 end
 
 
+local function EVENT_onModsLoaded()
+	TILE_TOOLTIPS.NAH_Dig_Site = {"Dig Site","Excavate the Vek on this spot with the Excavator."}
+end
 
+modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
 
 
 --[[
