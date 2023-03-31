@@ -7,20 +7,20 @@ Location["effects/spike.png"] = Point(-20,0)
 ANIMS.Nautilus_explo_spikes = Animation:new{
 	Image = "effects/explo_spikes.png",
 	NumFrames = 10,
-	Time = 0.075,
+	Time = 0.045,
 	PosX = -24,
 	PosY = -4
 }
 
 
 TILE_TOOLTIPS = {
-	Nautilus_Spike_Text = {"Crystal Spikes", "Deals 1 Damage to units that move onto its tile."},	
+	Spikes = {"Spikes", "Deals 1 Damage to units that move onto it."},	
 }
 
 local mine_damage = SpaceDamage(1)
 mine_damage.sSound = "Science_KO_Crack_OnKill"
 mine_damage.sAnimation = "Nautilus_explo_spikes"
-Nautilus_Spike_Mine = { Image = "effects/spike.png", Damage = mine_damage, Tooltip = "Nautilus_Spike_Text", Icon = "effects/spike.png", UsedImage = ""}
+Nautilus_Spike_Mine = { Image = "effects/spike.png", Damage = mine_damage, Tooltip = "Spikes", Icon = "effects/spike.png", UsedImage = ""}
 
 Mission_Nautilus_Spikes = Mission_Infinite:new{ 
 	Name = "Spikes",

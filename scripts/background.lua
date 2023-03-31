@@ -19,7 +19,7 @@ local function HOOK_AddBackground(mission)
   if options.Nautilus_CaveBackground and options.Nautilus_CaveBackground.enabled and modApi:getCurrentTileset() == TILESET then
     --customAnim:add(Point(0,0),"cave_background") --If we want to remove it later, but I don't think we do.
     --Just adding it normally allows it to stay at mission end, unless that is fixed
-    Board:AddAnimation(Point(0,0),"cave_background",ANIM_NO_DELAY)
+	Board:AddAnimation(Point(0,0),"cave_background",ANIM_NO_DELAY)
   end
 end
 
