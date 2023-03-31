@@ -138,10 +138,49 @@ local function HOOK_mapEntered(mission)
 	end
 end
 
+local function HOOK_missionEnd(mission)
+	for x = 0, 7 do
+		for y = 0, 7 do
+			local point = Point(x,y)
+			for i,j in pairs(order) do -- re-do waterfalls on tile
+				customAnim:rem(point,j..WATERFALL)
+				if modApi:getCurrentTileset() == TILESET and Board:GetTerrain(point) == TERRAIN_HOLE then
+					local curr = point + DIR_VECTORS[i-1]
+					if Board:IsValid(curr) then
+						if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
+							if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
+								Board:AddAnimation(point,j..WATERFALL,1)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+-- for use outside of this script
+function AddCustomWaterfall(point)
+	if modApi:getCurrentTileset() == TILESET then
+		for i,j in pairs(order) do -- re-do waterfalls on tile
+			customAnim:rem(point,j..WATERFALL)
+			local curr = point + DIR_VECTORS[i-1]
+			if Board:IsValid(curr) then
+				if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
+					if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
+						customAnim:add(curr,j..WATERFALL)
+					end
+				end
+			end
+		end
+	end
+end
+
 -- add hooks
 local function EVENT_onModsLoaded()
 	modApi:addTestMechEnteredHook(HOOK_mapEntered)
 	modApi:addMissionStartHook(HOOK_mapEntered)
+	modApi:addMissionEndHook(HOOK_missionEnd)
 end
 
 modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
