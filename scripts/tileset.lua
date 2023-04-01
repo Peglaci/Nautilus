@@ -11,13 +11,14 @@ tileset:setClimate("Subterranean")
 
 -- percentage chance of a mission having rain
 tileset:setRainChance(0)
+tileset:setCrackChance(10)
 
 -- percentage chance that a regular ground tile gets changed to the following
 tileset:setEnvironmentChance{
-	[TERRAIN_ACID] = 10,
+	[TERRAIN_ACID] = 0,
 	[TERRAIN_FOREST] = 10,
-	[TERRAIN_SAND] = 10,
-	[TERRAIN_ICE] = 10,
+	[TERRAIN_SAND] = 0,
+	[TERRAIN_ICE] = 0,
 }
 
 -- set custom tooltip text for various tile types
