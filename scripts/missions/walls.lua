@@ -64,7 +64,7 @@ function Mission_Nautilus_Walls:GetCompletedObjectives()
   if self.Triggered >= 4 then
     return self.Objectives
   elseif self.Triggered >= 2 then
-    return Objective(string.format("Trigger All the Pressure Plates\n (%s/%s triggered)",self.Triggered,self.Plates),1,2)
+    return Objective(string.format("Trigger All the Pressure Plates (%s/%s triggered)",self.Triggered,self.Plates),1,2) --\n missing
   else
     return self.Objectives:Failed()
   end

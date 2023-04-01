@@ -28,7 +28,7 @@ function Mission_Nautilus_Crystals:GetCompletedObjectives()
   if self.Crystals <= self.CrystalsDestroyed then
     return self.Objectives
   elseif self.CrystalsDestroyed >= 2 then
-    return Objective(string.format("Destroy %s Crystals\n%s/%s destroyed",self.Crystals,self.CrystalsDestroyed,self.Crystals),1,2)
+    return Objective(string.format("Destroy %s Crystals %s/%s destroyed",self.Crystals,self.CrystalsDestroyed,self.Crystals),1,2) --\n missing
   else
     return self.Objectives:Failed()
   end
