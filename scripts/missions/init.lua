@@ -24,15 +24,9 @@ local Nautilus_Missions = {
   {"Falling_Mountains",LOW_THREAT}, --Incomplete
   {"Digging",LOW_THREAT}, --Incomplete
   {"Crumbling",LOW_THREAT}, --Incomplete, testing
-   {"Spikes",HIGH_THREAT}, --Added multiple times to increase likelyhood of it showing up
-  {"Spikes",HIGH_THREAT}, 
-  {"Spikes",HIGH_THREAT},  
-    {"Spikes",LOW_THREAT}, --Added multiple times to increase likelyhood of it showing up
-  {"Spikes",LOW_THREAT}, 
-  {"Spikes",LOW_THREAT},  
+  {"Spikes",LOW_THREAT},
 	{"Walls",HIGH_THREAT}, --Incomplete
 	{"Crystals",HIGH_THREAT}, --ChatGPT, incomplete
-
 }
 
 function this:init(mod)
