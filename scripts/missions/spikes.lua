@@ -14,9 +14,6 @@ ANIMS.Nautilus_explo_spikes = Animation:new{
 	PosY = -4
 }
 
-
-
-
 local mine_damage = SpaceDamage(1)
 mine_damage.sSound = "Science_KO_Crack_OnKill"
 mine_damage.sAnimation = "Nautilus_explo_spikes"

@@ -8,12 +8,12 @@ island.name = "Nautilus"
 island:appendAssets("img/island/")
 
 -- see the easyEdit wiki for details on everything below
-island.shift = Point(14,13)
-island.magic = Point(145,102)
+island.shift = Point(0,0)
+island.magic = Point(0,0)
 
 island.regionData = {
 	RegionInfo(Point(13,105), Point(10,-45), 100),
-	RegionInfo(Point(100,12), Point(0,-20), 300),
+	RegionInfo(Point(100,12), Point(0,-20), 3000),
 	RegionInfo(Point(98,78), Point(0,-20), 100),
 	RegionInfo(Point(64,172), Point(10,-30), 100),
 	RegionInfo(Point(172,92), Point(-10,-20), 100),
