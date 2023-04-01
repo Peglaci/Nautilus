@@ -1,5 +1,5 @@
 local mod = mod_loader.mods[modApi.currentMod]
-local customAnim = require(mod.scriptPath.."libs/customAnim")
+local customAnim = mod.libs.customAnim
 
 --waterfall name and tileset
 local TILESET = "Nautilus_tileset_id"

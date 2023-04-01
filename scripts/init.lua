@@ -13,6 +13,11 @@ local mod = {
 }
 
 function mod:init()
+	self.libs = {}
+	self.libs.modApiExt = modapiext
+	self.libs.weaponPreview = require(self.scriptPath.."libs/weaponPreview")
+	self.libs.customAnim = require(mod.scriptPath.."libs/customAnim")
+
 	require(mod.scriptPath.."libs/boardEvents")
 
 	require(self.scriptPath.."island")
@@ -28,10 +33,6 @@ function mod:init()
 	require(self.scriptPath.."island_composite")
 	require(self.scriptPath .."waterfall")
 	require(self.scriptPath.."background")
-
-	self.libs = {}
-	self.libs.modApiExt = modapiext
-	self.libs.weaponPreview = require(self.scriptPath.."libs/weaponPreview")
 
 	self.missions = require(self.scriptPath.."missions/init")
 	self.missions:init(self)
