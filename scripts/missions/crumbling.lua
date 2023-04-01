@@ -92,28 +92,38 @@ function Env_Nautilus_Crumbling:ApplyStart() --Runs once before the effect
 
   local turn = Board:GetTurn()
   --BLOCK NEW SPAWNS
-  modApi:conditionalHook(
+  modApi:conditionalHook( --THIS IS REALLY HACKY AND BAD IT NEEDS TO MOVE SOMEWEHERE ELSE
   function()
-    return Board:GetTurn() > turn+1--We got to wait like, forever cause block spawn hates me
+    return not Board or Board:GetTurn() > turn+1--We got to wait like, forever cause block spawn hates me
   end,
   function()
-    local board_size = Board:GetSize()
-    for i=0,board_size.x-1 do
-      for j=0,board_size.y-1 do
-        local point = Point(i,j)
-        if self:PointIsEdge(point) then
-          Board:BlockSpawn(point,BLOCKED_PERM)--Is working?
+    if Board then
+      local board_size = Board:GetSize()
+      for i=0,board_size.x-1 do
+        for j=0,board_size.y-1 do
+          local point = Point(i,j)
+          if self:PointIsEdge(point) then
+            Board:BlockSpawn(point,BLOCKED_PERM)--Is working?
+          end
         end
       end
     end
   end)
 end
-
+--TEST CRUBMLING THIGN
 function Env_Nautilus_Crumbling:GetAttackEffect(location,effect) --When instant, passes in effect
   local damage = SpaceDamage(location)
-	damage.iTerrain = TERRAIN_HOLE
-	--damage.fDelay = 0.2
-  effect:AddDamage(damage)
+  if location ~= Point(0,0) then --Could be better
+    damage.iTerrain = TERRAIN_HOLE
+  	--damage.fDelay = 0.2
+    effect:AddDamage(damage)
+  else
+    damage.iCrack = EFFECT_CREATE
+    effect:AddDamage(damage)
+    damage.iDamage = 1
+    effect:AddDamage(damage)
+  end
+
   effect:AddScript(string.format("AddCustomWaterfall(%s)",location:GetString()))
   return effect
 end
