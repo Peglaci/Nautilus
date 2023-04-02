@@ -31,7 +31,7 @@ return {
 		Crystal Caverns,
 		Magma Tunnels,
 		Lithium Labyrinth,
-		Deep Abyssal Drifts,
+		Abyssal Drifts,
 		Diamond Nexus,
 		Riftfall,
 		Zero Point,
