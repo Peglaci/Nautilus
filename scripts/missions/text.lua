@@ -6,9 +6,6 @@ Global_Texts = {
   TipTitle_Env_Falling_Mountains = "Falling Mountains",
   TipText_Env_Falling_Mountains = "Mountains fall from the sky, killing any unit it lands on.",
 
-  TipTitle_Env_Incinerator = "Incinerator",
-  TipText_Env_Incinerator = "The incinerator will shred units on it, killing them instantly.",
-
 }
 
 TILE_TOOLTIPS = {
@@ -19,9 +16,9 @@ TILE_TOOLTIPS = {
 
   NAH_Falling_Mountain = {"Falling Mountain","A mountain will fall here, killing any unit under it."},
 
-  Nautilus_Incinerator = {"Incinerator","The incinerator will shred any unit standing here."},
+  Nautilus_Incinerator = {"Incinerator","Ground units pushed in will be shred by the incinerator."},
 
   NAH_Pressure_Plate_Text = {"Pressure Plate","Triggers security walls to pop up on all 4 sides. Send other enemeis flying."},
-  
+
   Nautilus_Spike_Text = {"Spike Field", "Deals 1 Damage to units that move onto it."}
 }
