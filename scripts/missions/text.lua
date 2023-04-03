@@ -20,5 +20,10 @@ TILE_TOOLTIPS = {
 
   NAH_Pressure_Plate_Text = {"Pressure Plate","Triggers security walls to pop up on all 4 sides. Send other enemeis flying."},
 
-  Nautilus_Spike_Text = {"Spike Field", "Deals 1 Damage to units that move onto it."}
+  Nautilus_Spike_Text = {"Spike Field", "Deals 1 Damage to units that move onto it."},
+
+  NAH_Blast_Charge_Unpowered = {"Unpowerd Blast Charge", "Friendly units activate blast charges if they stand next to them at the end of your turn."},
+
+  NAH_Blast_Charge_Powered = {"Powered Blast Charge", "Preparing to explode, destroying itself and all surrounding units."},
+
 }

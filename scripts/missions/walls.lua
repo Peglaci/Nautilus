@@ -29,7 +29,8 @@ function Mission_Nautilus_Walls:IsPointValid(space)
 			not Board:IsPod(space) and
 			not Board:IsBuilding(space) and
       not Board:GetPawn(space) and
-			tile ~= TERRAIN_WATER
+			tile ~= TERRAIN_WATER and
+      tile ~= TERRAIN_MOUNTAIN
 end
 
 function Mission_Nautilus_Walls:StartMission()

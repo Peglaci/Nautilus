@@ -27,6 +27,7 @@ local Nautilus_Missions = {
   {"Spikes",LOW_THREAT},
 	{"Walls",HIGH_THREAT}, --Incomplete
 	{"Crystals",HIGH_THREAT}, --ChatGPT, incomplete
+	{"Charges",HIGH_THREAT}, --incomplete
 }
 
 function this:init(mod)
