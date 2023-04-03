@@ -14,6 +14,8 @@ Objectives = Objective()
 --Other Excavator action: Dig up rocks, crack current tile and chuck
 --Easy Edit Icons, need other art first
 
+--Board:SetCustomTile(choice,"square_missilesilo.png")
+
 local mod = mod_loader.mods[modApi.currentMod]
 local previewer = mod.libs.weaponPreview
 
@@ -29,7 +31,7 @@ ANIMS.BurrowOpenClose = Animation:new{
     Layer = LAYER_FLOOR        --lets you create an animation visually behind pawns
 }
 
-Mission_Nautilus_Digging = Mission:new{
+Mission_Nautilus_Digging = Mission_Infinite:new{
   Name = "Vek Excavation",
   Objectives = Objective("Dig up and kill the Volatile Vek",1),
   EnemyPawn = "GlowingScorpion", --Probably Change, change in weapon
