@@ -1,7 +1,7 @@
 local mod = mod_loader.mods[modApi.currentMod]
 local path = mod.resourcePath
 
-for i = 0, 6 do
+for i = 0, 7 do
 	modApi:addMap(path .."maps/minecart".. i ..".map")
 end
 
