@@ -5,7 +5,8 @@ for i = 0, 6 do
 	modApi:addMap(path .."maps/minecart".. i ..".map")
 end
 
-Mission_Nautilus_Minecart = Mission_Infinite:new{ 
+Mission_Nautilus_Minecarts = Mission_Infinite:new{ 
+	Name = "Minecart Railway",
 	Objectives = Objective("Have 2 Minecarts pass without crashing",2),
 	MapTags = {"minecart"},
 	Tunnel1 = -1,
@@ -18,7 +19,7 @@ Mission_Nautilus_Minecart = Mission_Infinite:new{
 	FreeCarts = 0,
 }
 
-function Mission_Nautilus_Minecart:StartMission()
+function Mission_Nautilus_Minecarts:StartMission()
 	local tunnel = PAWN_FACTORY:CreatePawn("Nautilus_Tunnel_Pawn1")
 	self.Tunnel1 = tunnel:GetId()
 	Board:AddPawn(tunnel,self.TunnelLoc1)
@@ -31,20 +32,19 @@ function Mission_Nautilus_Minecart:StartMission()
 	self.MinecartRandom = random_removal(choices)
 end
 
-function Mission_Nautilus_Minecart:UpdateObjectives()
+function Mission_Nautilus_Minecarts:UpdateObjectives()
 	local status = self.FreeCarts >= 2 and OBJ_COMPLETE or OBJ_STANDARD
-	--\n
 	Game:AddObjective(string.format("Have 2 Minecarts pass without crashing (%s/2 Minecarts)",tostring(self.FreeCarts)),status, REWARD_REP, 2)
 end
 
-function Mission_Nautilus_Minecart:GetCompletedObjectives()
+function Mission_Nautilus_Minecarts:GetCompletedObjectives()
 	if self.FreeCarts == 1 then
 		return Objective("Have 2 Minecarts pass without crashing (1/2 Minecarts)", 1, 2)
 	elseif self.FreeCarts >= 2 then
 		return Objective("Have 2 Minecarts pass without crashing (2/2 Minecarts)", 2, 2)
 	end
 	
-	return Objective("Have 2 Minecarts pass without crashing (0/2 Minecarts)", 0, 2)--self.Objectives:Failed()
+	return Objective("Have 2 Minecarts pass without crashing (0/2 Minecarts)", 0, 2)
 end
 
 ------- UNITS AND SKILLS FOR THE MISSION -------------------
