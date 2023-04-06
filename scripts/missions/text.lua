@@ -18,7 +18,7 @@ TILE_TOOLTIPS = {
 
   Nautilus_Incinerator = {"Incinerator","Ground units pushed in will be shred by the incinerator."},
 
-  NAH_Pressure_Plate_Text = {"Pressure Plate","Triggers security walls to pop up on all 4 sides. Send other enemeis flying."},
+  NAH_Pressure_Plate_Text = {"Pressure Plate","Triggers security walls to pop up on all 4 sides. Sends other units flying."},
 
   Nautilus_Spike_Text = {"Spike Field", "Deals 1 Damage to units that move onto it."},
 
