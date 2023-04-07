@@ -1,5 +1,5 @@
-Nautilus_Mission_Drilltrain = Mission_Infinite:new{
-	Name = "Drill Train",
+Mission_Nautilus_Drilltrain = Mission_Infinite:new{
+	Name = "Rail Layer",
 	Objectives = Objective("Protect the Rail Layer",2),
 	MapTags = {"train"},
 	Train = -1,
@@ -11,7 +11,7 @@ Nautilus_Mission_Drilltrain = Mission_Infinite:new{
 	TrainDamaged = "Nautilus_Drilltrain_Damaged",
 }
 
-function Nautilus_Mission_Drilltrain:StartMission()
+function Mission_Nautilus_Drilltrain:StartMission()
 	local train = PAWN_FACTORY:CreatePawn(self.TrainPawn)
 	self.Train = train:GetId()
 	Board:AddPawn(train,Point(4,6))
@@ -46,11 +46,11 @@ function Nautilus_Mission_Drilltrain:StartMission()
 	
 end
 
-function Nautilus_Mission_Drilltrain:IsTrainAlive()
+function Mission_Nautilus_Drilltrain:IsTrainAlive()
 	return Board:IsPawnAlive(self.Train)
 end	
 
-function Nautilus_Mission_Drilltrain:UpdateObjectives()
+function Mission_Nautilus_Drilltrain:UpdateObjectives()
 	local status1 = not self.TrainStopped and OBJ_STANDARD or OBJ_FAILED
 	
 	if status1 == OBJ_FAILED then
@@ -66,7 +66,7 @@ function Nautilus_Mission_Drilltrain:UpdateObjectives()
 	end
 end
 
-function Nautilus_Mission_Drilltrain:GetCompletedObjectives()
+function Mission_Nautilus_Drilltrain:GetCompletedObjectives()
 	if self:IsTrainAlive() then
 		if self.TrainStopped then
 			return Objective("Protect the damaged Rail Layer", 1, 2)
@@ -78,7 +78,7 @@ function Nautilus_Mission_Drilltrain:GetCompletedObjectives()
 	return self.Objectives:Failed()
 end
 
-function Nautilus_Mission_Drilltrain:StopTrain()
+function Mission_Nautilus_Drilltrain:StopTrain()
 	local trainPawn = Board:GetPawn(self.Train)
 	if trainPawn then Board:RemovePawn(trainPawn) end
 	
@@ -90,7 +90,7 @@ function Nautilus_Mission_Drilltrain:StopTrain()
 	--self:TriggerMissionEvent("TrainStopped")
 end
 
-function Nautilus_Mission_Drilltrain:UpdateMission()
+function Mission_Nautilus_Drilltrain:UpdateMission()
 	
 	--if not self:IsTrainAlive() and self.TrainStopped then
 	--	self:TriggerMissionEvent("TrainDestroyed")
