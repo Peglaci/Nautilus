@@ -32,7 +32,7 @@ function Mission_Nautilus_Drilltrain:StartMission()
 		
 		local choices = {true,false,false}
 		choice = random_removal(choices)
-		if choice then -- %chance of obstacle
+		if choice then -- remove some obstacles
 			obstacle = false
 		end
 		
@@ -138,7 +138,6 @@ Nautilus_Drilltrain_Pawn =
 	Corporate = true,
 	Corpse = true
 }
-	
 AddPawn("Nautilus_Drilltrain_Pawn") 
 
 Nautilus_Drilltrain_Damaged = 
@@ -157,8 +156,8 @@ Nautilus_Drilltrain_Damaged =
 	Pushable = false,
 	Corporate = true
 }
-	
 AddPawn("Nautilus_Drilltrain_Damaged")
+
 --------------------
 
 Nautilus_Drilltrain_Move = Skill:new{
@@ -169,8 +168,9 @@ Nautilus_Drilltrain_Move = Skill:new{
 	LaunchSound = "/support/train_armored/move",
 	TipImage = {
 		Unit = Point(2,3),
-		Enemy = Point(2,1),
 		Target = Point(2,2),
+		Hole = Point(2,2),
+		Mountain = Point(2,1),
 		CustomPawn = "Nautilus_Drilltrain_Pawn"
 	}
 }
@@ -192,16 +192,21 @@ function Nautilus_Drilltrain_Move:GetSkillEffect(p1, p2)
 	local damage = Point(-1,-1)
 	for k = 1, 2 do
 		q_move:push_back(current)
-		ret:AddQueuedDamage(SpaceDamage(current,DAMAGE_DEATH))
+		local dam = SpaceDamage(current)
+		if Board:GetPawn(current) then
+			dam.iDamage = DAMAGE_DEATH
+		elseif Board:GetTerrain(current) == TERRAIN_MOUNTAIN or Board:GetTerrain(current) == TERRAIN_BUILDING then
+			ret:AddQueuedScript("Board:DamageSpace("..(current):GetString()..",DAMAGE_DEATH)")
+		end
+		dam.iTerrain = 0
+		ret:AddQueuedDamage(dam)
 		
 		if Board:IsPawnSpace(current, false) and Board:GetPawn(current, false):IsCorpse() then
 			ret:AddQueuedScript("Board:GetPawn("..current:GetString()..",false):FlyAway()")
 		end
 		
-		ret:AddQueuedScript("Board:SetTerrain("..(current-VEC_UP*2):GetString()..",0)")
+		-- ret:AddQueuedScript("Board:SetTerrain("..(current):GetString()..",0)")
 		ret:AddQueuedScript("Board:SetCustomTile("..(current-VEC_UP*2):GetString()..",'ground_rail.png')")
-		ret:AddQueuedScript("Board:SetTerrain("..current:GetString()..",0)")
-		ret:AddQueuedScript("Board:SetCustomTile("..current:GetString()..",'ground_rail.png')")
 		current = current + VEC_UP
 	end
 	

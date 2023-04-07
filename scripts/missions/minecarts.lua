@@ -48,25 +48,6 @@ function Mission_Nautilus_Minecarts:GetCompletedObjectives()
 end
 
 ------- UNITS AND SKILLS FOR THE MISSION -------------------
-
-Nautilus_Minecart_Pawn = 
-{
-	Health = 1,
-	Neutral = true,
-	Image = "Civilian1",
-	MoveSpeed = 0,
-	SkillList = { "Train_Move" },
-	DefaultTeam = TEAM_PLAYER,
-	IgnoreSmoke = true,
-	IgnoreFlip = true,
-	IgnoreFire = true,
-	SoundLocation = "/support/train",
-	Pushable = false,
-	Corporate = true,
-	Corpse = false
-}
-AddPawn("Nautilus_Minecart_Pawn") 
-
 Nautilus_Tunnel_Pawn1 = 
 {
 	Name = "Tunnel",
