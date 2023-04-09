@@ -9,26 +9,26 @@ island:appendAssets("img/island/")
 
 -- see the easyEdit wiki for details on everything below
 island.shift = Point(14,13)
-island.magic = Point(150,100)
+island.magic = Point(145,102)
 
 island.regionData = {
-	RegionInfo(Point(0,0), Point(-260, -140), 100),
-	RegionInfo(Point(0,0), Point(-60, -120), 100),
-	RegionInfo(Point(0,0), Point(130, -110), 100),
-	RegionInfo(Point(0,0), Point(280, -50), 100),
-	RegionInfo(Point(0,0), Point(-225, -20), 100),
-	RegionInfo(Point(0,0), Point(-60, 10), 100),
-	RegionInfo(Point(0,0), Point(130, 10), 100),
-	RegionInfo(Point(0,0), Point(300, 80), 100)
+	RegionInfo(Point(25,76), Point(-5, -24), 100),
+	RegionInfo(Point(124,80), Point(0, -30), 100),
+	RegionInfo(Point(198,73), Point(0, -20), 100),
+	RegionInfo(Point(273,86), Point(-10, -10), 100),
+	RegionInfo(Point(56,146), Point(0, -20), 100),
+	RegionInfo(Point(139,144), Point(0, -30), 100),
+	RegionInfo(Point(252,170), Point(20, -55), 100),
+	RegionInfo(Point(353,144), Point(-10, -20), 100)
 }
 
 island.network = {
 	{1,4},
 	{0,2,4,5},
-	{1,3,6},
-	{2,6,7},
-	{0,4,5},
-	{1,4,6},
-	{2,3,5,7},
+	{1,3,5},
+	{2,6,7,5},
+	{0,1,5},
+	{1,2,3,4,6},
+	{3,5,7},
 	{3,6}
 }
