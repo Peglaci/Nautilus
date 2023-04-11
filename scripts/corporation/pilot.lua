@@ -28,3 +28,5 @@ CreatePilot{
 	Portrait = "npcs/Nautilus1",
 	Voice = "/voice/rust",
 }
+
+modApi:addPilotDrop{id = "Nautilus_pilot_id", recruit = true }

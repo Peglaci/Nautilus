@@ -13,10 +13,10 @@ island.magic = Point(145,102)
 
 island.regionData = {
 	RegionInfo(Point(25,76), Point(-5, -24), 100),
-	RegionInfo(Point(124,80), Point(0, -30), 100),
+	RegionInfo(Point(124,80), Point(0, -35), 100),
 	RegionInfo(Point(198,73), Point(0, -20), 100),
 	RegionInfo(Point(273,86), Point(-10, -10), 100),
-	RegionInfo(Point(56,146), Point(0, -20), 100),
+	RegionInfo(Point(56,146), Point(0, -45), 100),
 	RegionInfo(Point(139,144), Point(0, -30), 100),
 	RegionInfo(Point(252,170), Point(20, -55), 100),
 	RegionInfo(Point(353,144), Point(-10, -20), 100)

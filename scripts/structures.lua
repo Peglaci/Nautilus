@@ -5,7 +5,7 @@ CreateStructure{
 	Name = "Materials Facility",
 	Path = "img/structures/",
 	Image = "materialsfacility",
-	ImageOffset = Point(-28,-8),
+	ImageOffset = Point(-36,-4),
 	Reward = REWARD_TECH
 }
 
@@ -14,7 +14,7 @@ CreateStructure{
 	Name = "Thermal Pile",
 	Path = "img/structures/",
 	Image = "thermalpile",
-	ImageOffset = Point(-17,4),
+	ImageOffset = Point(-17,-6),
 	Reward = REWARD_POWER
 }
 
