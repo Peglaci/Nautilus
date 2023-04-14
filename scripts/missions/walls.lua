@@ -26,7 +26,7 @@ a.securitywall_U = base:new{ Image = imagepath..name.."a.png", NumFrames = 1 }
 --a.securitywall_U = base:new{ Image = imagepath..name.."_death.png", NumFrames = 5, Lengths = {.15,.15,.15,.15,.8}, Loop = false }
 --a.securitywall_U = base:new{ Image = imagepath..name.."_Bw.png", PosY = 0} --Only if there's a boss
 
-local base = a.BaseUnit:new{Image = imagepath .. name..".png", PosX = -12, PosY = -23}
+local base = a.BaseUnit:new{Image = imagepath .. name..".png", PosX = -7, PosY = -23}
 local baseEmerge = a.BaseEmerge:new{Image = imagepath ..name.."_emerge.png", PosX = -28, PosY = -5, NumFrames = 8}
 
 a.securitywall_D = base
@@ -42,7 +42,7 @@ modApi:appendAsset(writepath..name.."_emerge.png", readpath..name.."_emerge.png"
 --modApi:appendAsset(writepath.."DNT_"..name.."_death.png", readpath.."DNT_"..name.."_death.png")
 --modApi:appendAsset(writepath.."DNT_"..name.."_Bw.png", readpath.."DNT_"..name.."_Bw.png")
 
-local base = a.BaseUnit:new{Image = imagepath .. name..".png", PosX = -12, PosY = -7}
+local base = a.BaseUnit:new{Image = imagepath .. name..".png", PosX = -12, PosY = -8}
 local baseEmerge = a.BaseEmerge:new{Image = imagepath ..name.."_emerge.png", PosX = -23, PosY = -6, NumFrames = 8}
 
 a.securitywall_L = base
@@ -51,7 +51,7 @@ a.securitywall_L = base:new{ Image = imagepath..name.."a.png", NumFrames = 1 }
 --a.securitywall_L = base:new{ Image = imagepath..name.."_death.png", NumFrames = 5, Lengths = {.15,.15,.15,.15,.8}, Loop = false }
 --a.securitywall_L = base:new{ Image = imagepath..name.."_Bw.png", PosY = 0} --Only if there's a boss
 
-local base = a.BaseUnit:new{Image = imagepath .. name..".png", PosX = -29, PosY = -23}
+local base = a.BaseUnit:new{Image = imagepath .. name..".png", PosX = -31, PosY = -25}
 local baseEmerge = a.BaseEmerge:new{Image = imagepath ..name.."_emerge.png", PosX = -23, PosY = -5, NumFrames = 8}
 
 a.securitywall_R = base

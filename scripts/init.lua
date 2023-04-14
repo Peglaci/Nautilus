@@ -27,11 +27,10 @@ function mod:init()
 	require(self.scriptPath.."tileset")
 	require(self.scriptPath.."bossList")
 	require(self.scriptPath.."enemyList")
-	--require(self.scriptPath.."missionList") Move to /missions/init.lua
 	require(self.scriptPath.."structures")
 	require(self.scriptPath.."structureList")
 	require(self.scriptPath.."island_composite")
-	require(self.scriptPath .."waterfall")
+	require(self.scriptPath.."waterfall")
 	require(self.scriptPath.."background")
 
 	self.missions = require(self.scriptPath.."missions/init")

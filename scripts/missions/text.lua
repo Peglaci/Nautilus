@@ -5,6 +5,9 @@ Global_Texts = {
 
   TipTitle_Env_Falling_Mountains = "Falling Mountains",
   TipText_Env_Falling_Mountains = "Mountains fall from the sky, killing any unit it lands on.",
+  
+  TipTitle_Env_Nautilus_Spikes = "Crystal Spikes",
+  TipText_Env_Nautilus_Spikes = "Crystal spikes are littered across the terrain, dealing damage to the first unit to stand on them.",
 
 }
 
@@ -20,7 +23,7 @@ TILE_TOOLTIPS = {
 
   NAH_Pressure_Plate_Text = {"Pressure Plate","Triggers security walls to pop up on all 4 sides. Sends other units flying."},
 
-  Nautilus_Spike_Text = {"Spike Field", "Deals 1 Damage to units that move onto it."},
+  Nautilus_Spike_Text = {"Crystal Spikes", "Deals 1 Damage to units entering the tile."},
 
   NAH_Blast_Charge_Unpowered = {"Unpowerd Blast Charge", "Friendly units activate blast charges if they stand next to them at the end of your turn."},
 

@@ -22,6 +22,7 @@ Nautilus_Spike_Mine2 = { Image = "effects/spike2.png", Damage = mine_damage, Too
 
 Mission_Nautilus_Spikes = Mission_Infinite:new{ 
 	Name = "Spikes",
+	Environment = "Env_Nautilus_Spikes",
 	MineCount = 9, 
 	GlobalSpawnMod = 1,
 	SpawnStartMod = 0,
@@ -30,6 +31,14 @@ Mission_Nautilus_Spikes = Mission_Infinite:new{
 	MineType2 = "Nautilus_Spike_Mine2",
 	BlockedUnits = {"Jelly_Explode", "Dung"},
 	MineLocations = {},
+}
+
+Env_Nautilus_Spikes = Env_Attack:new{
+  Name = "Crystal Spikes",
+  Text = "Crystal spikes are littered across the terrain, dealing damage to the first unit to stand on them.",
+  CombatName = "SPIKES",
+	CombatIcon = "combat/tile_icon/tile_rock.png",
+  StratText = "SPIKES",
 }
 
 function Mission_Nautilus_Spikes:StartMission()
