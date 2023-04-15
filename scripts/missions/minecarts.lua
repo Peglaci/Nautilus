@@ -1,18 +1,25 @@
 local mod = mod_loader.mods[modApi.currentMod]
 local path = mod.resourcePath
 
-for i = 0, 7 do
+-- add sprites anims and maps
+for i = 0, 19 do
 	modApi:addMap(path .."maps/minecart".. i ..".map")
 end
 
+modApi:appendAsset("img/effects/minecart_R.png",path.."img/effects/minecart_R.png")
+modApi:appendAsset("img/effects/minecart_U.png",path.."img/effects/minecart_U.png")
+
+local a = ANIMS
+a.minecart = a.BaseUnit:new{ Image = "units/mission/minecart.png", PosX = -18, PosY = -1 }
+a.minecarta = a.minecart:new{ Image = "units/mission/minecart_a.png", PosX = -18, PosY = -1, NumFrames = 4 }
+-- a.minecartd = a.minecart:new{}
+-- a.minecarte = a.minecart:new{}
+
+-- mission
 Mission_Nautilus_Minecarts = Mission_Infinite:new{ 
 	Name = "Minecart Railway",
 	Objectives = Objective("Have 2 Minecarts pass without crashing",2),
 	MapTags = {"minecart"},
-	Tunnel1 = -1,
-	Tunnel2 = -2,
-	TunnelLoc1 = Point(3,0),
-	TunnelLoc2 = Point(5,0),
 	TurnLimit = 4,
 	MinecartRandom = 0,
 	UseBonus = false,
@@ -20,14 +27,13 @@ Mission_Nautilus_Minecarts = Mission_Infinite:new{
 }
 
 function Mission_Nautilus_Minecarts:StartMission()
-	local tunnel = PAWN_FACTORY:CreatePawn("Nautilus_Tunnel_Pawn1")
-	self.Tunnel1 = tunnel:GetId()
-	Board:AddPawn(tunnel,self.TunnelLoc1)
-	
-	tunnel = PAWN_FACTORY:CreatePawn("Nautilus_Tunnel_Pawn2")
-	self.Tunnel2 = tunnel:GetId()
-	Board:AddPawn(tunnel,self.TunnelLoc2)
-	
+	local zone = extract_table(Board:GetZone("Tunnels"))
+	local tunnels = {"Nautilus_Tunnel_Pawn1","Nautilus_Tunnel_Pawn2"}
+	for _, p in ipairs(zone) do
+		local pawn = PAWN_FACTORY:CreatePawn(random_removal(tunnels))
+		Board:AddPawn(pawn, p)
+	end
+	-- get random tunnel to shoot a minecart
 	local choices = {1,2}
 	self.MinecartRandom = random_removal(choices)
 end
@@ -97,13 +103,14 @@ AddPawn("Nautilus_Tunnel_Pawn2")
 
 Nautilus_Tunnel_Spawn1 = Skill:new{
 	Name = "Minecart Railway",
-	Description = "Minecarts are moving at high speed, killing the first thing they hit.",
+	Description = "Minecarts are moving at high speed, destroying the first thing they hit.",
 	Class = "Enemy",
 	AttackAnimation = "ExploArt2",
 	LaunchSound = "/support/train/move",
+	CrashSound = "/impact/dynamic/rock",
 	TunnelN = 1,
 	Dir = DIR_DOWN,
-	CartArt = "effects/shot_fist",
+	CartArt = "effects/minecart",--"effects/shot_fist",
 	CustomTipImage = "Nautilus_Tunnel_Spawn1_Tip",
 	TipImage = {
 		Unit = Point(2,0),
@@ -127,7 +134,9 @@ Nautilus_Tunnel_Spawn2 = Nautilus_Tunnel_Spawn1:new{
 
 function Nautilus_Tunnel_Spawn1:GetTargetArea(point)
 	local ret = PointList()
-	ret:push_back(point + VEC_DOWN)
+	local vec = VEC_DOWN
+	if point.x == 0 then vec = VEC_RIGHT end
+	ret:push_back(point + vec)
 	return ret
 end
 
@@ -140,6 +149,12 @@ end
 function Nautilus_Tunnel_Spawn1:GetSkillEffect(p1, p2)
 	local ret = SkillEffect()
 	local dir = self.Dir
+	
+	if p1.x == 0 then
+		if dir == DIR_DOWN then dir = DIR_RIGHT end
+		if dir == DIR_UP then dir = DIR_LEFT end
+	end
+	
 	local mission = GetCurrentMission()
 	
 	local rand = 0
@@ -150,7 +165,7 @@ function Nautilus_Tunnel_Spawn1:GetSkillEffect(p1, p2)
 	if rand == self.TunnelN then
 		local pEnd = p2
 		local blocked = false
-		if dir == DIR_DOWN or dir == DIR_LEFT then --self.TunnelN then
+		if dir == DIR_DOWN or dir == DIR_RIGHT then
 			local pStart = p1+DIR_VECTORS[dir]
 			pEnd = GetProjectileEnd(p1,p2,PATH_GROUND)
 			if Board:IsBlocked(pEnd,PATH_GROUND) then blocked = true end
@@ -170,9 +185,10 @@ function Nautilus_Tunnel_Spawn1:GetSkillEffect(p1, p2)
 			end
 			
 			local cart = SpaceDamage(pEnd)
-			-- cart.sImageMark = "combat/icons/icon_arrow_2_glow.png"
 			if Board:IsValid(pEnd) and Board:IsBlocked(pEnd, PATH_PROJECTILE) then
 				cart.iDamage = DAMAGE_DEATH
+				cart.sAnimation = self.AttackAnimation
+				cart.sSound = self.CrashSound
 				ret:AddQueuedProjectile(cart, self.CartArt, FULL_DELAY)
 			else
 				ret:AddQueuedProjectile(cart, self.CartArt, FULL_DELAY)
@@ -202,9 +218,10 @@ function Nautilus_Tunnel_Spawn1:GetSkillEffect(p1, p2)
 			end
 			
 			local cart = SpaceDamage(pEnd)
-			-- cart.sImageMark = "combat/icons/icon_arrow_0_glow.png"
 			if Board:IsValid(pEnd) and Board:IsBlocked(pEnd, PATH_PROJECTILE) then
 				cart.iDamage = DAMAGE_DEATH
+				cart.sAnimation = self.AttackAnimation
+				cart.sSound = self.CrashSound
 				ret:Nautilus_AddQueuedProjectile(p1,cart, self.CartArt, FULL_DELAY)
 			else
 				ret:Nautilus_AddQueuedProjectile(p1,cart, self.CartArt, FULL_DELAY)
@@ -236,6 +253,8 @@ function Nautilus_Tunnel_Spawn1_Tip:GetSkillEffect(p1,p2) -- for passive preview
 	local q_move = PointList()
 	if self.Dir == DIR_DOWN or self.Dir == DIR_LEFT then
 		pStart = Point(2,0)
+		q_move:push_back(Point(2,-1))
+		q_move:push_back(Point(2,0))
 		q_move:push_back(Point(2,1))
 		q_move:push_back(Point(2,2))
 	else
