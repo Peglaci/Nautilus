@@ -31,14 +31,38 @@ a.cave_background_fade_in = a.cave_background_fade_out:new {
 
 local fadein = a.cave_background_fade_in
 
+local function IsBackground()
+	return options.Nautilus_CaveBackground and options.Nautilus_CaveBackground.enabled and modApi:getCurrentTileset() == TILESET
+end
+
 local function HOOK_AddBackground(mission)
-  if options.Nautilus_CaveBackground and options.Nautilus_CaveBackground.enabled and modApi:getCurrentTileset() == TILESET then
+  if IsBackground() then
 		Board:AddAnimation(Point(0,0),"cave_background_fade_in",ANIM_NO_DELAY)
 		modApi:scheduleHook((fadein.Time*(fadein.NumFrames-1))*1000, function() -- minus 1 cause it uses one less frame
-			--customAnim:add(Point(0,0),"cave_background")
-			Board:AddAnimation(Point(0,0),"cave_background",ANIM_NO_DELAY) --THERE'S JUST NO FADE OUT TILL CUSTOMANIM IS FIXED
+			customAnim:add(Point(0,0),"cave_background")
+			--Board:AddAnimation(Point(0,0),"cave_background",ANIM_NO_DELAY)
 		end)
   end
+end
+
+local function customRunLater(delay, fn) --I hate everything
+	if delay == 0 then
+		fn()
+	else
+		modApi:runLater(function()
+			customRunLater(delay-1,fn)
+		end)
+	end
+end
+
+--If you exit the game before the game saves, the anim doens't get saved. This checks for that.
+local function HOOK_CheckBackground(screen)
+	customRunLater(5,function()
+		local mission = GetCurrentMission()
+		if mission and IsBackground() and not customAnim:get(Point(0,0),"cave_background") then
+			customAnim:add(Point(0,0),"cave_background")
+		end
+	end)
 end
 
 local function HOOK_RemoveBackground(mission)
@@ -53,6 +77,9 @@ local function EVENT_onModsLoaded()
   modApi:addTestMechEnteredHook(HOOK_AddBackground)
   modApi:addMissionStartHook(HOOK_AddBackground)
 	modApi:addMissionEndHook(HOOK_RemoveBackground)
+	--modapiext:addGameLoadedHook(HOOK_CheckBackground)
 end
 
 modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
+
+modApi.events.onContinueClicked:subscribe(HOOK_CheckBackground)

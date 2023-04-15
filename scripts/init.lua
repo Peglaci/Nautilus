@@ -46,7 +46,7 @@ function mod:metadata()
 		"Nautilus_CaveBackground",
 		"Cave Background",
 		"Check to turn on the cave background in each mission. Requires a restart.",
-		{ enabled = false } --Change default later
+		{ enabled = true } --Change default later
 	)
 end
 
