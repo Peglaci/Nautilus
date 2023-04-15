@@ -79,7 +79,7 @@ end
 local function HOOK_PawnKilled(mission,pawn)
 	if mission.Incinerator and mission.Incinerated ~= nil then
 		local space = pawn:GetSpace()
-		if space == mission.Incinerator then
+		if space == mission.Incinerator and pawn:GetTeam() == TEAM_ENEMY then
 			mission.Incinerated = mission.Incinerated+1
 
 			local effect = SkillEffect()
