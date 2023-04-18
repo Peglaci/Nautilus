@@ -15,11 +15,19 @@ Objectives = Objective()
 --Easy Edit Icons, need other art first
 
 --Board:SetCustomTile(choice,"square_missilesilo.png")
-
+local this = {id = "Mission_Nautilus_Digging"}
 local mod = mod_loader.mods[modApi.currentMod]
 local previewer = mod.libs.weaponPreview
 
 modApi:appendAsset("img/effects/burrow_openclose.png",mod.resourcePath.."img/effects/burrow_openclose.png") --Thanks to Metalocif for the animation
+modApi:appendAsset("img/units/mission/excavator.png", mod.resourcePath .."img/units/mission/excavator.png")
+modApi:appendAsset("img/units/mission/excavator_a.png", mod.resourcePath .."img/units/mission/excavator_a.png")
+modApi:appendAsset("img/units/mission/Rock1.png", mod.resourcePath .."img/units/mission/Rock1.png")
+
+
+local a = ANIMS
+a.Nautilus_Excavator = a.BaseUnit:new{Image = "units/mission/excavator.png", PosX = -24, PosY = -9}
+a.Nautilus_Excavatora = a.Nautilus_Excavator:new{Image = "units/mission/excavator_a.png", NumFrames = 4 }
 
 ANIMS.BurrowOpenClose = Animation:new{
     Image = "effects/burrow_openclose.png",
@@ -33,7 +41,7 @@ ANIMS.BurrowOpenClose = Animation:new{
 
 Mission_Nautilus_Digging = Mission_Infinite:new{
   Name = "Vek Excavation",
-  Objectives = Objective("Dig up and kill the Volatile Vek",1),
+  Objectives = Objective("Dig up and kill the Fossilized Vek",1),
   EnemyPawn = "GlowingScorpion", --Probably Change, change in weapon
   ExcavatorPawn = "NAH_Excavator",
   Excavator = nil,
@@ -98,7 +106,7 @@ NAH_Excavator = {
   Name = "Excavator",
   Health = 2,
   MoveSpeed = 4,
-  Image = "SmallTank1", --Change
+  Image = "Nautilus_Excavator", --Change
   SoundLocation = "/support/civilian_tank/", --Probably Change
   DefaultTeam = TEAM_PLAYER,
   SkillList = {"NAH_ExcavatorSkill"},
@@ -195,24 +203,6 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
   return ret
 end
 
-
---[[
-
-Spawn Enemy Pawn (plays the emerge animation)
-local damage = SpaceDamage(p1,0)
-damage.sPawn = self.EnemyPawn
-damage.bHide = true
-ret:AddDamage(damage)
-
---Leap Enemy to selected space
-local move = PointList()
-move:push_back(p1)
-move:push_back(p2)
-ret:AddLeap(move,NO_DELAY)
-ret.effect:index(ret.effect:size()).bHide = true
-ret.effect:index(ret.effect:size()).bHidePath = true
-ret.effect:index(ret.effect:size()).bHideIcon = true
-ret.effect:index(ret.effect:size()).sAnimation = ""
-ret.effect:index(ret.effect:size()).sImageMark = ""
---ret.effect:back().bHide = true
-]]
+function this:init(mod)
+	
+end
