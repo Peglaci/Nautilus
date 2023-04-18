@@ -13,7 +13,7 @@ ANIMS.Incinerator = Animation:new {
 	PosX = -29,
 	PosY = 0,
   Loop = true,
-  Layer = ANIMS.LAYER_FLOOR,
+  Layer = ANIMS.LAYER_BACK,
 }
 
 Mission_Nautilus_Incinerator = Mission_Auto:new{

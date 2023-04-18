@@ -1,3 +1,23 @@
+local mod = mod_loader.mods[modApi.currentMod]
+local path = mod.resourcePath
+
+-- sprites and animations
+modApi:appendAsset("img/units/mission/raillayer.png",path.."img/units/mission/raillayer.png")
+modApi:appendAsset("img/units/mission/raillayer_a.png",path.."img/units/mission/raillayer_a.png")
+modApi:appendAsset("img/units/mission/raillayer_damaged.png",path.."img/units/mission/raillayer_damaged.png")
+modApi:appendAsset("img/units/mission/raillayer_broken.png",path.."img/units/mission/raillayer_broken.png")
+
+local a = ANIMS
+
+a.train_drill = 				a.BaseUnit:new{ Image = "units/mission/raillayer.png", PosX = -46, PosY = -2 }
+a.train_drilla = 				a.BaseUnit:new{ Image = "units/mission/raillayer_a.png", PosX = -46, PosY = -2, NumFrames = 4 } 
+a.train_drill_broken = 			a.BaseUnit:new{ Image = "units/mission/raillayer.png", PosX = -46, PosY = -2 }
+
+a.train_drill_damaged = 		a.BaseUnit:new{ Image = "units/mission/raillayer_damaged.png", PosX = -46, PosY = -2 }
+-- a.train_drill_damagedd = 		a.BaseUnit:new{ Image = "units/mission/raillayer_broken.png", PosX = -51, PosY = 3, Loop = false }
+a.train_drill_damaged_broken = 	a.BaseUnit:new{ Image = "units/mission/raillayer_broken.png", PosX = -46, PosY = -2 }
+
+-- mission
 Mission_Nautilus_Drilltrain = Mission_Infinite:new{
 	Name = "Rail Layer",
 	Objectives = Objective("Protect the Rail Layer",2),
@@ -125,7 +145,7 @@ Nautilus_Drilltrain_Pawn =
 	Name = "Rail Layer",
 	Health = 1,
 	Neutral = true,
-	Image = "train_armored",
+	Image = "train_drill",
 	MoveSpeed = 0,
 	SkillList = { "Nautilus_Drilltrain_Move" },
 	DefaultTeam = TEAM_PLAYER,
@@ -146,7 +166,7 @@ Nautilus_Drilltrain_Damaged =
 	Health = 1,
 	Neutral = true,
 	IgnoreFire = true,
-	Image = "train_dual_damaged",
+	Image = "train_drill_damaged",
 	MoveSpeed = 0,
 	SkillList = { },
 	DefaultTeam = TEAM_PLAYER,
