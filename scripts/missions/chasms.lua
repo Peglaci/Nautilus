@@ -1,5 +1,5 @@
 
-local objText = "End the mission with at least 8 chasm tiles on the board."
+local objText = "End with at least 8 chasm tiles"
 
 Mission_Nautilus_Chasms = Mission_Infinite:new{
 	Name = "Chasms",
