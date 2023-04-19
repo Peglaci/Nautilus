@@ -19,15 +19,31 @@ local this = {id = "Mission_Nautilus_Digging"}
 local mod = mod_loader.mods[modApi.currentMod]
 local previewer = mod.libs.weaponPreview
 
+--IMAGES
 modApi:appendAsset("img/effects/burrow_openclose.png",mod.resourcePath.."img/effects/burrow_openclose.png") --Thanks to Metalocif for the animation
 modApi:appendAsset("img/units/mission/excavator.png", mod.resourcePath .."img/units/mission/excavator.png")
 modApi:appendAsset("img/units/mission/excavator_a.png", mod.resourcePath .."img/units/mission/excavator_a.png")
 modApi:appendAsset("img/units/mission/Rock1.png", mod.resourcePath .."img/units/mission/Rock1.png")
+modApi:appendAsset("img/weapons/excavatorbucket.png", mod.resourcePath.. "img/weapons/excavatorbucket.png")
 
+modApi:appendAsset("img/tileset/ground_buried_firefly.png", mod.resourcePath .."img/tileset/ground_buried_firefly.png")
+modApi:appendAsset("img/tileset/ground_buried_scarab.png", mod.resourcePath .."img/tileset/ground_buried_scarab.png")
+modApi:appendAsset("img/tileset/ground_buried_scorpion.png", mod.resourcePath .."img/tileset/ground_buried_scorpion.png")
+modApi:appendAsset("img/tileset/ground_buried_empty.png", mod.resourcePath .."img/tileset/ground_buried_empty.png")
+
+modApi:appendAsset("img/units/mission/firefly.png", mod.resourcePath .."img/units/mission/firefly.png")
+modApi:appendAsset("img/units/mission/fireflya.png", mod.resourcePath .."img/units/mission/fireflya.png")
+modApi:appendAsset("img/units/mission/firefly_emerge.png", mod.resourcePath .."img/units/mission/firefly_emerge.png")
+modApi:appendAsset("img/units/mission/firefly_death.png", mod.resourcePath .."img/units/mission/firefly_death.png")
 
 local a = ANIMS
-a.Nautilus_Excavator = a.BaseUnit:new{Image = "units/mission/excavator.png", PosX = -24, PosY = -9}
+a.Nautilus_Excavator = a.BaseUnit:new{Image = "units/mission/excavator.png", PosX = -20, PosY = -9}
 a.Nautilus_Excavatora = a.Nautilus_Excavator:new{Image = "units/mission/excavator_a.png", NumFrames = 4 }
+
+a.CrystalFirefly = a.BaseUnit:new{Image = "units/mission/firefly.png", PosX = -12, PosY = -9}
+a.CrystalFireflya = a.CrystalFirefly:new{Image = "units/mission/fireflya.png", NumFrames = 4 }
+a.CrystalFireflyd = a.CrystalFirefly:new{ Image = "units/mission/firefly_death.png", Loop = false, NumFrames = 8, Time = .14 } 
+a.CrystalFireflye = a.CrystalFirefly:new{Image = "units/mission/firefly_emerge.png", PosX = -23, PosY = -5, NumFrames = 10}
 
 ANIMS.BurrowOpenClose = Animation:new{
     Image = "effects/burrow_openclose.png",
@@ -39,10 +55,25 @@ ANIMS.BurrowOpenClose = Animation:new{
     Layer = LAYER_FLOOR        --lets you create an animation visually behind pawns
 }
 
+--ENEMY
+CrystalFirefly = 
+	{	
+		Name = "Fossil Firefly",
+		Health = 4,
+		Image = "CrystalFirefly",
+		MoveSpeed = 3,
+		SkillList = { "ScorpionAtk1" },
+		SoundLocation = "/enemy/scorpion_soldier_1/",
+		DefaultTeam = TEAM_ENEMY,
+		
+	}
+AddPawn("CrystalFirefly")
+
+
+--MISSION
 Mission_Nautilus_Digging = Mission_Infinite:new{
   Name = "Vek Excavation",
   Objectives = Objective("Dig up and kill the Fossilized Vek",1),
-  EnemyPawn = "GlowingScorpion", --Probably Change, change in weapon
   ExcavatorPawn = "NAH_Excavator",
   Excavator = nil,
   DigSite = Point(-1,-1),
@@ -78,7 +109,8 @@ function Mission_Nautilus_Digging:StartMission()
   local choice = random_removal(choices)
   Board:BlockSpawn(choice,BLOCKED_PERM)
   self.DigSite = choice
-  Board:SetTerrain(choice,17) --This probably needs to be something more consistent
+  Board:SetCustomTile(choice,"ground_buried_firefly.png")
+ -- Board:SetTerrain(choice,17) --This probably needs to be something more consistent
 end
 
 function Mission_Nautilus_Digging:UpdateMission()
@@ -99,7 +131,7 @@ function Mission_Nautilus_Digging:UpdateObjectives()
   local status = (self.DigSite ~= Point(-1,-1) and not Board:IsPawnAlive(self.Excavator) and OBJ_FAILED) or
   (self.DigSite == Point(-1,-1) and not Board:IsPawnAlive(self.PawnId) and OBJ_COMPLETE) or
   OBJ_STANDARD
-  Game:AddObjective("Excavate and Kill the Volatile Vek", status, REWARD_REP, 1)
+  Game:AddObjective("Excavate and Kill the Fossilized Vek", status, REWARD_REP, 1)
 end
 
 NAH_Excavator = {
@@ -118,10 +150,10 @@ NAH_ExcavatorSkill = Skill:new{
   Name = "Excavator",
   Description = "Crack the tile beneath you and throw a rock. If on the dig site, throw the Vek in it instead.",
   Class = "",
-  Icon = "advanced/weapons/Prime_KO_Crack", --Change
+  Icon = "weapons/excavatorbucket.png",
   Damage = 0,
   LaunchSound = "/weapons/shift",
-  EnemyPawn = "GlowingScorpion",
+  --EnemyPawn = "GlowingScorpion",
   Animation = "BurrowOpenClose",
   TipImage = {
     Unit = Point(2,2),
@@ -149,7 +181,7 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
   local mission = GetCurrentMission()
   local spawnPawn = "Wall"
   if (mission.DigSite and p1 == mission.DigSite) then --Board:IsTipImage() or
-    spawnPawn = self.EnemyPawn
+    spawnPawn = "CrystalFirefly"
   end
 
   --Animation:
@@ -191,6 +223,7 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
   --LOG(GetCurrentMission().DigSite)
   --Mission things
   if mission.DigSite and p1 == mission.DigSite then
+	Board:SetCustomTile(mission.DigSite,"ground_buried_empty.png")
     ret:AddScript("GetCurrentMission().DigSite = nil")
   end
 
