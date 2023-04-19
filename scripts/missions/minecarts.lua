@@ -1,19 +1,33 @@
 local mod = mod_loader.mods[modApi.currentMod]
 local path = mod.resourcePath
+local customAnim = mod.libs.customAnim
 
 -- add sprites anims and maps
 for i = 0, 19 do
 	modApi:addMap(path .."maps/minecart".. i ..".map")
 end
 
+--carts
 modApi:appendAsset("img/effects/minecart_R.png",path.."img/effects/minecart_R.png")
 modApi:appendAsset("img/effects/minecart_U.png",path.."img/effects/minecart_U.png")
 
+--tunnels
+modApi:appendAsset("img/units/mission/tunnel_l.png",path.."img/units/mission/tunnel_l.png")
+modApi:appendAsset("img/units/mission/tunnel_l_broken.png",path.."img/units/mission/tunnel_l_broken.png")
+modApi:appendAsset("img/units/mission/tunnel_l_top.png",path.."img/units/mission/tunnel_l_top.png")
+modApi:appendAsset("img/units/mission/tunnel_r.png",path.."img/units/mission/tunnel_r.png")
+modApi:appendAsset("img/units/mission/tunnel_r_broken.png",path.."img/units/mission/tunnel_r_broken.png")
+modApi:appendAsset("img/units/mission/tunnel_r_top.png",path.."img/units/mission/tunnel_r_top.png")
+
 local a = ANIMS
-a.minecart = a.BaseUnit:new{ Image = "units/mission/minecart.png", PosX = -18, PosY = -1 }
-a.minecarta = a.minecart:new{ Image = "units/mission/minecart_a.png", PosX = -18, PosY = -1, NumFrames = 4 }
--- a.minecartd = a.minecart:new{}
--- a.minecarte = a.minecart:new{}
+a.nautilus_tunnel_l = a.BaseUnit:new{ Image = "units/mission/tunnel_l.png", PosX = -28, PosY = -11 }
+a.nautilus_tunnel_l_broken = a.BaseUnit:new{ Image = "units/mission/tunnel_l_broken.png", PosX = -28, PosY = -11 }
+a.nautilus_tunnel_top_l = a.BaseUnit:new{ Image = "units/mission/tunnel_l_top.png", PosX = -28, PosY = -11, Time = 3.0, Loop = false, Layer = LAYER_FRONT }
+
+a.nautilus_tunnel_r = a.BaseUnit:new{ Image = "units/mission/tunnel_r.png", PosX = -28, PosY = -12 }
+a.nautilus_tunnel_r_broken = a.BaseUnit:new{ Image = "units/mission/tunnel_r_broken.png", PosX = -28, PosY = -12 }
+a.nautilus_tunnel_top_r = a.BaseUnit:new{ Image = "units/mission/tunnel_r_top.png", PosX = -28, PosY = -12, Time = 3.0, Loop = false, Layer = LAYER_FRONT }
+-- , Layer = LAYER_FRONT
 
 -- mission
 Mission_Nautilus_Minecarts = Mission_Infinite:new{ 
@@ -28,9 +42,11 @@ Mission_Nautilus_Minecarts = Mission_Infinite:new{
 
 function Mission_Nautilus_Minecarts:StartMission()
 	local zone = extract_table(Board:GetZone("Tunnels"))
-	local tunnels = {"Nautilus_Tunnel_Pawn1","Nautilus_Tunnel_Pawn2"}
+	local tunnels = {"Nautilus_Tunnel_Pawn1_","Nautilus_Tunnel_Pawn2_"}
 	for _, p in ipairs(zone) do
-		local pawn = PAWN_FACTORY:CreatePawn(random_removal(tunnels))
+		local spriteDir = (p.x == 0) and 'r' or 'l'
+		local pawn = PAWN_FACTORY:CreatePawn(random_removal(tunnels)..spriteDir)
+		-- customAnim:add(p,'nautilus_tunnel_top_'..spriteDir)
 		Board:AddPawn(pawn, p)
 	end
 	-- get random tunnel to shoot a minecart
@@ -54,12 +70,12 @@ function Mission_Nautilus_Minecarts:GetCompletedObjectives()
 end
 
 ------- UNITS AND SKILLS FOR THE MISSION -------------------
-Nautilus_Tunnel_Pawn1 = 
+Nautilus_Tunnel_Pawn1_l = 
 {
 	Name = "Tunnel",
 	Health = 1,
 	Neutral = true,
-	Image = "terraformer1",
+	Image = "nautilus_tunnel_l",
 	MoveSpeed = 0,
 	SkillList = { "Nautilus_Tunnel_Spawn1" },
 	-- DefaultTeam = TEAM_PLAYER,
@@ -73,14 +89,35 @@ Nautilus_Tunnel_Pawn1 =
 	SpaceColor = false,
 	IsPortrait = false
 }
-AddPawn("Nautilus_Tunnel_Pawn1") 
+AddPawn("Nautilus_Tunnel_Pawn1_l") 
 
-Nautilus_Tunnel_Pawn2 = 
+Nautilus_Tunnel_Pawn1_r = 
 {
 	Name = "Tunnel",
 	Health = 1,
 	Neutral = true,
-	Image = "terraformer2",
+	Image = "nautilus_tunnel_r",
+	MoveSpeed = 0,
+	SkillList = { "Nautilus_Tunnel_Spawn1" },
+	-- DefaultTeam = TEAM_PLAYER,
+	IgnoreSmoke = true,
+	IgnoreFlip = true,
+	IgnoreFire = true,
+	SoundLocation = "/support/train",
+	Pushable = false,
+	-- Corporate = true,
+	Corpse = true,
+	SpaceColor = false,
+	IsPortrait = false
+}
+AddPawn("Nautilus_Tunnel_Pawn1_r") 
+
+Nautilus_Tunnel_Pawn2_l = 
+{
+	Name = "Tunnel",
+	Health = 1,
+	Neutral = true,
+	Image = "nautilus_tunnel_l",
 	MoveSpeed = 0,
 	SkillList = { "Nautilus_Tunnel_Spawn2" },
 	-- DefaultTeam = TEAM_PLAYER,
@@ -96,8 +133,30 @@ Nautilus_Tunnel_Pawn2 =
 	SpaceColor = false,
 	IsPortrait = false
 }
+AddPawn("Nautilus_Tunnel_Pawn2_l") 
 
-AddPawn("Nautilus_Tunnel_Pawn2") 
+Nautilus_Tunnel_Pawn2_r = 
+{
+	Name = "Tunnel",
+	Health = 1,
+	Neutral = true,
+	Image = "nautilus_tunnel_r",
+	MoveSpeed = 0,
+	SkillList = { "Nautilus_Tunnel_Spawn2" },
+	-- DefaultTeam = TEAM_PLAYER,
+	IgnoreSmoke = true,
+	IgnoreFlip = true,
+	IgnoreFire = true,
+	-- Armor = true,
+	-- ExtraSpaces = { Point(0,1) },
+	SoundLocation = "/support/train",
+	Pushable = false,
+	-- Corporate = true,
+	Corpse = true,
+	SpaceColor = false,
+	IsPortrait = false
+}
+AddPawn("Nautilus_Tunnel_Pawn2_r")
 
 ------------------------------------------
 
@@ -114,9 +173,9 @@ Nautilus_Tunnel_Spawn1 = Skill:new{
 	CustomTipImage = "Nautilus_Tunnel_Spawn1_Tip",
 	TipImage = {
 		Unit = Point(2,0),
-		Enemy = Point(2,2),
+		Enemy = Point(2,3),
 		Target = Point(2,1),
-		CustomPawn = "Nautilus_Tunnel_Pawn1"
+		CustomPawn = "Nautilus_Tunnel_Pawn1_l"
 	},
 }
 
@@ -128,7 +187,7 @@ Nautilus_Tunnel_Spawn2 = Nautilus_Tunnel_Spawn1:new{
 		Unit = Point(2,0),
 		Enemy = Point(2,2),
 		Target = Point(2,1),
-		CustomPawn = "Nautilus_Tunnel_Pawn2"
+		CustomPawn = "Nautilus_Tunnel_Pawn2_l"
 	},
 }
 
@@ -178,22 +237,13 @@ function Nautilus_Tunnel_Spawn1:GetSkillEffect(p1, p2)
 			end
 			if pStart ~= pEnd then
 				ret:AddQueuedMove(q_move, NO_DELAY)
+				p1 = pStart
 			end
 			
 			if not Board:IsBlocked(pEnd,PATH_GROUND) then
 				pEnd = pEnd + DIR_VECTORS[dir]
 			end
 			
-			local cart = SpaceDamage(pEnd)
-			if Board:IsValid(pEnd) and Board:IsBlocked(pEnd, PATH_PROJECTILE) then
-				cart.iDamage = DAMAGE_DEATH
-				cart.sAnimation = self.AttackAnimation
-				cart.sSound = self.CrashSound
-				ret:AddQueuedProjectile(cart, self.CartArt, FULL_DELAY)
-			else
-				ret:AddQueuedProjectile(cart, self.CartArt, FULL_DELAY)
-			end
-			ret.q_effect:back().bHidePath = true
 		else
 			local pLast = p1
 			p1 = p1-DIR_VECTORS[dir]*7
@@ -216,18 +266,21 @@ function Nautilus_Tunnel_Spawn1:GetSkillEffect(p1, p2)
 			if pEnd == pLast then
 				pEnd = pEnd+DIR_VECTORS[dir]
 			end
-			
-			local cart = SpaceDamage(pEnd)
-			if Board:IsValid(pEnd) and Board:IsBlocked(pEnd, PATH_PROJECTILE) then
-				cart.iDamage = DAMAGE_DEATH
-				cart.sAnimation = self.AttackAnimation
-				cart.sSound = self.CrashSound
-				ret:Nautilus_AddQueuedProjectile(p1,cart, self.CartArt, FULL_DELAY)
-			else
-				ret:Nautilus_AddQueuedProjectile(p1,cart, self.CartArt, FULL_DELAY)
-			end
-			ret.q_effect:back().bHidePath = true
 		end
+		
+		local cart = SpaceDamage(pEnd)
+		if Board:IsValid(pEnd) and Board:IsBlocked(pEnd, PATH_PROJECTILE) then
+			cart.iDamage = DAMAGE_DEATH
+			cart.sAnimation = self.AttackAnimation
+			cart.sSound = self.CrashSound
+			ret:Nautilus_AddQueuedProjectile(p1, cart, self.CartArt, FULL_DELAY)
+		else
+			if dir == DIR_UP or dir == DIR_LEFT then cart.loc = pEnd-DIR_VECTORS[dir] end
+			ret:Nautilus_AddQueuedProjectile(p1, cart, self.CartArt, FULL_DELAY)
+			ret.q_effect:back().bHide = true
+		end
+		ret.q_effect:back().bHidePath = true
+		
 		if mission and mission.FreeCarts and not blocked then
 			ret:AddQueuedScript('GetCurrentMission().FreeCarts = GetCurrentMission().FreeCarts + 1')
 		end
@@ -252,17 +305,23 @@ function Nautilus_Tunnel_Spawn1_Tip:GetSkillEffect(p1,p2) -- for passive preview
 	local pEnd = Point(2,2)
 	local q_move = PointList()
 	if self.Dir == DIR_DOWN or self.Dir == DIR_LEFT then
-		pStart = Point(2,0)
+		pStart = Point(2,1)
+		pEnd = Point(2,3)
 		q_move:push_back(Point(2,-1))
 		q_move:push_back(Point(2,0))
 		q_move:push_back(Point(2,1))
 		q_move:push_back(Point(2,2))
+		q_move:push_back(Point(2,3))
 	else
 		pStart = Point(2,6)
 		q_move:push_back(Point(2,5))
 		q_move:push_back(Point(2,4))
 		q_move:push_back(Point(2,3))
 		q_move:push_back(Point(2,2))
+	end
+	
+	for y = 0,6 do
+		Board:SetCustomTile(Point(2,y),'ground_rail.png')
 	end
 	
 	ret:AddQueuedMove(q_move, NO_DELAY)

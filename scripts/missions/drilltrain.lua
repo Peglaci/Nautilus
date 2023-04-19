@@ -9,13 +9,11 @@ modApi:appendAsset("img/units/mission/raillayer_broken.png",path.."img/units/mis
 
 local a = ANIMS
 
-a.train_drill = 				a.BaseUnit:new{ Image = "units/mission/raillayer.png", PosX = -46, PosY = -2 }
-a.train_drilla = 				a.BaseUnit:new{ Image = "units/mission/raillayer_a.png", PosX = -46, PosY = -2, NumFrames = 4 } 
-a.train_drill_broken = 			a.BaseUnit:new{ Image = "units/mission/raillayer.png", PosX = -46, PosY = -2 }
-
-a.train_drill_damaged = 		a.BaseUnit:new{ Image = "units/mission/raillayer_damaged.png", PosX = -46, PosY = -2 }
--- a.train_drill_damagedd = 		a.BaseUnit:new{ Image = "units/mission/raillayer_broken.png", PosX = -51, PosY = 3, Loop = false }
-a.train_drill_damaged_broken = 	a.BaseUnit:new{ Image = "units/mission/raillayer_broken.png", PosX = -46, PosY = -2 }
+a.nautilus_train_drill = 				a.BaseUnit:new{ Image = "units/mission/raillayer.png", PosX = -46, PosY = -2 }
+a.nautilus_train_drilla = 				a.BaseUnit:new{ Image = "units/mission/raillayer_a.png", PosX = -46, PosY = -2, NumFrames = 4 } 
+a.nautilus_train_drill_broken = 		a.BaseUnit:new{ Image = "units/mission/raillayer.png", PosX = -46, PosY = -2 }
+a.nautilus_train_drill_damaged = 		a.BaseUnit:new{ Image = "units/mission/raillayer_damaged.png", PosX = -46, PosY = -2 }
+a.nautilus_train_drill_damaged_broken = a.BaseUnit:new{ Image = "units/mission/raillayer_broken.png", PosX = -46, PosY = -2 }
 
 -- mission
 Mission_Nautilus_Drilltrain = Mission_Infinite:new{
@@ -145,7 +143,7 @@ Nautilus_Drilltrain_Pawn =
 	Name = "Rail Layer",
 	Health = 1,
 	Neutral = true,
-	Image = "train_drill",
+	Image = "nautilus_train_drill",
 	MoveSpeed = 0,
 	SkillList = { "Nautilus_Drilltrain_Move" },
 	DefaultTeam = TEAM_PLAYER,
@@ -166,7 +164,7 @@ Nautilus_Drilltrain_Damaged =
 	Health = 1,
 	Neutral = true,
 	IgnoreFire = true,
-	Image = "train_drill_damaged",
+	Image = "nautilus_train_drill_damaged",
 	MoveSpeed = 0,
 	SkillList = { },
 	DefaultTeam = TEAM_PLAYER,
