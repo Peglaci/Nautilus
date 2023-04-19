@@ -6,6 +6,10 @@ Location["effects/spike.png"] = Point(-20,0)
 modApi:appendAsset("img/effects/spike2.png",mod.resourcePath.."img/effects/spike2.png")
 Location["effects/spike2.png"] = Point(-20,0)
 
+modApi:appendAsset("img/combat/tile_icon/icon_spikes.png", mod.resourcePath .."img/combat/tile_icon/icon_spikes.png")
+Location["combat/tile_icon/icon_spikes.png"] = Point(-27,2)
+
+
 ANIMS.Nautilus_explo_spikes = Animation:new{
 	Image = "effects/explo_spikes.png",
 	NumFrames = 10,
@@ -37,7 +41,7 @@ Env_Nautilus_Spikes = Env_Attack:new{
   Name = "Crystal Spikes",
   Text = "Crystal spikes are littered across the terrain, dealing damage to the first unit to stand on them.",
   CombatName = "SPIKES",
-	CombatIcon = "combat/tile_icon/tile_rock.png",
+	CombatIcon = "combat/tile_icon/icon_spikes.png",
   StratText = "SPIKES",
 }
 

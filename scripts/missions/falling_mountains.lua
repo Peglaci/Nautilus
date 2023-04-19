@@ -4,18 +4,23 @@
 --Assets:
 local mod = mod_loader.mods[modApi.currentMod]
 
+modApi:appendAsset("img/combat/tile_icon/icon_stalactites.png", mod.resourcePath .."img/combat/tile_icon/icon_stalactites.png")
+Location["combat/tile_icon/icon_stalactites.png"] = Point(-27,2)
+modApi:appendAsset("img/units/mission/rock3.png", mod.resourcePath .."img/units/mission/rock3.png")
+Location["units/mission/rock3.png"] = Point(-27,2)
+
 Mission_Nautilus_Falling_Mountains = Mission_Auto:new{
-  Name = "Falling Mountains",
+  Name = "Stalactites",
   Environment = "Env_Falling_Mountains",
   --Objectives = Objective("Incinerate 2 Vek",1),
 }
 
 Env_Falling_Mountains = Env_Attack:new{
   Name = "Falling Mountains",
-  Text = "Mountains fall from the sky, killing any unit it lands on.",
-  CombatName = "FALLING MOUNTAINS",
-	CombatIcon = "combat/tile_icon/tile_rock.png",
-  StratText = "FALLING MOUNTAINS",
+  Text = "Stalactites fall from the sky, killing any units they land on.",
+  CombatName = "STALACTITES",
+	CombatIcon = "combat/tile_icon/icon_stalactites.png",
+  StratText = "STALACTITES",
 	Random = random_int(2) --Randomizes which quarters it starts at
 	--Image = "env_lightning",
 }
@@ -53,7 +58,7 @@ function Env_Falling_Mountains:GetAttackEffect(location) --Runs for each locatio
 		end)
 	]],location:GetString())
 
-	effect:AddDropper(damage,"effects/shotdown_rock.png")
+	effect:AddDropper(damage,"units/mission/rock3.png")
 	return effect
 end
 
