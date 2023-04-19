@@ -30,6 +30,7 @@ a.cave_background_fade_in = a.cave_background_fade_out:new {
 }
 
 local fadein = a.cave_background_fade_in
+local fading = false
 
 local function IsBackground()
 	return options.Nautilus_CaveBackground and options.Nautilus_CaveBackground.enabled and modApi:getCurrentTileset() == TILESET
@@ -38,8 +39,10 @@ end
 local function HOOK_AddBackground(mission)
   if IsBackground() then
 		Board:AddAnimation(Point(0,0),"cave_background_fade_in",ANIM_NO_DELAY)
+		fading = true
 		modApi:scheduleHook((fadein.Time*(fadein.NumFrames-1))*1000, function() -- minus 1 cause it uses one less frame
 			customAnim:add(Point(0,0),"cave_background")
+			fading = false
 			--Board:AddAnimation(Point(0,0),"cave_background",ANIM_NO_DELAY)
 		end)
   end
@@ -59,7 +62,7 @@ end
 local function HOOK_CheckBackground(screen)
 	customRunLater(5,function()
 		local mission = GetCurrentMission()
-		if mission and IsBackground() and not customAnim:get(Point(0,0),"cave_background") then
+		if mission and IsBackground() and not customAnim:get(Point(0,0),"cave_background") and not fading then
 			customAnim:add(Point(0,0),"cave_background")
 		end
 	end)
