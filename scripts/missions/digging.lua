@@ -23,7 +23,7 @@ local previewer = mod.libs.weaponPreview
 modApi:appendAsset("img/effects/burrow_openclose.png",mod.resourcePath.."img/effects/burrow_openclose.png") --Thanks to Metalocif for the animation
 modApi:appendAsset("img/units/mission/excavator.png", mod.resourcePath .."img/units/mission/excavator.png")
 modApi:appendAsset("img/units/mission/excavator_a.png", mod.resourcePath .."img/units/mission/excavator_a.png")
-modApi:appendAsset("img/units/mission/Rock1.png", mod.resourcePath .."img/units/mission/Rock1.png")
+
 modApi:appendAsset("img/weapons/excavatorbucket.png", mod.resourcePath.. "img/weapons/excavatorbucket.png")
 
 modApi:appendAsset("img/tileset/ground_buried_firefly.png", mod.resourcePath .."img/tileset/ground_buried_firefly.png")
@@ -36,14 +36,41 @@ modApi:appendAsset("img/units/mission/fireflya.png", mod.resourcePath .."img/uni
 modApi:appendAsset("img/units/mission/firefly_emerge.png", mod.resourcePath .."img/units/mission/firefly_emerge.png")
 modApi:appendAsset("img/units/mission/firefly_death.png", mod.resourcePath .."img/units/mission/firefly_death.png")
 
+modApi:appendAsset("img/units/mission/scorpion.png", mod.resourcePath .."img/units/mission/scorpion.png")
+modApi:appendAsset("img/units/mission/scorpiona.png", mod.resourcePath .."img/units/mission/scorpiona.png")
+modApi:appendAsset("img/units/mission/scorpion_emerge.png", mod.resourcePath .."img/units/mission/scorpion_emerge.png")
+modApi:appendAsset("img/units/mission/scorpion_death.png", mod.resourcePath .."img/units/mission/scorpion_death.png")
+
+modApi:appendAsset("img/units/mission/scarab.png", mod.resourcePath .."img/units/mission/scarab.png")
+modApi:appendAsset("img/units/mission/scaraba.png", mod.resourcePath .."img/units/mission/scaraba.png")
+modApi:appendAsset("img/units/mission/scarab_emerge.png", mod.resourcePath .."img/units/mission/scarab_emerge.png")
+modApi:appendAsset("img/units/mission/scarab_death.png", mod.resourcePath .."img/units/mission/scarab_death.png")
+
+modApi:appendAsset("img/units/mission/rock1.png", mod.resourcePath .."img/units/mission/rock1.png")
+modApi:appendAsset("img/units/mission/rock1_death.png", mod.resourcePath .."img/units/mission/rock1_death.png")
+
 local a = ANIMS
 a.Nautilus_Excavator = a.BaseUnit:new{Image = "units/mission/excavator.png", PosX = -20, PosY = -9}
 a.Nautilus_Excavatora = a.Nautilus_Excavator:new{Image = "units/mission/excavator_a.png", NumFrames = 4 }
 
-a.CrystalFirefly = a.BaseUnit:new{Image = "units/mission/firefly.png", PosX = -12, PosY = -9}
+a.CrystalRock = a.BaseUnit:new{Image = "units/mission/rock1.png", PosX = -18, PosY = -1}
+a.CrystalRockd = a.CrystalRock:new{ Image = "units/mission/rock1_death.png", PosX = -34, PosY = -9, NumFrames = 13, Time = 0.09, Loop = false }
+
+a.CrystalFirefly = a.BaseUnit:new{Image = "units/mission/firefly.png", PosX = -18, PosY = -2 }
 a.CrystalFireflya = a.CrystalFirefly:new{Image = "units/mission/fireflya.png", NumFrames = 4 }
 a.CrystalFireflyd = a.CrystalFirefly:new{ Image = "units/mission/firefly_death.png", Loop = false, NumFrames = 8, Time = .14 } 
-a.CrystalFireflye = a.CrystalFirefly:new{Image = "units/mission/firefly_emerge.png", PosX = -23, PosY = -5, NumFrames = 10}
+a.CrystalFireflye = a.CrystalFirefly:new{Image = "units/mission/firefly_emerge.png", PosX = -23, PosY = -2, NumFrames = 10}
+
+a.CrystalScorpion = a.BaseUnit:new{Image = "units/mission/scorpion.png", PosX = -16, PosY = -2 }
+a.CrystalScorpiona = a.BaseUnit:new{Image = "units/mission/scorpiona.png", PosX = -15, PosY = -2, NumFrames = 4 }
+a.CrystalScorpiond = a.BaseUnit:new{ Image = "units/mission/scorpion_death.png", PosX = -18, PosY = -5, Loop = false, NumFrames = 8, Time = .14 } 
+a.CrystalScorpione = a.CrystalScorpion:new{Image = "units/mission/scorpion_emerge.png", PosX = -24, PosY = -1, NumFrames = 10}
+
+a.CrystalScarab = a.BaseUnit:new{Image = "units/mission/scarab.png", PosX = -18, PosY = -2, Height = 4 }
+a.CrystalScaraba = a.CrystalScarab:new{Image = "units/mission/scaraba.png", NumFrames = 4 }
+a.CrystalScarabd = a.CrystalScarab:new{ Image = "units/mission/scarab_death.png", Loop = false, NumFrames = 8, Time = .14 } 
+a.CrystalScarabe = a.CrystalScarab:new{Image = "units/mission/scarab_emerge.png", PosX = -23, PosY = -3, NumFrames = 10}
+
 
 ANIMS.BurrowOpenClose = Animation:new{
     Image = "effects/burrow_openclose.png",
@@ -56,6 +83,21 @@ ANIMS.BurrowOpenClose = Animation:new{
 }
 
 --ENEMY
+CrystalRock = 
+	{	
+		Name = "Rock",
+		Health = 1,
+		Neutral = true,
+		MoveSpeed = 0,
+		IsPortrait = false,
+		Image = "CrystalRock",
+		SoundLocation = "/support/rock/",
+		MoveSpeed = 0,		
+		DefaultTeam = TEAM_NONE,
+		ImpactMaterial = IMPACT_ROCK
+	}
+AddPawn("CrystalRock")
+
 CrystalFirefly = 
 	{	
 		Name = "Fossil Firefly",
@@ -68,6 +110,32 @@ CrystalFirefly =
 		
 	}
 AddPawn("CrystalFirefly")
+
+CrystalFirefly = 
+	{	
+		Name = "Fossil Scarab",
+		Health = 4,
+		Image = "CrystalScarab",
+		MoveSpeed = 3,
+		SkillList = { "ScorpionAtk1" },
+		SoundLocation = "/enemy/scorpion_soldier_1/",
+		DefaultTeam = TEAM_ENEMY,
+		
+	}
+AddPawn("CrystalScarab")
+
+CrystalScorpion = 
+	{	
+		Name = "Fossil Scorpion",
+		Health = 4,
+		Image = "CrystalScorpion",
+		MoveSpeed = 3,
+		SkillList = { "ScorpionAtk1" },
+		SoundLocation = "/enemy/scorpion_soldier_1/",
+		DefaultTeam = TEAM_ENEMY,
+		
+	}
+AddPawn("CrystalScorpion")
 
 
 --MISSION
@@ -109,7 +177,7 @@ function Mission_Nautilus_Digging:StartMission()
   local choice = random_removal(choices)
   Board:BlockSpawn(choice,BLOCKED_PERM)
   self.DigSite = choice
-  Board:SetCustomTile(choice,"ground_buried_firefly.png")
+  Board:SetCustomTile(choice,"ground_buried_scorpion.png")
  -- Board:SetTerrain(choice,17) --This probably needs to be something more consistent
 end
 
@@ -179,9 +247,9 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
   local ret = SkillEffect()
   local pawn = Board:GetPawn(p1)
   local mission = GetCurrentMission()
-  local spawnPawn = "Wall"
+  local spawnPawn = "CrystalRock"
   if (mission.DigSite and p1 == mission.DigSite) then --Board:IsTipImage() or
-    spawnPawn = "CrystalFirefly"
+    spawnPawn = "CrystalScorpion"
   end
 
   --Animation:
