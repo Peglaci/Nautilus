@@ -38,12 +38,13 @@ Mission_Nautilus_Minecarts = Mission_Infinite:new{
 	MinecartRandom = 0,
 	UseBonus = false,
 	FreeCarts = 0,
+	ForceSpawn = false --garantee players can finish the mission if a tunnel collapse
 }
 
 function Mission_Nautilus_Minecarts:StartMission()
 	local zone = extract_table(Board:GetZone("Tunnels"))
 	local tunnels = {"Nautilus_Tunnel_Pawn1_","Nautilus_Tunnel_Pawn2_"}
-	for _, p in ipairs(zone) do
+	for i, p in ipairs(zone) do
 		local spriteDir = (p.x == 0) and 'r' or 'l'
 		local pawn = PAWN_FACTORY:CreatePawn(random_removal(tunnels)..spriteDir)
 		-- customAnim:add(p,'nautilus_tunnel_top_'..spriteDir)
@@ -221,7 +222,7 @@ function Nautilus_Tunnel_Spawn1:GetSkillEffect(p1, p2)
 		rand = mission.MinecartRandom
 	end
 	
-	if rand == self.TunnelN then
+	if rand == self.TunnelN or mission.ForceSpawn then
 		local pEnd = p2
 		local blocked = false
 		if dir == DIR_DOWN or dir == DIR_RIGHT then
@@ -268,18 +269,20 @@ function Nautilus_Tunnel_Spawn1:GetSkillEffect(p1, p2)
 			end
 		end
 		
-		local cart = SpaceDamage(pEnd)
-		if Board:IsValid(pEnd) and Board:IsBlocked(pEnd, PATH_PROJECTILE) then
-			cart.iDamage = DAMAGE_DEATH
-			cart.sAnimation = self.AttackAnimation
-			cart.sSound = self.CrashSound
-			ret:Nautilus_AddQueuedProjectile(p1, cart, self.CartArt, FULL_DELAY)
-		else
-			if dir == DIR_UP or dir == DIR_LEFT then cart.loc = pEnd-DIR_VECTORS[dir] end
-			ret:Nautilus_AddQueuedProjectile(p1, cart, self.CartArt, FULL_DELAY)
-			ret.q_effect:back().bHide = true
+		if Game:GetTeamTurn() == TEAM_PLAYER then -- stop enemies from avoiding carts
+			local cart = SpaceDamage(pEnd)
+			if Board:IsValid(pEnd) and Board:IsBlocked(pEnd, PATH_GROUND) then
+				cart.iDamage = DAMAGE_DEATH
+				cart.sAnimation = self.AttackAnimation
+				cart.sSound = self.CrashSound
+				ret:Nautilus_AddQueuedProjectile(p1, cart, self.CartArt, FULL_DELAY)
+			else
+				if dir == DIR_UP or dir == DIR_LEFT then cart.loc = pEnd-DIR_VECTORS[dir] end
+				ret:Nautilus_AddQueuedProjectile(p1, cart, self.CartArt, FULL_DELAY)
+				ret.q_effect:back().bHide = true
+			end
+			ret.q_effect:back().bHidePath = true
 		end
-		ret.q_effect:back().bHidePath = true
 		
 		if mission and mission.FreeCarts and not blocked then
 			ret:AddQueuedScript('GetCurrentMission().FreeCarts = GetCurrentMission().FreeCarts + 1')
@@ -339,9 +342,29 @@ Nautilus_Tunnel_Spawn2_Tip.GetSkillEffect = Nautilus_Tunnel_Spawn1_Tip.GetSkillE
 
 ----------- Hooks -----------
 local HOOK_nextTurn = function(mission)
-	if mission and mission.MinecartRandom and Game:GetTeamTurn() == TEAM_ENEMY then
-		local choices = {1,2}
-		mission.MinecartRandom = random_removal(choices)
+	if mission and mission.ID == "Mission_Nautilus_Minecarts" then
+		if Game:GetTeamTurn() == TEAM_ENEMY then
+			local choices = {1,2}
+			mission.MinecartRandom = random_removal(choices)
+		end
+		
+		local colapsed = false
+		local pawnList = extract_table(Board:GetPawns(TEAM_ANY))
+		for i = 1, #pawnList do
+			local currPawn = Board:GetPawn(pawnList[i])
+			if currPawn:GetType():find("^Nautilus_Tunnel_Pawn") and currPawn:IsDead() then
+				colapsed = true
+			end
+		end
+		
+		mission.ForceSpawn = false
+		if colapsed then
+			if mission.FreeCarts < 2 and Board:GetTurn() > 1 + mission.FreeCarts then
+				mission.ForceSpawn = true
+			end
+		end
+		
+		Board:DamageSpace(SpaceDamage(Point(0,0))) -- update previews in player turn
 	end
 end
 
