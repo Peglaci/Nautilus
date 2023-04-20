@@ -38,6 +38,7 @@ Mission_Nautilus_Minecarts = Mission_Infinite:new{
 	MinecartRandom = 0,
 	UseBonus = false,
 	FreeCarts = 0,
+	Colapsed = false,
 	ForceSpawn = false --garantee players can finish the mission if a tunnel collapse
 }
 
@@ -348,17 +349,8 @@ local HOOK_nextTurn = function(mission)
 			mission.MinecartRandom = random_removal(choices)
 		end
 		
-		local colapsed = false
-		local pawnList = extract_table(Board:GetPawns(TEAM_ANY))
-		for i = 1, #pawnList do
-			local currPawn = Board:GetPawn(pawnList[i])
-			if currPawn:GetType():find("^Nautilus_Tunnel_Pawn") and currPawn:IsDead() then
-				colapsed = true
-			end
-		end
-		
 		mission.ForceSpawn = false
-		if colapsed then
+		if mission.Colapsed then
 			if mission.FreeCarts < 2 and Board:GetTurn() > 1 + mission.FreeCarts then
 				mission.ForceSpawn = true
 			end
@@ -368,8 +360,26 @@ local HOOK_nextTurn = function(mission)
 	end
 end
 
+local HOOK_pawnKilled = function(mission, pawn)
+	if mission and mission.ID == "Mission_Nautilus_Minecarts" then 
+		if pawn:GetType():find("^Nautilus_Tunnel_Pawn") then
+			mission.Colapsed = true
+		end
+	end
+end
+
+local HOOK_pawnRevived = function(mission, pawn)
+	if mission and mission.ID == "Mission_Nautilus_Minecarts" then 
+		if pawn:GetType():find("^Nautilus_Tunnel_Pawn") then
+			pawn:Kill()
+		end
+	end
+end
+
 local function EVENT_onModsLoaded()
 	modApi:addNextTurnHook(HOOK_nextTurn)
+	modapiext:addPawnKilledHook(HOOK_pawnKilled)
+	modapiext:addPawnRevivedHook(HOOK_pawnRevived)
 end
 
 modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
