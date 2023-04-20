@@ -34,30 +34,31 @@ function Mission_Nautilus_Drilltrain:StartMission()
 	self.Train = train:GetId()
 	Board:AddPawn(train,Point(4,6))
 	
-	local choices = {TERRAIN_MOUNTAIN,TERRAIN_HOLE}
-	local terrain = random_removal(choices)
 	for i = 0, 7 do
-		local curr = Point(4,i)
-		Board:SetCustomTile(curr,"")
-		local obstacle = true
-		for j = DIR_START, DIR_END do
-			local adj = curr + DIR_VECTORS[j]
-			local ort = adj + DIR_VECTORS[(j+1)%4]
-			if Board:IsBlocked(ort, PATH_PROJECTILE) or i > 5 then -- and Board:IsBlocked(adj, PATH_GROUND) then
+		local order = {4,3,5}
+		for _,j in ipairs(order) do
+			local curr = Point(j,i)
+			Board:SetCustomTile(curr,"")
+			local obstacle = true
+			for j = DIR_START, DIR_END do
+				local adj = curr + DIR_VECTORS[j]
+				local ort = adj + DIR_VECTORS[(j+1)%4]
+				if Board:IsBlocked(ort, PATH_PROJECTILE) or i > 5 then -- and Board:IsBlocked(adj, PATH_GROUND) then
+					obstacle = false
+				end
+			end
+			
+			local choices = {true,false,false}
+			choice = random_removal(choices)
+			if choice then -- remove some obstacles
 				obstacle = false
 			end
-		end
-		
-		local choices = {true,false,false}
-		choice = random_removal(choices)
-		if choice then -- remove some obstacles
-			obstacle = false
-		end
-		
-		if obstacle then
-			Board:SetTerrain(curr,terrain)
-		else
-			Board:SetTerrain(curr,0)
+			
+			if obstacle then
+				Board:SetTerrain(curr,TERRAIN_MOUNTAIN)
+			else
+				Board:SetTerrain(curr,0)
+			end
 		end
 	end
 	
@@ -145,7 +146,7 @@ Nautilus_Drilltrain_Pawn =
 	Neutral = true,
 	Image = "nautilus_train_drill",
 	MoveSpeed = 0,
-	SkillList = { "Nautilus_Drilltrain_Move" },
+	SkillList = { "Nautilus_Drilltrain_Move" }, --{'Train_Move'},
 	DefaultTeam = TEAM_PLAYER,
 	IgnoreSmoke = true,
 	IgnoreFlip = true,
@@ -187,7 +188,7 @@ Nautilus_Drilltrain_Move = Skill:new{
 	TipImage = {
 		Unit = Point(2,3),
 		Target = Point(2,2),
-		Hole = Point(2,2),
+		-- Hole = Point(2,2),
 		Mountain = Point(2,1),
 		CustomPawn = "Nautilus_Drilltrain_Pawn"
 	}
@@ -209,22 +210,28 @@ function Nautilus_Drilltrain_Move:GetSkillEffect(p1, p2)
 	local current = p2
 	local damage = Point(-1,-1)
 	for k = 1, 2 do
-		q_move:push_back(current)
+		if Board:GetTerrain(current) == TERRAIN_HOLE or Board:GetTerrain(current) == TERRAIN_WATER then -- kill with chasm or water
+			ret:AddQueuedDamage(SpaceDamage(current - VEC_UP,DAMAGE_DEATH))
+			break
+		end
+		
 		local dam = SpaceDamage(current)
 		if Board:GetPawn(current) then
 			dam.iDamage = DAMAGE_DEATH
+			ret:AddQueuedDamage(dam)
 		elseif Board:GetTerrain(current) == TERRAIN_MOUNTAIN or Board:GetTerrain(current) == TERRAIN_BUILDING then
 			ret:AddQueuedScript("Board:DamageSpace("..(current):GetString()..",DAMAGE_DEATH)")
+			-- dam.iTerrain = 0
+			-- ret:AddQueuedDamage(dam)
 		end
-		dam.iTerrain = 0
-		ret:AddQueuedDamage(dam)
 		
 		if Board:IsPawnSpace(current, false) and Board:GetPawn(current, false):IsCorpse() then
 			ret:AddQueuedScript("Board:GetPawn("..current:GetString()..",false):FlyAway()")
 		end
 		
-		-- ret:AddQueuedScript("Board:SetTerrain("..(current):GetString()..",0)")
 		ret:AddQueuedScript("Board:SetCustomTile("..(current-VEC_UP*2):GetString()..",'ground_rail.png')")
+		
+		q_move:push_back(current)
 		current = current + VEC_UP
 	end
 	
