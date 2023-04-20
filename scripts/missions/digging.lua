@@ -61,17 +61,17 @@ a.CrystalRockd = a.CrystalRock:new{ Image = "units/mission/rock1_death.png", Pos
 
 a.CrystalFirefly = a.BaseUnit:new{Image = "units/mission/firefly.png", PosX = -18, PosY = -2 }
 a.CrystalFireflya = a.CrystalFirefly:new{Image = "units/mission/fireflya.png", NumFrames = 4 }
-a.CrystalFireflyd = a.CrystalFirefly:new{ Image = "units/mission/firefly_death.png", Loop = false, NumFrames = 8, Time = .14 } 
+a.CrystalFireflyd = a.CrystalFirefly:new{ Image = "units/mission/firefly_death.png", Loop = false, NumFrames = 8, Time = .14, PosX = -20, PosY = -2 }
 a.CrystalFireflye = a.CrystalFirefly:new{Image = "units/mission/firefly_emerge.png", PosX = -23, PosY = -2, NumFrames = 10}
 
 a.CrystalScorpion = a.BaseUnit:new{Image = "units/mission/scorpion.png", PosX = -16, PosY = -2 }
-a.CrystalScorpiona = a.BaseUnit:new{Image = "units/mission/scorpiona.png", PosX = -15, PosY = -2, NumFrames = 4 }
-a.CrystalScorpiond = a.BaseUnit:new{ Image = "units/mission/scorpion_death.png", PosX = -18, PosY = -5, Loop = false, NumFrames = 8, Time = .14 } 
+a.CrystalScorpiona = a.CrystalScorpion:new{Image = "units/mission/scorpiona.png", PosX = -15, PosY = -2, NumFrames = 4 }
+a.CrystalScorpiond = a.CrystalScorpion:new{ Image = "units/mission/scorpion_death.png", PosX = -18, PosY = -5, Loop = false, NumFrames = 8, Time = .14 }
 a.CrystalScorpione = a.CrystalScorpion:new{Image = "units/mission/scorpion_emerge.png", PosX = -24, PosY = -1, NumFrames = 10}
 
-a.CrystalScarab = a.BaseUnit:new{Image = "units/mission/scarab.png", PosX = -18, PosY = -2, Height = 4 }
-a.CrystalScaraba = a.CrystalScarab:new{Image = "units/mission/scaraba.png", NumFrames = 4 }
-a.CrystalScarabd = a.CrystalScarab:new{ Image = "units/mission/scarab_death.png", Loop = false, NumFrames = 8, Time = .14 } 
+a.CrystalScarab = a.BaseUnit:new{Image = "units/mission/scarab.png", PosX = -18, PosY = -3}
+a.CrystalScaraba = a.CrystalScarab:new{Image = "units/mission/scaraba.png", NumFrames = 4, PosX = -20, PosY = -3}
+a.CrystalScarabd = a.CrystalScarab:new{ Image = "units/mission/scarab_death.png", Loop = false, NumFrames = 8, Time = .14, PosX = -21, PosY = -3 }
 a.CrystalScarabe = a.CrystalScarab:new{Image = "units/mission/scarab_emerge.png", PosX = -23, PosY = -3, NumFrames = 10}
 
 
@@ -86,8 +86,8 @@ ANIMS.BurrowOpenClose = Animation:new{
 }
 
 --ENEMY
-CrystalRock = 
-	{	
+CrystalRock =
+	{
 		Name = "Rock",
 		Health = 1,
 		Neutral = true,
@@ -95,40 +95,40 @@ CrystalRock =
 		IsPortrait = false,
 		Image = "CrystalRock",
 		SoundLocation = "/support/rock/",
-		MoveSpeed = 0,		
+		MoveSpeed = 0,
 		DefaultTeam = TEAM_NONE,
 		ImpactMaterial = IMPACT_ROCK
 	}
 AddPawn("CrystalRock")
 
-CrystalFirefly = 
-	{	
+CrystalFirefly =
+	{
 		Name = "Fossil Firefly",
 		Health = 4,
 		Image = "CrystalFirefly",
 		MoveSpeed = 3,
-		SkillList = { "ScorpionAtk1" },
-		SoundLocation = "/enemy/scorpion_soldier_1/",
+		SkillList = { "FireflyAtk1" },
+		SoundLocation = "/enemy/firefly_soldier_1/",
 		DefaultTeam = TEAM_ENEMY,
-		--Portrait = "portraits/scorpion.png",		
+		--Portrait = "portraits/scorpion.png",
 	}
 AddPawn("CrystalFirefly")
 
-CrystalFirefly = 
-	{	
+CrystalScarab =
+	{
 		Name = "Fossil Scarab",
 		Health = 4,
 		Image = "CrystalScarab",
 		MoveSpeed = 3,
-		SkillList = { "ScorpionAtk1" },
-		SoundLocation = "/enemy/scorpion_soldier_1/",
+		SkillList = { "ScarabAtk1" },
+		SoundLocation = "/enemy/scarab_1/",
 		DefaultTeam = TEAM_ENEMY,
-		--Portrait = "portraits/scorpion.png",		
+		--Portrait = "portraits/scorpion.png",
 	}
 AddPawn("CrystalScarab")
 
-CrystalScorpion = 
-	{	
+CrystalScorpion =
+	{
 		Name = "Fossil Scorpion",
 		Health = 4,
 		Image = "CrystalScorpion",
@@ -136,7 +136,7 @@ CrystalScorpion =
 		SkillList = { "ScorpionAtk1" },
 		SoundLocation = "/enemy/scorpion_soldier_1/",
 		DefaultTeam = TEAM_ENEMY,
-		--Portrait = "portraits/scorpion.png",		
+		--Portrait = "portraits/scorpion.png",
 	}
 AddPawn("CrystalScorpion")
 
@@ -149,6 +149,7 @@ Mission_Nautilus_Digging = Mission_Infinite:new{
   Excavator = nil,
   DigSite = Point(-1,-1),
   PawnId = nil,
+  spawnPawn = nil,
 }
 
 function Mission_Nautilus_Digging:IsPointValid(space)
@@ -180,7 +181,10 @@ function Mission_Nautilus_Digging:StartMission()
   local choice = random_removal(choices)
   Board:BlockSpawn(choice,BLOCKED_PERM)
   self.DigSite = choice
-  Board:SetCustomTile(choice,"ground_buried_scorpion.png")
+  local types = {{"ground_buried_scorpion.png","CrystalScorpion"},{"ground_buried_scarab.png","CrystalScarab"},{"ground_buried_firefly.png","CrystalFirefly"}}
+  local type = random_removal(types)
+  Board:SetCustomTile(choice,type[1])
+  self.spawnPawn = type[2]
  -- Board:SetTerrain(choice,17) --This probably needs to be something more consistent
 end
 
@@ -250,9 +254,13 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
   local ret = SkillEffect()
   local pawn = Board:GetPawn(p1)
   local mission = GetCurrentMission()
-  local spawnPawn = "CrystalRock"
+  local spawnPawn = nil
   if (mission.DigSite and p1 == mission.DigSite) then --Board:IsTipImage() or
-    spawnPawn = "CrystalScorpion"
+    spawnPawn = mission.spawnPawn
+  end
+
+  if not spawnPawn then
+    spawnPawn = "CrystalRock"
   end
 
   --Animation:
@@ -294,8 +302,11 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
   --LOG(GetCurrentMission().DigSite)
   --Mission things
   if mission.DigSite and p1 == mission.DigSite then
-	Board:SetCustomTile(mission.DigSite,"ground_buried_empty.png")
-    ret:AddScript("GetCurrentMission().DigSite = nil")
+    ret:AddScript([[
+      local mission = GetCurrentMission()
+      Board:SetCustomTile(mission.DigSite,"ground_buried_empty.png")
+      mission.DigSite = nil
+    ]])
   end
 
   --Reset Terrain and Crack Tile, animations etc.
@@ -308,5 +319,5 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
 end
 
 function this:init(mod)
-	
+
 end
