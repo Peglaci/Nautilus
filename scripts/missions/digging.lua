@@ -31,16 +31,19 @@ modApi:appendAsset("img/tileset/ground_buried_scarab.png", mod.resourcePath .."i
 modApi:appendAsset("img/tileset/ground_buried_scorpion.png", mod.resourcePath .."img/tileset/ground_buried_scorpion.png")
 modApi:appendAsset("img/tileset/ground_buried_empty.png", mod.resourcePath .."img/tileset/ground_buried_empty.png")
 
+modApi:appendAsset("img/portraits/firefly.png", mod.resourcePath .."img/portraits/firefly.png")
 modApi:appendAsset("img/units/mission/firefly.png", mod.resourcePath .."img/units/mission/firefly.png")
 modApi:appendAsset("img/units/mission/fireflya.png", mod.resourcePath .."img/units/mission/fireflya.png")
 modApi:appendAsset("img/units/mission/firefly_emerge.png", mod.resourcePath .."img/units/mission/firefly_emerge.png")
 modApi:appendAsset("img/units/mission/firefly_death.png", mod.resourcePath .."img/units/mission/firefly_death.png")
 
+modApi:appendAsset("img/portraits/scorpion.png", mod.resourcePath .."img/portraits/scorpion.png")
 modApi:appendAsset("img/units/mission/scorpion.png", mod.resourcePath .."img/units/mission/scorpion.png")
 modApi:appendAsset("img/units/mission/scorpiona.png", mod.resourcePath .."img/units/mission/scorpiona.png")
 modApi:appendAsset("img/units/mission/scorpion_emerge.png", mod.resourcePath .."img/units/mission/scorpion_emerge.png")
 modApi:appendAsset("img/units/mission/scorpion_death.png", mod.resourcePath .."img/units/mission/scorpion_death.png")
 
+modApi:appendAsset("img/portraits/scarab.png", mod.resourcePath .."img/portraits/scarab.png")
 modApi:appendAsset("img/units/mission/scarab.png", mod.resourcePath .."img/units/mission/scarab.png")
 modApi:appendAsset("img/units/mission/scaraba.png", mod.resourcePath .."img/units/mission/scaraba.png")
 modApi:appendAsset("img/units/mission/scarab_emerge.png", mod.resourcePath .."img/units/mission/scarab_emerge.png")
@@ -107,7 +110,7 @@ CrystalFirefly =
 		SkillList = { "ScorpionAtk1" },
 		SoundLocation = "/enemy/scorpion_soldier_1/",
 		DefaultTeam = TEAM_ENEMY,
-		
+		--Portrait = "portraits/scorpion.png",		
 	}
 AddPawn("CrystalFirefly")
 
@@ -120,7 +123,7 @@ CrystalFirefly =
 		SkillList = { "ScorpionAtk1" },
 		SoundLocation = "/enemy/scorpion_soldier_1/",
 		DefaultTeam = TEAM_ENEMY,
-		
+		--Portrait = "portraits/scorpion.png",		
 	}
 AddPawn("CrystalScarab")
 
@@ -133,7 +136,7 @@ CrystalScorpion =
 		SkillList = { "ScorpionAtk1" },
 		SoundLocation = "/enemy/scorpion_soldier_1/",
 		DefaultTeam = TEAM_ENEMY,
-		
+		--Portrait = "portraits/scorpion.png",		
 	}
 AddPawn("CrystalScorpion")
 
