@@ -221,14 +221,13 @@ function Nautilus_Drilltrain_Move:GetSkillEffect(p1, p2)
 			ret:AddQueuedDamage(dam)
 		elseif Board:GetTerrain(current) == TERRAIN_MOUNTAIN or Board:GetTerrain(current) == TERRAIN_BUILDING then
 			ret:AddQueuedScript("Board:DamageSpace("..(current):GetString()..",DAMAGE_DEATH)")
-			-- dam.iTerrain = 0
-			-- ret:AddQueuedDamage(dam)
 		end
 		
 		if Board:IsPawnSpace(current, false) and Board:GetPawn(current, false):IsCorpse() then
 			ret:AddQueuedScript("Board:GetPawn("..current:GetString()..",false):FlyAway()")
 		end
 		
+		ret:AddQueuedScript("Board:SetTerrain("..(current-VEC_UP*2):GetString()..",0)") -- prevent rubble from mountains to overlay tracks
 		ret:AddQueuedScript("Board:SetCustomTile("..(current-VEC_UP*2):GetString()..",'ground_rail.png')")
 		
 		q_move:push_back(current)

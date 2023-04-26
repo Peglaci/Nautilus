@@ -24,19 +24,30 @@ Mission_Nautilus_Incinerator = Mission_Auto:new{
 }
 
 function Mission_Nautilus_Incinerator:IsValidTarget(space)
-	local tile = Board:GetTerrain(space)
+	local ret = (not Board:IsUniqueBuilding(space) and not Board:IsPod(space))
+	
+	for i = DIR_START, DIR_END do -- check tiles around the incinerator
+		local adj = space + DIR_VECTORS[i]
+		local ort = adj + DIR_VECTORS[(i+1)%4]
+		if Board:IsUniqueBuilding(adj) or Board:IsUniqueBuilding(ort) then
+			ret = false
+		end
+	end
+	
+	return ret
+	-- local tile = Board:GetTerrain(space)
 
-	return Board:IsValid(space) and
-			not Board:IsPod(space) and
-			not Board:IsBuilding(space) and
-			tile ~= TERRAIN_WATER
+	-- return Board:IsValid(space) and
+			-- not Board:IsPod(space)-- and
+			-- -- not Board:IsBuilding(space) and
+			-- -- tile ~= TERRAIN_WATER
 end
 
 function Mission_Nautilus_Incinerator:StartMission()
   local choices = {}
 
   --Find all possible places
-  for i=3,5 do
+  for i=4,5 do
     for j=2,5 do
       local point = Point(i,j)
       if self:IsValidTarget(point) then
@@ -46,11 +57,19 @@ function Mission_Nautilus_Incinerator:StartMission()
   end
   --Choose one randomly
   if #choices ~= 0 then
-		local choice = random_removal(choices)
+	local choice = random_removal(choices)
     self.Incinerator = choice
     Board:AddAnimation(choice,"Incinerator",ANIM_NO_DELAY) --This animation loops forever
-		Board:SetTerrain(choice,TERRAIN_HOLE)
+	Board:SetTerrain(choice,TERRAIN_HOLE)
     Board:BlockSpawn(choice,BLOCKED_PERM)
+	
+	for i = DIR_START, DIR_END do -- clean tiles around the incinerator
+		local adj = choice + DIR_VECTORS[i]
+		local ort = adj + DIR_VECTORS[(i+1)%4]
+		Board:SetTerrain(ort,0)
+		Board:SetTerrain(adj,0)
+	end
+	
 	else
     LOG("This should never show up, @NamesAreHard#2501 on discord if you see it. Nautilus.") --There should always be a valid spot
   end
