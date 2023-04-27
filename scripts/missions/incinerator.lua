@@ -21,7 +21,16 @@ Mission_Nautilus_Incinerator = Mission_Auto:new{
   Objectives = Objective("Incinerate 2 Vek",1),
 	Incinerator = Point(-1,-1),
   Incinerated = 0,
+  VekN = 2
 }
+
+function Mission_Nautilus_Incinerator:GetObjective()
+	if GetDifficulty() == DIFF_EASY then
+		return 1
+	else
+		return 2
+	end
+end
 
 function Mission_Nautilus_Incinerator:IsValidTarget(space)
 	local ret = (not Board:IsUniqueBuilding(space) and not Board:IsPod(space))
@@ -44,8 +53,9 @@ function Mission_Nautilus_Incinerator:IsValidTarget(space)
 end
 
 function Mission_Nautilus_Incinerator:StartMission()
+  self.Objectives = Objective("Incinerate "..self:GetObjective().." Vek",1)
+  
   local choices = {}
-
   --Find all possible places
   for i=4,5 do
     for j=2,5 do
@@ -76,14 +86,14 @@ function Mission_Nautilus_Incinerator:StartMission()
 end
 
 function Mission_Nautilus_Incinerator:UpdateMission()
-	if self.Incinerator then
-	  local point = self.Incinerator
-	  Board:MarkSpaceDesc(point,"Nautilus_Incinerator",EFFECT_DEADLY) --Text in TILE_TOOLTIPS
-	end
+	-- if self.Incinerator then
+	  -- local point = self.Incinerator
+	  -- Board:MarkSpaceDesc(point,"Nautilus_Incinerator",EFFECT_DEADLY) --Text in TILE_TOOLTIPS
+	-- end
 end
 
 function Mission_Nautilus_Incinerator:GetCompletedObjectives()
-  if self.Incinerated >= 2 then
+  if self.Incinerated >= self:GetObjective() then
     return self.Objectives
   else
     return self.Objectives:Failed()
@@ -91,8 +101,21 @@ function Mission_Nautilus_Incinerator:GetCompletedObjectives()
 end
 
 function Mission_Nautilus_Incinerator:UpdateObjectives()
-	local status = self.Incinerated >= 2 and OBJ_COMPLETE or OBJ_STANDARD
-	Game:AddObjective(string.format("Incinerate 2 Vek\n(%s/2 incinerated)",tostring(self.Incinerated)),status, REWARD_REP, 1)
+	local status = self.Incinerated >= self:GetObjective() and OBJ_COMPLETE or OBJ_STANDARD
+	Game:AddObjective(string.format("Incinerate %i Vek\n(%s/%i incinerated)",self:GetObjective(),tostring(self.Incinerated),self:GetObjective()),status, REWARD_REP, 1)
+end
+
+--toxs tooltips
+local HOOK_onTileHighlighted = function(mission, point)	
+	-- Override chasm tile tooltip when highlighting Incinerator
+	-- Board:MarkSpaceDesc is used by environment effects and could conflict
+	if mission and point == mission.Incinerator and Board:GetTerrain(point) == TERRAIN_HOLE then
+		modApi.modLoaderDictionary["Tile_chasm_Title"] = TILE_TOOLTIPS.Nautilus_Incinerator[1]
+		modApi.modLoaderDictionary["Tile_chasm_Text"] = TILE_TOOLTIPS.Nautilus_Incinerator[2]		
+	else
+		modApi.modLoaderDictionary["Tile_chasm_Title"] = nil
+		modApi.modLoaderDictionary["Tile_chasm_Text"] = nil		
+	end
 end
 
 local function HOOK_PawnKilled(mission,pawn)
@@ -114,6 +137,7 @@ end
 
 local function EVENT_onModsLoaded()
   modapiext:addPawnKilledHook(HOOK_PawnKilled)
+  modapiext:addTileHighlightedHook(HOOK_onTileHighlighted)
 end
 
 modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
