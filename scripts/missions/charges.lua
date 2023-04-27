@@ -110,14 +110,12 @@ function Mission_Nautilus_Charges:UpdateMission()
           local newpawn = Board:GetPawn(curr)
           if newpawn and newpawn:GetTeam() == TEAM_PLAYER then
             if not on and pawn:GetCustomAnim() ~= "BlastingCharge_On" then
-              LOG("Setting to On!")
               pawn:SetCustomAnim("BlastingCharge_On")
             end
             on = true
           end
         end
         if not on and pawn:GetCustomAnim() ~= "BlastingCharge_Off" then
-          LOG("Setting to Off!")
           pawn:SetCustomAnim("BlastingCharge_Off")
         end
       end
