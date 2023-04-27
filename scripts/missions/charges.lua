@@ -5,7 +5,21 @@
 --Charges can spawn next to each other, okay?
 -- \n?
 
+--If reloading game and mech starts next to not powered charge, it does not set it properly for some reason
+
 local mod = mod_loader.mods[modApi.currentMod]
+
+--assets
+modApi:appendAsset("img/units/mission/blastingcharge_on.png",mod.resourcePath.."img/units/mission/blastingcharge_on.png")
+modApi:appendAsset("img/units/mission/blastingcharge_off.png",mod.resourcePath.."img/units/mission/blastingcharge_off.png")
+modApi:appendAsset("img/units/mission/blastingcharge_warning.png",mod.resourcePath.."img/units/mission/blastingcharge_warning.png")
+
+local a = ANIMS
+a.BlastingCharge_Off = a.BaseUnit:new{Image = "units/mission/blastingcharge_off.png", PosX = -22, PosY = -2}
+a.BlastingCharge_Offa = a.BlastingCharge_Off:new{Image = "units/mission/blastingcharge_on.png", NumFrames = 4} --Should never be seen
+
+a.BlastingCharge_On = a.BlastingCharge_Offa:new{Image = "units/mission/blastingcharge_warning.png", Time = .6} --Weirdness cause hacks
+a.BlastingCharge_Ona = a.BlastingCharge_Offa:new{Image = "units/mission/blastingcharge_on.png", Time = .2}
 
 Mission_Nautilus_Charges = Mission_Infinite:new{
   Name = "Blast Charges",
@@ -65,9 +79,11 @@ function Mission_Nautilus_Charges:NextTurn()
           local newpawn = Board:GetPawn(curr)
           if newpawn and newpawn:GetTeam() == TEAM_PLAYER then
             pawn:SetPowered(true)
-            Board:Ping(space,GL_Color(255,255,255))
-            Board:Ping(curr,GL_Color(0,0,0))
-            Game:TriggerSound("/ui/battle/buff_armor")
+            modApi:runLater(function()
+              Board:Ping(curr,GL_Color(255,162,0)) --Switches anim on same frame, kills ping
+              Board:Ping(space,GL_Color(255,45,0))
+              Game:TriggerSound("/ui/battle/buff_armor")
+            end)
             break
           end
         end
@@ -79,12 +95,31 @@ end
 function Mission_Nautilus_Charges:UpdateMission()
   for _, id in ipairs(self.Ids) do
     local pawn = Board:GetPawn(id)
-    if pawn then
+    if pawn then--and not modApi:IsTipImage() then
       local space = pawn:GetSpace()
       if pawn:IsPowered() then
         Board:MarkSpaceDesc(space,"NAH_Blast_Charge_Powered")
+        if pawn:GetCustomAnim() ~= "BlastingCharge_On" then
+          pawn:SetCustomAnim("BlastingCharge_On")
+        end
       else
         Board:MarkSpaceDesc(space,"NAH_Blast_Charge_Unpowered")
+        local on = false
+        for i=DIR_START,DIR_END do
+          local curr = space + DIR_VECTORS[i]
+          local newpawn = Board:GetPawn(curr)
+          if newpawn and newpawn:GetTeam() == TEAM_PLAYER then
+            if not on and pawn:GetCustomAnim() ~= "BlastingCharge_On" then
+              LOG("Setting to On!")
+              pawn:SetCustomAnim("BlastingCharge_On")
+            end
+            on = true
+          end
+        end
+        if not on and pawn:GetCustomAnim() ~= "BlastingCharge_Off" then
+          LOG("Setting to Off!")
+          pawn:SetCustomAnim("BlastingCharge_Off")
+        end
       end
     end
   end
@@ -118,14 +153,13 @@ end
 
 NAH_Blast_Charge = Pawn:new{ --Maybe needs a description
   Name = "Blast Charge",
-  Image = "missile",
+  Image = "BlastingCharge_Off",
   Health = 2,
   IgnoreSmoke = true,
 	MoveSpeed = 0,
   Neutral = true,
   MoveSpeed = 0,
   Pushable = false,
-	SpaceColor = true,
 	IsPortrait = false,
   DefaultTeam = TEAM_NONE,
   ImpactMaterial = IMPACT_METAL,
@@ -170,3 +204,32 @@ function NAH_Blast_Charge_Skill:GetSkillEffect(p1, p2)
 
   return ret
 end
+
+local function customRunLater(delay, fn) --I hate everything again
+	if delay == 0 then
+		fn()
+	else
+		modApi:runLater(function()
+			customRunLater(delay-1,fn)
+		end)
+	end
+end
+
+--SetCustomAnim is stupid
+local function UpdateCharges(mission)
+	customRunLater(5,function()
+		local mission = GetCurrentMission()
+		if mission.Name == "Blast Charges" then
+      for _, id in ipairs(mission.Ids) do
+        if Board:IsPawnAlive(id) then
+          local pawn = Board:GetPawn(id)
+          if pawn:GetCustomAnim() == "BlastingCharge_On" then
+            pawn:SetCustomAnim("BlastingCharge_On") --Reset the custom anim
+          end
+        end
+      end
+		end
+	end)
+end
+
+modApi.events.onContinueClicked:subscribe(UpdateCharges)
