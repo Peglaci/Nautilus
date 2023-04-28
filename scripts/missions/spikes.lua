@@ -1,10 +1,14 @@
 local mod = mod_loader.mods[modApi.currentMod]
 
 modApi:appendAsset("img/effects/explo_spikes.png",mod.resourcePath.."img/effects/explo_spikes.png")
+modApi:appendAsset("img/effects/spike_emerge.png",mod.resourcePath.."img/effects/spike_emerge.png")
+
 modApi:appendAsset("img/effects/spike.png",mod.resourcePath.."img/effects/spike.png")
 Location["effects/spike.png"] = Point(-20,0)
 modApi:appendAsset("img/effects/spike2.png",mod.resourcePath.."img/effects/spike2.png")
 Location["effects/spike2.png"] = Point(-20,0)
+modApi:appendAsset("img/effects/spikeicon.png",mod.resourcePath.."img/effects/spikeicon.png")
+Location["effects/spikeicon.png"] = Point(-20,0)
 
 modApi:appendAsset("img/combat/tile_icon/icon_spikes.png", mod.resourcePath .."img/combat/tile_icon/icon_spikes.png")
 Location["combat/tile_icon/icon_spikes.png"] = Point(-27,2)
@@ -18,11 +22,19 @@ ANIMS.Nautilus_explo_spikes = Animation:new{
 	PosY = -4
 }
 
+ANIMS.Nautilus_spike_emerge = Animation:new{
+	Image = "effects/spike_emerge.png",
+	NumFrames = 6,
+	Time = 0.045,
+	PosX = -20,
+	PosY = -0
+}
+
 local mine_damage = SpaceDamage(1)
 mine_damage.sSound = "Science_KO_Crack_OnKill"
 mine_damage.sAnimation = "Nautilus_explo_spikes"
-Nautilus_Spike_Mine = { Image = "effects/spike.png", Damage = mine_damage, Tooltip = "Nautilus_Spike_Text", Icon = "effects/spike.png", UsedImage = ""}
-Nautilus_Spike_Mine2 = { Image = "effects/spike2.png", Damage = mine_damage, Tooltip = "Nautilus_Spike_Text", Icon = "effects/spike.png", UsedImage = ""}
+Nautilus_Spike_Mine = { Image = "effects/spike.png", Damage = mine_damage, Tooltip = "Nautilus_Spike_Text", Icon = "effects/spikeicon.png", UsedImage = ""}
+Nautilus_Spike_Mine2 = { Image = "effects/spike2.png", Damage = mine_damage, Tooltip = "Nautilus_Spike_Text", Icon = "effects/spikeicon.png", UsedImage = ""}
 
 Mission_Nautilus_Spikes = Mission_Infinite:new{ 
 	Name = "Spikes",
