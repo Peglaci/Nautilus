@@ -13,20 +13,19 @@ local HIGH_THREAT = true
 local LOW_THREAT = false
 
 local BASE_MISSIONS = {
-  {"Train", HIGH_THREAT},
-  {"Laser", LOW_THREAT},
-  {"Wind", LOW_THREAT},
+  --{"Train", HIGH_THREAT}, We have our own train
   {"Trapped", LOW_THREAT},
+	{"Survive", LOW_THREAT},
 }
 
 local Nautilus_Missions = {
   {"Incinerator",LOW_THREAT}, --Incomplete
   {"Falling_Mountains",LOW_THREAT}, --Incomplete
-  {"Digging",LOW_THREAT}, --Incomplete
+  {"Digging",HIGH_THREAT}, --Incomplete
   {"Crumbling",LOW_THREAT}, --Incomplete, testing
   {"Spikes",LOW_THREAT},
 	--{"Walls",HIGH_THREAT}, --Incomplete   Taken out, at least for now
-	{"Crystals",HIGH_THREAT}, --ChatGPT, incomplete
+	--{"Crystals",HIGH_THREAT}, --ChatGPT, incomplete    SUCKED
 	{"Charges",HIGH_THREAT}, --incomplete
 	{"Minecarts",HIGH_THREAT}, --incomplete
 	{"Drilltrain",HIGH_THREAT}, --incomplete

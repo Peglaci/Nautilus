@@ -6,7 +6,7 @@ local mod = mod_loader.mods[modApi.currentMod]
 Mission_Nautilus_Crumbling = Mission_Auto:new{
   Name = "Crumbling Cave",
   Environment = "Env_Nautilus_Crumbling",
-  BonusPool = {BONUS_GRID, BONUS_MECHS, BONUS_KILL_FIVE, BONUS_SELFDAMAGE},
+  BonusPool = {BONUS_GRID, BONUS_MECHS, BONUS_KILL_FIVE, BONUS_SELFDAMAGE, BONUS_DEBRIS},
   -- Took out BONUS_BLOCK because it's hard in combination with environment
   -- Took out BONUS_PACIFIST because good luck with that
   TurnLimit = 4, --normal
