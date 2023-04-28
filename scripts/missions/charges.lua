@@ -5,7 +5,8 @@
 --Charges can spawn next to each other, okay?
 -- \n?
 
---If reloading game and mech starts next to not powered charge, it does not set it properly for some reason
+--TODO:
+--LAST THING FOR THIS IS THE DEATH OF BLAST CHARGES I THINK explo_air1
 
 local mod = mod_loader.mods[modApi.currentMod]
 
@@ -24,11 +25,22 @@ a.BlastingCharge_Ona = a.BlastingCharge_Offa:new{Image = "units/mission/blasting
 Mission_Nautilus_Charges = Mission_Infinite:new{
   Name = "Blast Charges",
   Objectives = Objective("Destroy All the Blast Charges",2),
+  BonusPool = {BONUS_GRID, BONUS_MECHS, BONUS_BLOCK, BONUS_KILL_FIVE, BONUS_PACIFIST, BONUS_SELFDAMAGE},
+  --Took out BONUS_DEBRIS (Vek Eggs) because there's already so many things on the board
   Count = 3, --Does nothing
   Ids = nil,
 }
 
 function Mission_Nautilus_Charges:IsPointValid(space)
+  --Don't spawn next to another blast charge
+  for i=DIR_START,DIR_END do
+    local curr = space + DIR_VECTORS[i]
+    local pawn = Board:GetPawn(curr)
+    if pawn and list_contains(self.Ids, pawn:GetId())  then
+      return false
+    end
+  end
+
   local tile = Board:GetTerrain(space)
 	return Board:IsValid(space) and
 			not Board:IsPod(space) and
@@ -38,13 +50,12 @@ function Mission_Nautilus_Charges:IsPointValid(space)
       tile ~= TERRAIN_MOUNTAIN
 end
 
-
 function Mission_Nautilus_Charges:StartMission()
   self.Ids = {}
   --ZONE THINGS
-  local zone1 = extract_table(general_DiamondTarget(Point(5,1),2))
-  local zone2 = extract_table(general_DiamondTarget(Point(5,6),2))
-  local zone3 = add_tables(extract_table(general_DiamondTarget(Point(6,3),1)),extract_table(general_DiamondTarget(Point(6,4),1)))
+  local zone1 = extract_table(general_DiamondTarget(Point(5,2),2))
+  local zone2 = extract_table(general_DiamondTarget(Point(5,5),2))
+  local zone3 = add_tables(zone1,zone2)
   local zones = {zone1,zone2,zone3}
   local backup = extract_table(general_DiamondTarget(Point(4,4),7))
 
