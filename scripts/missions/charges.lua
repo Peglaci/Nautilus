@@ -25,7 +25,8 @@ a.BlastingCharge_Ona = a.BlastingCharge_Offa:new{Image = "units/mission/blasting
 Mission_Nautilus_Charges = Mission_Infinite:new{
   Name = "Blast Charges",
   Objectives = Objective("Destroy All the Blast Charges",2),
-  BonusPool = {BONUS_GRID, BONUS_MECHS, BONUS_BLOCK, BONUS_KILL_FIVE, BONUS_PACIFIST, BONUS_SELFDAMAGE},
+  UseBonus = false,
+  -- BonusPool = {BONUS_GRID, BONUS_MECHS, BONUS_BLOCK, BONUS_KILL_FIVE, BONUS_PACIFIST, BONUS_SELFDAMAGE},
   --Took out BONUS_DEBRIS (Vek Eggs) because there's already so many things on the board
   Count = 3, --Does nothing
   Ids = nil,

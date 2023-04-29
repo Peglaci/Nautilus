@@ -96,6 +96,7 @@ Mission_Nautilus_Digging = Mission_Infinite:new{
   DigSite = Point(-1,-1),
   PawnId = nil,
   spawnPawn = nil,
+  UseBonus = false,
 }
 
 function Mission_Nautilus_Digging:IsPointValid(space)

@@ -65,6 +65,7 @@ Mission_Nautilus_Walls = Mission_Infinite:new{
   Plates = 4,
   Triggered = 0,
   BlockedUnits = {"Jelly_Explode", "Dung"},
+  UseBonus = false,
 }
 
 local mine_damage = SpaceDamage(0)

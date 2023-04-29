@@ -7,6 +7,7 @@ Mission_Nautilus_Crystals = Mission_Infinite:new{
   Crystal1 = nil,
   Crystal2 = nil,
   CrystalsDestroyed = 0,
+  UseBonus = false,
   Objectives = Objective("Destroy 4 Crystals", 2),
 }
 
