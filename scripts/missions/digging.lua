@@ -10,8 +10,6 @@ Objectives = Objective()
 
 --TODO:
 --Sounds
---Death Anim Excavator
---Crystal Spikes Emerge
 
 --Board:SetCustomTile(choice,"square_missilesilo.png")
 local this = {id = "Mission_Nautilus_Digging"}
@@ -24,6 +22,7 @@ modApi:appendAsset("img/effects/burrow_openclose.png",mod.resourcePath.."img/eff
 modApi:appendAsset("img/units/mission/excavator.png", mod.resourcePath .."img/units/mission/excavator.png")
 modApi:appendAsset("img/units/mission/excavator_a.png", mod.resourcePath .."img/units/mission/excavator_a.png")
 modApi:appendAsset("img/units/mission/excavatorw.png", mod.resourcePath .."img/units/mission/excavatorw.png")
+modApi:appendAsset("img/units/mission/excavator_d.png", mod.resourcePath .."img/units/mission/excavator_d.png")
 
 modApi:appendAsset("img/weapons/excavatorbucket.png", mod.resourcePath.. "img/weapons/excavatorbucket.png")
 
@@ -56,6 +55,7 @@ modApi:appendAsset("img/units/mission/rock1_death.png", mod.resourcePath .."img/
 local a = ANIMS
 a.Nautilus_Excavator = a.BaseUnit:new{Image = "units/mission/excavator.png", PosX = -20, PosY = -9}
 a.Nautilus_Excavatora = a.Nautilus_Excavator:new{Image = "units/mission/excavator_a.png", NumFrames = 4 }
+a.Nautilus_Excavatord = a.Nautilus_Excavator:new{Image = "units/mission/excavator_d.png", NumFrames = 11, Loop = false, Time = 0.12}
 a.Nautilus_Excavatorw = a.Nautilus_Excavator:new{Image = "units/mission/excavatorw.png", PosY = 0}
 
 a.CrystalRock = a.BaseUnit:new{Image = "units/mission/rock1.png", PosX = -18, PosY = -1}
@@ -214,14 +214,29 @@ AddPawn("CrystalScorpion")
 
 function CrystalFirefly:GetDeathEffect(p)
   ret = SkillEffect()
-  local damage = SpaceDamage(p)
-  damage.sItem = "Nautilus_Spike_Mine"
+  local points = {}
   for i=DIR_START,DIR_END do
     local curr = p + DIR_VECTORS[i]
-    if Board:IsValid(curr) then
-      damage.loc = curr
-      ret:AddDamage(damage)
+    if Board:IsValid(curr) and not Board:IsBlocked(curr,PATH_GROUND) and Board:GetItem(curr) == "" then
+      table.insert(points,curr)
     end
+  end
+
+  local animation = SpaceDamage(p)
+  animation.sAnimation = "Nautilus_spike_emerge"
+  for _, point in ipairs(points) do
+    animation.loc = point
+    ret:AddDamage(animation)
+  end
+
+  local anim = ANIMS.Nautilus_spike_emerge
+  ret:AddDelay(anim.Time*anim.NumFrames)
+
+  local damage = SpaceDamage(p)
+  damage.sItem = "Nautilus_Spike_Mine"
+  for _, point in ipairs(points) do
+    damage.loc = point
+    ret:AddDamage(damage)
   end
 
   return ret
