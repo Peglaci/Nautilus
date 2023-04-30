@@ -2,6 +2,20 @@
 --Mission By: NamesAreHard: NAH
 
 local mod = mod_loader.mods[modApi.currentMod]
+local path = mod.resourcePath
+
+-- add maps
+for i = 6, 9 do
+	modApi:addMap(path .."maps/crumbling".. i ..".map")
+end
+
+-- mapcheck = function(missionId,tilesetId)
+	-- local mapList = modApi:fetchMissionMaps(missionId,tilesetId)
+	-- for _,m in ipairs(mapList) do
+		-- LOG(m.id)
+	-- end
+-- end
+-- mapcheck("Mission_Nautilus_Falling_Mountains","Nautilus_tileset_id")
 
 Mission_Nautilus_Crumbling = Mission_Auto:new{
   Name = "Crumbling Cave",
@@ -11,6 +25,7 @@ Mission_Nautilus_Crumbling = Mission_Auto:new{
   -- Took out BONUS_PACIFIST because good luck with that
   TurnLimit = 4, --normal
   BlockSecret = true,
+  MapTags = {"crumbling"},
   --Objectives = Objective("Incinerate 2 Vek",1),
 }
 

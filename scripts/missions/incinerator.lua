@@ -48,8 +48,8 @@ function Mission_Nautilus_Incinerator:IsValidTarget(space)
 
 	-- return Board:IsValid(space) and
 			-- not Board:IsPod(space)-- and
-			-- -- not Board:IsBuilding(space) and
-			-- -- tile ~= TERRAIN_WATER
+			-- not Board:IsBuilding(space) and
+			-- tile ~= TERRAIN_WATER
 end
 
 function Mission_Nautilus_Incinerator:StartMission()
@@ -65,6 +65,18 @@ function Mission_Nautilus_Incinerator:StartMission()
       end
     end
   end
+  --Find more places if none found
+  if #choices == 0 then
+    for i=3,6 do
+      for j=2,5 do
+        local point = Point(i,j)
+        if self:IsValidTarget(point) then
+          choices[#choices+1] = Point(i,j)
+        end
+      end
+    end
+  end
+  
   --Choose one randomly
   if #choices ~= 0 then
 	local choice = random_removal(choices)
