@@ -237,20 +237,28 @@ return {
 	
 	-- Generic Missions
 	Mission_Generic_Briefing = {
-		"My people lived through a lot... We tenaciously adapted with the help of science. The Vek proved to be our one weakness. Please, #squad, help us survive this tribulation as well.",
-		"In the past we were a small community of scientists. In time, we have grown strong together. But not strong enough to rid ourselves of the Vek...",
-		"R.S.T., Archive, Detritus and even Pinnacle rely on some of our tech to survive in the New World. Save our island, so that we may continue to support our friends.",
+		"The Vek have been causing us no end of trouble. It's about time someone dealt with them.", 
+		"I'm not thrilled about outsiders interfering in our affairs, but I suppose desperate times call for desperate measures.", 
+		"Let's get one thing straight: you may be here to help us, but you're still outsiders. Don't forget it.", 
+		"We've managed to keep the Vek at bay for this long, but they're getting stronger every day. We need your help to put an end to them.", 
+		"We've lost good people to the Vek. Don't take this mission lightly.",
+		"I hope you're prepared for the dangers of these caverns. The Vek are not to be underestimated."
 	},
 	Mission_Generic_Success = {
-		"With your help #squad, we might just survive this horrible war. Thank you.",
-		"I can't deny your combat prowess in fighting the Vek, #squad. You are an inspiration to all of us.",
-		"Giant mechs fighting colossal monsters for humanity's survival ... If it wouldn't be our reality, I'd call it a silly horror show."
+		"Well, #squad, I'll give you credit where it's due - you got the job done.",
+		"Excellent work on driving back the Vek. Your team's efforts have not gone unnoticed.", 
+		"You have proven yourselves to be a formidable force against the Vek threat. Well done.",
+		"Your mission was a success, and the Vek threat has been neutralized. Nautilus owes you a debt of gratitude.",
+		"Your team's dedication and skill in defeating the Vek have earned the respect and admiration of my men. Don't let it get to your heads.",		
 	},
 	Mission_Generic_Failure = {
-		"I am afraid this was too little, too late, commander.",
-		"My father was right. War is unavoidable. Neither is all the pain and suffering it brings to all involved.",
-		"We shouldn't rely only on your help to fight the Vek, #squad... But we have no other choice.",
-		"I know you tried hard, but sometimes having an unfavorable outcome proves to be just inevitable.",
+		"Your failure to conquer the Vek is unacceptable.",
+		"I expected better from you, #squad. I'll revise my estimations downwards in the future.",
+		"The Vek are a threat to our survival, and your incompetence has put us all at risk.",
+		"You've let the Vek get the upper hand, and now we're all paying the price.",
+		"This failure will not be forgotten, and it will not be forgiven.",
+		"Your failure has cost us dearly; we can't afford to make any more mistakes.",
+		"I trusted you to handle this discretely, and you've let me down.",
 	},
 	
 	-- Unsure if these should be filled in or not.
@@ -260,102 +268,129 @@ return {
 	
 	-- >=3 grid damage during a mission.
 	Mission_ExtremeDamage = {
-		"So many casualties! We value our people above everything. If you have to sacrifice an objective to save a life, I would prefer that.",
-		"We know there are risks involved in our studies, but these losses are too much to endure.",
-		"Was there no way to save those lives? Our people knew there were risk, but we weren't prepared for this...",
-		"Some of our brightest minds were lost in that attack. This is a huge loss for Meridia.",
-		"So many lives were lost today... It will take considerable time to rebuild what was lost.",
+		"I expected more from a team of professionals. Be assured that the cost of repairs will rest on your heads.", 
+		"You've cost us a lot of time and money with your recklessness. It'll take us years to recover from this.", 
+		"I hope you're ready to compensate us for the damage you caused out there. What a fiasco.", 
+		"Your lack of regard for our facilities and personnel is inexcusable. Your actions - or inactions, I should say - have set back our operations significantly.", 
+		"I'm deeply disappointed in your performance. This kind of damage is unacceptable and won't be tolerated in the future.",
 	},
 	Mission_Mechs_Dead = {
-		"I... I am sorry, commander. May the pilot's sacrifice not be in vain...",
-		"They will be remembered for their sacrifice, always.",
-		"They will live on in our memories!",
+		"Your efforts will not be forgotten, nor will the sacrifices you've made.",
+		"Your team fought like hell out there, and I respect that.",
+		"I appreciate the sacrifices you and your team made to protect our equipment and people. Nautilus will remember your fallen.", 
+		"You've proven yourselves to be true professionals, even in the face of overwhelming odds. Nautilus will remember your fallen.",
 	},
 	
 	-- Generic Objectives
 	-- Lose less than x mech health
 	Mission_MechHealth_Briefing = {
-		"Our resources grow thinner by the day. It would help if you could decontaminate the region with less damage inflicted on your mechs.",
-		"If you can, avoid unnecessary damage - our technicians are extremely overworked as it is.",
-		"Stay safe out there..."
+		"Listen up, #squad. I want all of you to come back in one piece. Remember, repairs are expensive, so try to avoid getting hit!",
+		"We need those mechs in top condition for the next mission, so avoid unnecessary damage.",
+		"Your mechs are valuable assets, so take care of them. If you come back with damage, you better have a damn good reason for it.", 
+		"Don't take unnecessary risks. We need those mechs intact. Remember, every scratch and dent is going to cost us.", 
+		"I can't stress this enough: keep those mechs in one piece. We can't afford to be careless with our equipment. Keep your mechs in top shape.", 
+
 	},
 	Mission_MechHealth_Success = {
-		"Our engineering teams will have to spend a minimal amount of resources to repair your mechs. Well done!",
-		"My team has confirmed you're good to head out for another sortie. No repairs were needed!",
-		"Well fought, #squad."
+		"It's refreshing to work with a team that understands the value of not causing needless destruction.",
+		"Your ability to avoid causing unnecessary damage shows a level of skill that I didn't think was possible.", 
+		"I'm pleased to see that you understand the importance of being mindful of your surroundings.", 
+		"I have to say, I'm impressed with the level of restraint you showed during the mission.",
+		
 	},
 	Mission_MechHealth_Failure = {
-		"We aren't lacking in skilled engineers but in resources. Repairing Mechs is not cheap. Please be more careful.",
-		"We will repair your mechs, but I cannot help but feel that we could have put these resources to better use...",
-		"Do not worry, we will aid in the repairs..."
+		"I'm going to need an explanation for all this damage on my desk by the end of the day.",
+		"I hope you have deep pockets, because repairing the mecha is not cheap.", 
+		"I hope you enjoyed the thrill of battle, because those repairs are going to be expensive.", 
+		"You may think you're invincible, but those repair costs are going to bring you back to reality.", 
 	},
 	
 	-- Lose less than x grid
 	Mission_GridHealth_Briefing = {
-		"My father... He always treated people as expendable human resources. I don't agree with his views. Please do your best to save my people.",
-		"Keep the grid safe, #squad.",
-		"Fight well, #squad."
+		"The Power Grid is our lifeline, so don't even think about putting it in danger.", 
+		"I can't stress this enough: protect the Power Grid at all costs.", 
+		"#sqaud, if the Power Grid goes down, we're all dead. So, be smart out there.", 
+		"The Power Grid is critical to our survival. Do not let it be compromised.", 
+		"Remember, the Power Grid is your number one priority. Don't forget it.",
 	},
 	Mission_GridHealth_Success = {
-		"You saved a lot of lives today. Those families won't forget your effort. Neither will I. Merci beaucoup, #squad.",
-		"Merci, #squad. You have done well.",
+		"I'm pleased that you were able to complete the mission without causing any significant damage to the Grid.",
+		"Your efforts to protect the Power Grid are appreciated. We owe you a debt of gratitude.",
+		"You've shown that you have the skills and discipline necessary to protect the Power Grid. Keep up the good work.", 
+		"The Power Grid is our lifeline, and you did an excellent job in safeguarding it. We couldn't have done it without you.", 
+		"Your success in minimizing damage to the Power Grid has given us hope that we can weather this crisis.",
 	},
 	Mission_GridHealth_Failure = {
-		"Mon Dieu! My father told me there is no war without collateral damage... But I had hoped that in this day and age I wouldn't have to witness my friends' untimely deaths.",
-		"A lot of innocent lives will be buried under the rubble. But we don't have time to mourn the dead. We must go on.",
-		"My heart is filled with grief, but we must all soldier on. I am sure you've done your best...",
+		"Your carelessness with the Power Grid has endangered us all. I expected better from a team of supposed professionals.", 
+		"If you can't even protect the Grid, what good are you to us? You've put our entire operation in jeopardy with your incompetence.", 
+		"I don't care about your excuses. The fact remains that you failed to protect the Grid.", 
+		"Your disregard for the Power Grid is inexcusable. Do you have any idea what you've done? That's our lifeline.", 
 	},
 	
 	-- Kill x enemies
 	Mission_KillAll_Briefing = {
-		"The Vek retreat when the battle goes against them, then regroup and attack again somewhere else. Wipe them out for good this time!",
-		"If you rout them here, you will weaken their future attacks. Fight with tenacity!",
-		"Destroy them all, #squad. They have killed far too many as it is.",
+		"Listen up, pilots. Your mission is simple: Kill every last Vek in these mines.", 
+		"We cannot afford to let even one of these creatures escape. The stakes are too high.", 
+		"I don't care how tough these Vek are supposed to be. You're tougher.", 
+		"We've lost too many good miners to these Vek. It's time to make them pay.", 
+		"I don't want to hear any excuses. If even one Vek escapes, we'll be in big trouble.", 
+		"You'll have the best equipment and technology at your disposal. Use it wisely.", 
 	},
 	Mission_KillAll_Success = {
-		"Region is decontaminated. We will be able to resume with our scientific experiments soon enough.",
-		"Well done. Their blood will return to the soil and nourish it so that we may live on.",
-		"Magnifique! To see them fall in droves warms my heart!",
+		"I'm glad to see that our investment in you was not wasted. Your ruthlessness is unmatched.",
+		"Well done. We sent you to kill Vek, and you did just that.",
+		"Your precision in executing the mission was impressive. Not a single Vek escaped.", 
+		"You've made it clear that we will not tolerate the Vek's presence. Well done.",
 	},
 	Mission_KillAll_Failure = {
-		"You let some of the Vek retreat. Unfortunately, they'll emerge again soon and attack another region.",
-		"Ah, they have escaped your wrath. Dommage.",
-		"...Perhaps I expect too much. I beg your pardon...",
+		"The Vek will now spread throughout the area, and we have you to blame for that.", 
+		"Your failure has made it clear that you are not fit for this task. Perhaps you could turn over your technology to someone better suited...",
+		"You were tasked with a simple mission, and you failed spectacularly. Thanks to your failure, we'll be dealing with Vek incursions for years to come.", 
+	 	"Your failure will cost us dearly, both in resources and in lives. The contamination caused by the Vek will have long-lasting effects.", 
 	},
 	
 	-- Block x spawns
 	Mission_Block_Briefing = {
-		"We're studying a fragile ecosystem in this region. If too many Vek break through, the ecosystem will be devastated",
-		"This region is among the few environmentally safe locations we plan to relocate our facilities to. We can't allow the Vek to destabilize the surface.",
-		"Geoscans indicate several Vek specimens converging in the region. Their emergence would destabilize the surface, forcing us to retreat.",
+		"We've identified several potential exit points, and it's your job to block them off before the Vek can get through.",
+		"If the Vek make it to the surface, it'll be a disaster. We can't let that happen.", 
+		"Do not, under any circumstances, let them up to the surface. Things are unstable enough as it is down here.",
+		"#squad, you're the only thing standing between the Vek and the surface. Do not disappoint me.",
+		
 	},
 	Mission_Block_Success = {
-		"Well done, #squad! The way you prevented the Vek from surfacing was impressive.",
-		"Yes, stay below, monsters!",
-		"The sun does not wish to see your faces, Vek! Hide in the darkness!",
+		"The tectonic stability of the area is a direct result of your successful mission. Congratulations.",
+		"Your mission to block the Vek's exits was a roaring success. The company and the surrounding communities owe you a debt of gratitude.",
+		"Now hopefully they stay down there.",
+		"Great. The question now is where they're even *coming* from. What's deeper than Nautilus?",
 	},
 	Mission_Block_Failure = {
-		"Excessive Vek tunneling severely destabilized the surface. This will set our research back considerably.",
-		"This will play havoc with our studies. Ah, it cannot be helped...",
-		"This ecosystem will collapse, I am afraid. What a shame...",
+		 "Blocking the exits was supposed to prevent the Vek from emerging, but now the tectonic activity in the area is off the charts.",
+		 "Their emergence has destabilized an already unstable area. I wouldn't be surprised if the whole place comes down on our heads.",
+		 "Those tunnels are going to be pathways for future incursions, mark my words...",
+		"Well, what's done is done. We need to find a way to fix the damage they've caused before it's too late.",
 	},
 	
 	Mission_BossGeneric_Briefing = {
-		"Our bioscans report an unknown Vek approaching our tower. We need your help, #squad!",
-		"It cannot be... what is that thing!?",
-		"I have never seen anything like it! Protect our tower, #squad!",
+		 "The Vek is too powerful for our conventional weapons. You'll need to use all your skills to defeat it.", 
+		"This Vek is unlike anything we've seen before. Be prepared for anything.", 
+		"We're counting on you to take down this monster and protect our enterprise.", 
+		"The fate of Nautilus rests on your shoulders. Get out there!", 
 	},
 	Mission_BossGeneric_Success = {
-		"You have saved us commander! I've sent a team to gather the remains so we can study it. This is a great day!",
-		"It went down! We are in your debt, commander!",
-		"I simply cannot wait to study its remains! What wonders can be extracted from so fearsome a life form?",
+		"I'll make sure your payment is wired to you promptly. Now, if you don't mind, I have work to do.", 
+		"Nautilus owes you a debt of gratitude, #squad. Now, please leave so I can start processing the corpse.",
+		"That creature was a formidable opponent, but you made quick work of it. I'm impressed.",
+		"You've done me a great service, but I'm afraid I don't have much time for gratitude. There's much work to be done yet.",
+		"The bigger they are...",
 	},
 	Mission_BossGeneric_Tower = {
-		" ... <Static> ... <Static> ... <Connection Lost> ... "
+		"Wait, it's coming this w-!",
+		"Stop it before I-!",
+		"You fools, I'm still insi-!",
 	},
 	Mission_BossGeneric_Boss = {
-		"That monstrous Vek survived. Without the help of your #squad, I don't know how we will endure if it returns...",
-		"A shame it escaped, but you have saved us this day even so!",
-		"You have driven it off! Thank you, #squad.",
+		"That titan Vek may have escaped, but it's left a trail we can follow. We'll take it from here, #squad.",
+		"You drove it off, barely. We need to gather our resources and prepare for its inevitable return.",
+		"The Vek Boss may have retreated, but it's only a matter of time before it returns. Your efforts were commendable, but we need to stay vigilant.", 
 	},
 }
