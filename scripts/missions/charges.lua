@@ -18,9 +18,11 @@ modApi:appendAsset("img/units/mission/blastingcharge_warning.png",mod.resourcePa
 local a = ANIMS
 a.BlastingCharge_Off = a.BaseUnit:new{Image = "units/mission/blastingcharge_off.png", PosX = -22, PosY = -2}
 a.BlastingCharge_Offa = a.BlastingCharge_Off:new{Image = "units/mission/blastingcharge_on.png", NumFrames = 4} --Should never be seen
+a.BlastingCharge_Offd = a.BlastingCharge_Off:new{Image = "effects/explo_fire1.png",Loop=false, NumFrames = 10, Time = 0.075, PosX = -27, PosY = -18}
 
 a.BlastingCharge_On = a.BlastingCharge_Offa:new{Image = "units/mission/blastingcharge_warning.png", Time = .6} --Weirdness cause hacks
 a.BlastingCharge_Ona = a.BlastingCharge_Offa:new{Image = "units/mission/blastingcharge_on.png", Time = .2}
+a.BlastingCharge_Ond = a.BlastingCharge_Off:new{Image = "effects/explo_fire1.png",Loop=false, NumFrames = 10, Time = 0.075, PosX = -27, PosY = -18}
 
 Mission_Nautilus_Charges = Mission_Infinite:new{
   Name = "Blast Charges",
@@ -195,7 +197,7 @@ function NAH_Blast_Charge_Skill:GetSkillEffect(p1, p2)
   local ret = SkillEffect()
 
   local damage = SpaceDamage(p1, DAMAGE_DEATH)
-  damage.sAnimation = "explo_fire1"
+  --damage.sAnimation = "explo_fire1" --In death animation
   ret:AddQueuedDamage(damage)
 
   for dir = DIR_START, DIR_END do
