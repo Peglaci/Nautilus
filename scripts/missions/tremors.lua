@@ -41,7 +41,10 @@ function Env_Tremors:GetAttackEffect(location, effect) --When instant, passes in
   damage.iCrack = EFFECT_CREATE
 	effect:AddDamage(damage)
   effect:AddBounce(location,2)
-  --effect:AddDelay(.1)
+  local odds = 50
+  if math.random(1,100) <= odds then
+    effect:AddDelay(.1)
+  end
 
 	return effect
 end
@@ -69,5 +72,5 @@ function Env_Tremors:SelectSpaces()
       table.insert(ret,v)
     end
   end
-  return ret
+  return randomize(ret) --Makes them crack in a random order
 end

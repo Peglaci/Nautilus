@@ -2,11 +2,8 @@
 --Mission By: NamesAreHard: NAH
 --Could be a low threat mission, or made a little bit harder.
 
---Charges can spawn next to each other, okay?
 -- \n?
 
---TODO:
---LAST THING FOR THIS IS THE DEATH OF BLAST CHARGES I THINK explo_air1
 
 local mod = mod_loader.mods[modApi.currentMod]
 
