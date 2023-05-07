@@ -156,7 +156,7 @@ function Mission_Nautilus_Charges:GetCompletedObjectives()
 end
 
 function Mission_Nautilus_Charges:UpdateObjectives()
-  local status = self:BlastChargesLeft() and OBJ_STANDARD or OBJ_COMPLETE
+  local status = self:BlastChargesLeft() ~= 0 and OBJ_STANDARD or OBJ_COMPLETE --Not sure why I need ~= 0
   Game:AddObjective("Explode All the Blast Charges", status, REWARD_REP, 2)
 end
 
