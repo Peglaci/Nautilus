@@ -13,6 +13,4 @@ local ceo = easyEdit.ceo:add("Nautilus_ceo_id")
 ceo:setPersonality(personality)
 ceo:setPortrait("img/ceo/portrait.png")
 ceo:setOffice("img/ceo/office.png", "img/ceo/office_small.png")
-ceo:setFinalMission("Mission_Train")
-
-
+--ceo:setFinalMission("Mission_Train")
