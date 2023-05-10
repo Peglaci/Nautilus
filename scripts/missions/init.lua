@@ -22,6 +22,7 @@ local Nautilus_Missions = {
   {"Incinerator",LOW_THREAT}, --Incomplete
   {"Falling_Mountains",LOW_THREAT}, --Incomplete
   {"Digging",HIGH_THREAT}, --Incomplete
+  {"Mining",HIGH_THREAT}, --Incomplete
   {"Crumbling",LOW_THREAT}, --Incomplete, testing
   {"Spikes",LOW_THREAT},
 	--{"Walls",HIGH_THREAT}, --Incomplete   Taken out, at least for now
