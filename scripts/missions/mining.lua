@@ -155,7 +155,7 @@ function Mission_Nautilus_Mining:UpdateObjectives()
   local status = (self.DigSite ~= Point(-1,-1) and not Board:IsPawnAlive(self.Driller) and OBJ_FAILED) or
   (self.DigSite == Point(-1,-1) and not Board:IsPawnAlive(self.PawnId) and OBJ_COMPLETE) or
   OBJ_STANDARD
-  Game:AddObjective("Excavate 10 Units of Minerals", status, REWARD_CORE, 1)
+  Game:AddObjective("Excavate 10 Units of Minerals", status, REWARD_REP, 1) --REWARD_TECH
 end
 
 NAH_Driller = {
