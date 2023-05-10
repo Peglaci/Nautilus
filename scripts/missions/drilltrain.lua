@@ -36,6 +36,7 @@ function Mission_Nautilus_Drilltrain:StartMission()
 	
 	for i = 0, 7 do
 		local order = {4,3,5}
+		local mCount = 0
 		for _,j in ipairs(order) do
 			local curr = Point(j,i)
 			Board:SetCustomTile(curr,"")
@@ -43,15 +44,18 @@ function Mission_Nautilus_Drilltrain:StartMission()
 			for j = DIR_START, DIR_END do
 				local adj = curr + DIR_VECTORS[j]
 				local ort = adj + DIR_VECTORS[(j+1)%4]
-				if Board:IsBlocked(ort, PATH_PROJECTILE) or i > 5 then -- and Board:IsBlocked(adj, PATH_GROUND) then
+				if Board:IsBlocked(ort, PATH_PROJECTILE) or i > 4 then -- and Board:IsBlocked(adj, PATH_GROUND) then
 					obstacle = false
 				end
 			end
 			
 			local choices = {true,false,false}
 			choice = random_removal(choices)
-			if choice then -- remove some obstacles
+			if choice or mCount > 1 then -- remove some obstacles
 				obstacle = false
+				mCount = 0
+			else
+				mCount = mCount + 1
 			end
 			
 			if obstacle then
