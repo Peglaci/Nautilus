@@ -30,8 +30,9 @@ function mod:init()
 	require(self.scriptPath.."structures")
 	require(self.scriptPath.."structureList")
 	require(self.scriptPath.."island_composite")
+	require(self.scriptPath.."background") --Background needs to be before waterfall so it goes under the waterfalls
 	require(self.scriptPath.."waterfall")
-	require(self.scriptPath.."background")
+
 
 	self.missions = require(self.scriptPath.."missions/init")
 	self.missions:init(self)
