@@ -19,7 +19,7 @@ end
 a.cave_background = Animation:new {
 	Image = "combat/background.png",
 	NumFrames = 1,
-	Time = 0.19*3,
+	Time = 0.19,
 	PosX = -(474/2), --width / 2
 	PosY = -84,
 	Loop = true,
