@@ -126,6 +126,7 @@ function Mission_Nautilus_Digging:StartMission()
   end
 
   local choice = random_removal(choices)
+  Board:ClearSpace(choice)
   Board:BlockSpawn(choice,BLOCKED_PERM)
   self.DigSite = choice
   local types = {{"ground_buried_scorpion.png","CrystalScorpion"},{"ground_buried_scarab.png","CrystalScarab"},{"ground_buried_firefly.png","CrystalFirefly"}}
