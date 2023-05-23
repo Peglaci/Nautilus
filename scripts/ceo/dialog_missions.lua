@@ -1,12 +1,79 @@
 
 return {
+	-- Nautilus Missions
+	
+	--[[
+	blast charges -> the player must explode some blast charges.
+	chasms -> the player must create chasm tiles (for whatever reason, mining maybe?)
+	crumbling cave -> the cave is colapsing (tiles falling), no objective
+	vek excavation -> the player must excavate and kill a special fossilized vek
+	rail layer -> a drill train that can move through mountains leaves a rail trail
+	falling mountains -> environment effect that drop cracked mountains on the board, no objective
+	incinerator -> the player must drop 2 Vek into the incinerator (a fancy chasm)
+	mining -> the player must excavate 10 minerals from special tiles
+	spikes -> the board will spawn with spikes (mine that deal 1 damage), no objective.
+	tremors -> environment effect that cracks lots of tiles, no objective.]]--
+	
+	
+	Mission_Nautilus_Minecarts_Briefing = {"The minecarts are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Minecarts_Success = {"It looks like most of the minecarts made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Minecarts_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Minecarts_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Incinerator_Briefing = {"The Incinerator are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Incinerator_Success = {"It looks like most of the Incinerator made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Incinerator_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Incinerator_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Falling_Mountains_Briefing = {"The Falling_Mountains are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Falling_Mountains_Success = {"It looks like most of the Falling_Mountains made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Falling_Mountains_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Falling_Mountains_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Digging_Briefing = {"The Digging are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Digging_Success = {"It looks like most of the Digging made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Digging_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Digging_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Crumbling_Briefing = {"The Crumbling are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Crumbling_Success = {"It looks like most of the Crumbling made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Crumbling_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Crumbling_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Spikes_Briefing = {"The Spikes are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Spikes_Success = {"It looks like most of the Spikes made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Spikes_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Spikes_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Charges_Briefing = {"The Charges are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Charges_Success = {"It looks like most of the Charges made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Charges_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Charges_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Drilltrain_Briefing = {"The Drilltrain are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Drilltrain_Success = {"It looks like most of the Drilltrain made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Drilltrain_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Drilltrain_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Chasms_Briefing = {"The Chasms are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Chasms_Success = {"It looks like most of the Chasms made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Chasms_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Chasms_Failure = {"That was a total disaster, we needed those resources!"},
+	
+	Mission_Nautilus_Tremors_Briefing = {"The Tremors are vital to keep our operation running. Try not to get in their way, will you?"},
+	Mission_Nautilus_Tremors_Success = {"It looks like most of the Tremors made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Tremors_Partial = {"What? Only one minecart made it through?"},
+	Mission_Nautilus_Tremors_Failure = {"That was a total disaster, we needed those resources!"},
+	
+
+
 	-- Universal Missions
-	Mission_Train_Briefing = {"TOOT TOOT FUCKER"},
-	Mission_Train_Success = {"The region was decontaminated and the train is still running. By making sure that those supplies reach their destination, you saved many lives today, mon ami."},
-	Mission_Train_Failure = {"Losing our most efficient transportation method is a blow to our survivability. We'll have to allocate resources to fix the train... or salvage what remains."},
-	Mission_Train_Partial = {"The region was decontaminated, but the train is severely damaged. We will start the repairs as soon as possible."},
-	Mission_Train_TrainStopped = {"Commandant! Even although the train is damaged, we can still fix it! Please, defend it!"},
-	Mission_Train_TrainDestroyed = {" ... <static> ... "},
+	Mission_Train_Briefing = {},
+	Mission_Train_Success = {},
+	Mission_Train_Failure = {},
+	Mission_Train_Partial = {},
+	Mission_Train_TrainStopped = {},
+	Mission_Train_TrainDestroyed = {},
 	
 	--[[Mission_Volatile_Briefing = {},
 	Mission_Volatile_Success = {},
