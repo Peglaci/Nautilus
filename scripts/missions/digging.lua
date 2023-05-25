@@ -338,7 +338,9 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
     local point = pawn:GetSpace()
     pawn:SetSpace(Point(-1,-1))
     Board:AddPawn(%q,point)
-    GetCurrentMission().PawnId = Board:GetPawn(point):GetId()
+	if Board:GetPawn(point):GetType() ~= "CrystalRock" then
+		GetCurrentMission().PawnId = Board:GetPawn(point):GetId()
+	end
   ]],tostring(pawn:GetId()),spawnPawn))
 
   local preview = SpaceDamage(p2,0)
