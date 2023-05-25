@@ -309,7 +309,7 @@ return {
 	Mission_GridHealth_Briefing = {
 		"The Power Grid is our lifeline, so don't even think about putting it in danger.", 
 		"I can't stress this enough: protect the Power Grid at all costs.", 
-		"#sqaud, if the Power Grid goes down, we're all dead. So, be smart out there.", 
+		"#squad, if the Power Grid goes down, we're all dead. So, be smart out there.", 
 		"The Power Grid is critical to our survival. Do not let it be compromised.", 
 		"Remember, the Power Grid is your number one priority. Don't forget it.",
 	},
