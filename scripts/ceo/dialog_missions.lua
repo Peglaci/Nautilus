@@ -16,7 +16,7 @@ return {
 	
 	
 	Mission_Nautilus_Minecarts_Briefing = {"The minecarts are vital to keep our operation running. Try not to get in their way, will you?"},
-	Mission_Nautilus_Minecarts_Success = {"It looks like most of the minecarts made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Minecarts_Success = {"It looks like most of the minecarts made it through unscathed. You have our tanks, #squad"},
 	Mission_Nautilus_Minecarts_Partial = {"What? Only one minecart made it through?"},
 	Mission_Nautilus_Minecarts_Failure = {"That was a total disaster, we needed those resources!"},
 	
@@ -56,12 +56,12 @@ return {
 	Mission_Nautilus_Drilltrain_Failure = {"The Rail Layer is - was - critical to our operation! I'm livid, to say the least!", "That's going to put us enormously behind schedule - and over budget. I'm keeping tally of your failures.", "I suppose we'll go back to pickaxes and hand trucks to get through all this rock. Thanks for nothing."},
 	
 	Mission_Nautilus_Chasms_Briefing = {"The Chasms are vital to keep our operation running. Try not to get in their way, will you?"},
-	Mission_Nautilus_Chasms_Success = {"It looks like most of the Chasms made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Chasms_Success = {"It looks like most of the Chasms made it through unscathed. You have our tanks, #squad"},
 	Mission_Nautilus_Chasms_Partial = {"What? Only one minecart made it through?"},
 	Mission_Nautilus_Chasms_Failure = {"That was a total disaster, we needed those resources!"},
 	
 	Mission_Nautilus_Tremors_Briefing = {"The Tremors are vital to keep our operation running. Try not to get in their way, will you?"},
-	Mission_Nautilus_Tremors_Success = {"It looks like most of the Tremors made it through unscathed. You have our tanks, #squad".},
+	Mission_Nautilus_Tremors_Success = {"It looks like most of the Tremors made it through unscathed. You have our tanks, #squad"},
 	Mission_Nautilus_Tremors_Partial = {"What? Only one minecart made it through?"},
 	Mission_Nautilus_Tremors_Failure = {"That was a total disaster, we needed those resources!"},
 
