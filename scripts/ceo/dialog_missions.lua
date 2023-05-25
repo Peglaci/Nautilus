@@ -15,10 +15,10 @@ return {
 	tremors -> environment effect that cracks lots of tiles, no objective.]]--
 	
 	
-	Mission_Nautilus_Minecarts_Briefing = {"The minecarts are vital to keep our operation running. Try not to get in their way, will you?"},
-	Mission_Nautilus_Minecarts_Success = {"It looks like most of the minecarts made it through unscathed. You have our tanks, #squad"},
-	Mission_Nautilus_Minecarts_Partial = {"What? Only one minecart made it through?"},
-	Mission_Nautilus_Minecarts_Failure = {"That was a total disaster, we needed those resources!"},
+	Mission_Nautilus_Minecarts_Briefing = {"The minecarts are vital to keep our operation running. Try not to get in their way, will you?", "Those carts are our supply line. Keep them running smooth, #squad.", "Those minecarts are laden with ore - don't get in their way, for both our sakes.},
+	Mission_Nautilus_Minecarts_Success = {"It looks like most of the minecarts made it through unscathed. You have our thanks, #squad", "Glad to see you were successful - an open supply line can only be good for Nautilus.", "Our telemetry shows that most of those carts got past the Vek gauntlet. Many thanks."},
+	Mission_Nautilus_Minecarts_Partial = {"What? Only one minecart made it through?","I thought I told you how important it was to maintain our supply line! This will put us far behind schedule.", "This is a disappointment. An expensive failure." },
+	Mission_Nautilus_Minecarts_Failure = {"That was a total disaster, we needed those resources!", "What a fiasco. We needed those tracks open to ensure the transport of resources across our site.", "Disastrous."},
 	
 	Mission_Nautilus_Incinerator_Briefing = {"There's a lot of space down here, but managing our trash is still key to efficient work. Enter: the Incinerator.", "A combination grinder, smelter, and industrial nano-disassembler. Our pride and joy - and one well suited for the destruction of the Vek.","We call it the Incinerator. Try it out, would you?"},
 	Mission_Nautilus_Incinerator_Success = {"Just look at that thing go. Thanks for the show, #squad.", "Rest assured, we captured plenty of footage for our shareholders.", "That should make for some duly impressive stock footage. Well done." },
@@ -35,6 +35,12 @@ return {
 --relevant?	Mission_Nautilus_Digging_Partial = {""},
 	Mission_Nautilus_Digging_Failure = {"Fools! Who knows what might happen if the infestation spread to the rest of the vein?", "That's... powerfully disappointing, to say the least. I expected better.", "With that Vek in the wild, we're sure to see more of that strange blight on our minerals going forward. An expensive mistake."},
 	
+	Mission_Nautilus_Mining_Briefing = {"The Vek have come upon us at an unfortunate time. There's a rich vein of material running beneath this site - protect our equipment while it excavates.", "We have a mining rig out there scheduled to mine a rich payload. Keep them safe while they work.","Keep that drill rig safe while they excavate. We have to meet our quotas!"},
+	Mission_Nautilus_Mining_Success = {"Clean work, #squad. And now to weigh our prize.", "Just look at that shine. You've made me - er, us - a lot of money today, #squad.", "All in a day's work, ladies and gentlemen."},
+	Mission_Nautilus_Mining_Partial = {"Hmm, our ore detectors are reading untapped veins. I suppose we'll have to wait until the Vek clear out to go back for whatever you left behind.", "You missed a spot. Several, really. Amateurs...", "Did you misread the brief? You missed several rich veins out there."},
+	Mission_Nautilus_Mining_Failure = {"What a disaster. Now the whole area is clogged with Vek and off-limits.", "What a waste of fine material. I was hoping for better.", "Do you understand what you've cost us by not extracting those minerals? The valuation was off the charts..."},
+	
+		
 	Mission_Nautilus_Crumbling_Briefing = {"Watch those floors, #squad. This whole area is unstable.", "We've undermined this whole sector. Watch your footing.", "You mechs' footfalls may be enough to start a chain reaction of collapse here. Be careful."},
 --relevant?	Mission_Nautilus_Crumbling_Success = {""},
 --relevant?	Mission_Nautilus_Crumbling_Partial = {""},
@@ -55,15 +61,15 @@ return {
 	Mission_Nautilus_Drilltrain_Partial = {"The Rail Layer is tough, but not indestructible. Protect it until we can repair the damage.", "That's unfortunate. Quite unfortunate.", "Well, that's going to put us behind schedule."},
 	Mission_Nautilus_Drilltrain_Failure = {"The Rail Layer is - was - critical to our operation! I'm livid, to say the least!", "That's going to put us enormously behind schedule - and over budget. I'm keeping tally of your failures.", "I suppose we'll go back to pickaxes and hand trucks to get through all this rock. Thanks for nothing."},
 	
-	Mission_Nautilus_Chasms_Briefing = {"The Chasms are vital to keep our operation running. Try not to get in their way, will you?"},
-	Mission_Nautilus_Chasms_Success = {"It looks like most of the Chasms made it through unscathed. You have our tanks, #squad"},
-	Mission_Nautilus_Chasms_Partial = {"What? Only one minecart made it through?"},
-	Mission_Nautilus_Chasms_Failure = {"That was a total disaster, we needed those resources!"},
+	Mission_Nautilus_Chasms_Briefing = {"This whole region is dangerously unstable. While you're out there, do your utmost to shatter that stone.", "We'd like to open a path to a lower layer. Would you mind doing the honours?", "All this overburden will need to go if we want to access the lower levels. Thankfully, we have a crew of powerful time travelling mechs standing by!},
+	Mission_Nautilus_Chasms_Success = {"A yawning crevasse, ready to be plumbed for treasures. Our thanks.", "Well done. If this 'saving the world' gig doesn't work out, perhaps there's a place for you and your rig at Nautilus.", "You can hear the wind whistling in the depths. Music to my ears."},
+	--relevant?	Mission_Nautilus_Chasms_Partial = {""},
+	Mission_Nautilus_Chasms_Failure = {"We needed this region clear for future work. More stable land means more potential Vek footholds in our deeper mines. Not acceptable.", "Hrm. Clearing that overburden would have made future work out there significantly easier.","I was counting on you to clear away that rubble, #squad. It'll take us ages to do the same."},
 	
-	Mission_Nautilus_Tremors_Briefing = {"The Tremors are vital to keep our operation running. Try not to get in their way, will you?"},
-	Mission_Nautilus_Tremors_Success = {"It looks like most of the Tremors made it through unscathed. You have our tanks, #squad"},
-	Mission_Nautilus_Tremors_Partial = {"What? Only one minecart made it through?"},
-	Mission_Nautilus_Tremors_Failure = {"That was a total disaster, we needed those resources!"},
+	Mission_Nautilus_Tremors_Briefing = {"Seismic activity down here is off the charts. Watch your footing.", "The ground is liable to give way under heavy footfalls. Stay cautious.", "Our systems are predicting tremors out there; expect sinkholes to open at inopportune times."},
+--relevant?	Mission_Nautilus_Tremors_Success = {""},
+--relevant?	Mission_Nautilus_Tremors_Partial = {""},
+--relevant?	Mission_Nautilus_Tremors_Failure = {""},
 
 	-- Universal Missions
 	Mission_Train_Briefing = {},
