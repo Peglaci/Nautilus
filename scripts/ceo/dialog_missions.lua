@@ -70,6 +70,8 @@ return {
 --relevant?	Mission_Nautilus_Tremors_Success = {""},
 --relevant?	Mission_Nautilus_Tremors_Partial = {""},
 --relevant?	Mission_Nautilus_Tremors_Failure = {""},
+	
+	Mission_Trapped_Briefing = {"This sector has been largely abandoned, leaving behind a ton of infrastructure. We've taken the liberty of filling them with blasting explosives. Go, enjoy.", "These abandoned buildings should be a tempting target for the Vek. Trigger the explosives judiciously.","These buildings have been rigged to explode at your command. Don't worry, our people are long evacuated from the area."},
 
 	-- Universal Missions
 	Mission_Train_Briefing = {},
