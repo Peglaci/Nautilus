@@ -384,13 +384,47 @@ return {
 		"The bigger they are...",
 	},
 	Mission_BossGeneric_Tower = {
-		"Wait, it's coming this w-!",
-		"Stop it before I-!",
-		"You fools, I'm still insi-!",
+		"All gone. The work of decades, lost in a ruinous moment.",
+		"*SIGNAL LOST*",
+		"I don't know if Nautilus will ever recover from this loss...",
 	},
 	Mission_BossGeneric_Boss = {
 		"That titan Vek may have escaped, but it's left a trail we can follow. We'll take it from here, #squad.",
 		"You drove it off, barely. We need to gather our resources and prepare for its inevitable return.",
 		"The Vek Boss may have retreated, but it's only a matter of time before it returns. Your efforts were commendable, but we need to stay vigilant.", 
 	},
+	
+	-- Final mission
+	MissionFinal_StartResponse = {
+		"Deploying power Pylons, ladies and gentlemen. That should keep things running for long enough to end this.",
+		"Pylons coming down. That should keep your mechs online, #squad.",
+		"Pylons lighting up. That's all we have, so make it count.",
+	},
+	MissionFinal_FallStart = {
+		"Seismic activity off the charts! Watch your footing!",		
+		"How could we have missed that - sinkhole! Brace yourselves!",
+		"Hold on tight, you're going down!",
+	},
+	MissionFinal_Pylons = {
+		"These are the very last of our mobile relays. Once they're gone, they're gone.",
+		"That's the best I can do, #squad. Make them count.",
+		"The last of our Pylons. They should be enough. They'll have to be.",
+	},
+	MissionFinal_BombResponse = {
+		"A little gift from Dr. Renfield. If you can keep this safe until it's finished priming, we'll win this yet.",
+		"I can't even begin to describe what this bomb does. The specs were way beyond anything I've seen. Keep it safe.",		
+		"This is, as I understand it, one hell of a bomb. Don't mess around, now.",
+	},
+	MissionFinal_BombDestroyed = {
+		"Count yourselves fortunate we have a spare. Get your heads in the game, #squad!",		
+		"Thoughtless cretins, these are expensive! Don't count on another!",			
+		"How many of these do you think we have, guys? Stay focused!",
+	},
+	MissionFinal_BombArmed = {
+		"That's it. It's over. Congratulations, and thank you.",		
+		"It's time to leave, #squad. Thank you.",				
+		"It's going to blow! Time to go, gang!",
+	},
+	
+	
 }
