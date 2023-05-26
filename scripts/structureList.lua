@@ -9,11 +9,12 @@ structureList:addAssets(
 	"Str_MaterialsFacility",
 	"Str_ThermalPile",
 	"Str_Mine",
-
+	"Str_GasStorage",
+	"Str_VentilationShaft",
+	
 	"Str_Robotics",
 	"Str_Research",
 	"Str_Nimbus",
-	"Str_Power",
 	"Str_Power",
 	"Str_Bar"
 )
