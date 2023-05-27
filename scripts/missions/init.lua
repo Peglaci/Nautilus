@@ -17,6 +17,7 @@ local BASE_MISSIONS = {
   {"Trapped", LOW_THREAT},
 	{"Survive", LOW_THREAT},
 }
+require(path.."trapped_override")
 
 local Nautilus_Missions = {
   {"Incinerator",LOW_THREAT}, --Incomplete

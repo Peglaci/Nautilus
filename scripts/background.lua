@@ -83,7 +83,6 @@ end
 local function add_backgrounds()
 	if not IsBackground() then return end
 	local terrain = Board:GetTerrain(Point(0,0))
-	LOG(terrain)
 	if terrain == TERRAIN_HOLE then
 		customAnim:add(Point(0,0),"cave_background_chasm")
 	elseif terrain == TERRAIN_WATER then
