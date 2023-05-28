@@ -108,40 +108,45 @@ function Mission_Nautilus_Mining:IsPointValid(space)
 	return Board:IsValid(space) and
 			not Board:IsPod(space) and
 			not Board:IsBuilding(space) and
-      not Board:GetPawn(space) and
-      dist >= 5 and
-      dist <= 8 and --Two moves away
-			tile ~= TERRAIN_WATER
+      not Board:GetPawn(space) and tile ~= TERRAIN_WATER
 end
 
 function Mission_Nautilus_Mining:StartMission()
   local loc = Board:AddPawn(self.DrillerPawn)
   self.Driller = Board:GetPawn(loc):GetId()
 
-  choices = {}
-  for i=0,7 do
-    for j=0,7 do
-      local point = Point(i,j)
-      if self:IsPointValid(point) then
-        choices[#choices+1] = point
+  local choices = {}
+  local numDigSites = 20  -- Number of dig sites to generate
+  for k = 1, numDigSites do
+    local validPoints = {}
+    for i = 0, 7 do
+      for j = 0, 7 do
+        local point = Point(i, j)
+        if self:IsPointValid(point) then
+          validPoints[#validPoints + 1] = point
+        end
       end
     end
-  end
 
-  local choice = random_removal(choices)
-  Board:BlockSpawn(choice,BLOCKED_PERM)
-  self.DigSite = choice
-  local types = {{"ground_mineral.png","CrystalRock1"},{"ground_mineral.png","CrystalRock2"},{"ground_mineral.png","CrystalRock3"}}
-  local type = random_removal(types)
-  Board:SetCustomTile(choice,type[1])
-  self.spawnPawn = type[2]
+    if #validPoints > 0 then
+      local choice = random_removal(validPoints)
+      Board:BlockSpawn(choice, BLOCKED_PERM)
+      self.DigLocations[#self.DigLocations + 1] = choice
+      local types = {{"ground_mineral.png", "CrystalRock1"}, {"ground_mineral.png", "CrystalRock2"}, {"ground_mineral.png", "CrystalRock3"}}
+      local type = random_removal(types)
+      Board:SetCustomTile(choice, type[1])
+      self.spawnPawn = type[2]
+    end
+  end
 end
+
 
 function Mission_Nautilus_Mining:UpdateMission()
   if self.DigSite then
     Board:MarkSpaceDesc(self.DigSite,"NAH_Dig_Site")
   end
 end
+
 
 function Mission_Nautilus_Mining:GetCompletedObjectives()
   if self.DigSite == Point(-1,-1) and not Board:IsPawnAlive(self.PawnId) then
@@ -183,20 +188,6 @@ NAH_DrillerSkill = Skill:new{
     Target = Point(2,1),
   }
 }
-
-function NAH_DrillerSkill:GetTargetArea(p1)
-  local ret = PointList()
-  local mission = GetCurrentMission()
-  for i=DIR_START,DIR_END do
-    for j=1,2 do
-      local point = p1+DIR_VECTORS[i]*j
-      if Board:IsValid(point) and not Board:IsBlocked(point,PATH_GROUND) then
-        ret:push_back(point)
-      end
-    end
-  end
-  return ret
-end
 
 function NAH_DrillerSkill:GetSkillEffect(p1,p2)
   local ret = SkillEffect()
