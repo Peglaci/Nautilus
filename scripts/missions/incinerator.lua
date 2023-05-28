@@ -24,7 +24,8 @@ Mission_Nautilus_Incinerator = Mission_Auto:new{
   VekN = 2
 }
 
-function Mission_Nautilus_Incinerator:GetObjective()
+function Mission_Nautilus_Incinerator:GetRequirement()
+	return 2 --Cause of weird save data bug
 	if GetDifficulty() == DIFF_EASY then
 		return 1
 	else
@@ -34,7 +35,7 @@ end
 
 function Mission_Nautilus_Incinerator:IsValidTarget(space)
 	local ret = (not Board:IsUniqueBuilding(space) and not Board:IsPod(space))
-	
+
 	for i = DIR_START, DIR_END do -- check tiles around the incinerator
 		local adj = space + DIR_VECTORS[i]
 		local ort = adj + DIR_VECTORS[(i+1)%4]
@@ -42,7 +43,7 @@ function Mission_Nautilus_Incinerator:IsValidTarget(space)
 			ret = false
 		end
 	end
-	
+
 	return ret
 	-- local tile = Board:GetTerrain(space)
 
@@ -53,8 +54,8 @@ function Mission_Nautilus_Incinerator:IsValidTarget(space)
 end
 
 function Mission_Nautilus_Incinerator:StartMission()
-  self.Objectives = Objective("Incinerate "..self:GetObjective().." Vek",1)
-  
+	--self.Objectives = Objective("Incinerate "..self:GetObjective().." Vek",1)
+	
   local choices = {}
   --Find all possible places
   for i=4,5 do
@@ -76,22 +77,22 @@ function Mission_Nautilus_Incinerator:StartMission()
       end
     end
   end
-  
+
   --Choose one randomly
   if #choices ~= 0 then
-	local choice = random_removal(choices)
+		local choice = random_removal(choices)
     self.Incinerator = choice
     Board:AddAnimation(choice,"Incinerator",ANIM_NO_DELAY) --This animation loops forever
-	Board:SetTerrain(choice,TERRAIN_HOLE)
+		Board:SetTerrain(choice,TERRAIN_HOLE)
     Board:BlockSpawn(choice,BLOCKED_PERM)
-	
-	for i = DIR_START, DIR_END do -- clean tiles around the incinerator
-		local adj = choice + DIR_VECTORS[i]
-		local ort = adj + DIR_VECTORS[(i+1)%4]
-		Board:SetTerrain(ort,0)
-		Board:SetTerrain(adj,0)
-	end
-	
+
+		for i = DIR_START, DIR_END do -- clean tiles around the incinerator
+			local adj = choice + DIR_VECTORS[i]
+			local ort = adj + DIR_VECTORS[(i+1)%4]
+			Board:SetTerrain(ort,0)
+			Board:SetTerrain(adj,0)
+		end
+
 	else
     LOG("This should never show up, @NamesAreHard#2501 on discord if you see it. Nautilus.") --There should always be a valid spot
   end
@@ -105,7 +106,7 @@ function Mission_Nautilus_Incinerator:UpdateMission()
 end
 
 function Mission_Nautilus_Incinerator:GetCompletedObjectives()
-  if self.Incinerated >= self:GetObjective() then
+  if self.Incinerated >= self:GetRequirement() then
     return self.Objectives
   else
     return self.Objectives:Failed()
@@ -113,20 +114,20 @@ function Mission_Nautilus_Incinerator:GetCompletedObjectives()
 end
 
 function Mission_Nautilus_Incinerator:UpdateObjectives()
-	local status = self.Incinerated >= self:GetObjective() and OBJ_COMPLETE or OBJ_STANDARD
-	Game:AddObjective(string.format("Incinerate %i Vek\n(%s/%i incinerated)",self:GetObjective(),tostring(self.Incinerated),self:GetObjective()),status, REWARD_REP, 1)
+	local status = self.Incinerated >= self:GetRequirement() and OBJ_COMPLETE or OBJ_STANDARD
+	Game:AddObjective(string.format("Incinerate %i Vek (%s/%i incinerated)",self:GetRequirement(),tostring(self.Incinerated),self:GetRequirement()),status, REWARD_REP, 1)
 end
 
 --toxs tooltips
-local HOOK_onTileHighlighted = function(mission, point)	
+local HOOK_onTileHighlighted = function(mission, point)
 	-- Override chasm tile tooltip when highlighting Incinerator
 	-- Board:MarkSpaceDesc is used by environment effects and could conflict
 	if mission and point == mission.Incinerator and Board:GetTerrain(point) == TERRAIN_HOLE then
 		modApi.modLoaderDictionary["Tile_chasm_Title"] = TILE_TOOLTIPS.Nautilus_Incinerator[1]
-		modApi.modLoaderDictionary["Tile_chasm_Text"] = TILE_TOOLTIPS.Nautilus_Incinerator[2]		
+		modApi.modLoaderDictionary["Tile_chasm_Text"] = TILE_TOOLTIPS.Nautilus_Incinerator[2]
 	else
 		modApi.modLoaderDictionary["Tile_chasm_Title"] = nil
-		modApi.modLoaderDictionary["Tile_chasm_Text"] = nil		
+		modApi.modLoaderDictionary["Tile_chasm_Text"] = nil
 	end
 end
 
