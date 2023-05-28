@@ -32,9 +32,7 @@ function mod:init()
 	require(self.scriptPath.."island_composite")
 	require(self.scriptPath.."background") --Background needs to be before waterfall so it goes under the waterfalls
 	require(self.scriptPath.."waterfall")
-	-- require(self.scriptPath.."extra_dialog")
-	-- require(self.scriptPath.."voice_units")
-
+	require(self.scriptPath.."extra_dialog")
 
 	self.missions = require(self.scriptPath.."missions/init")
 	self.missions:init(self)

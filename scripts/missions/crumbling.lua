@@ -103,7 +103,11 @@ function Env_Nautilus_Crumbling:ApplyStart() --Runs once before the effect
   local effect = SkillEffect()
   effect:AddBoardShake(1.5)
   effect:AddSound("/props/ground_break_line")
-	Board:AddEffect(effect)
+  if Game:GetTurnCount() == 1 then
+	effect:AddDelay(2)
+	effect:AddScript("PrepareVoiceEvent('Mission_Nautilus_CrumblingReaction')")
+  end
+  Board:AddEffect(effect)
 
   local turn = Board:GetTurn()
   --BLOCK NEW SPAWNS
