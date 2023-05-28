@@ -26,11 +26,11 @@ Mission_Nautilus_Incinerator = Mission_Auto:new{
 
 function Mission_Nautilus_Incinerator:GetRequirement()
 	return 2 --Cause of weird save data bug
-	if GetDifficulty() == DIFF_EASY then
-		return 1
-	else
-		return 2
-	end
+	--if GetDifficulty() == DIFF_EASY then
+	--	return 1
+	--else
+	--	return 2
+	--end
 end
 
 function Mission_Nautilus_Incinerator:IsValidTarget(space)
@@ -55,7 +55,7 @@ end
 
 function Mission_Nautilus_Incinerator:StartMission()
 	--self.Objectives = Objective("Incinerate "..self:GetObjective().." Vek",1)
-	
+
   local choices = {}
   --Find all possible places
   for i=4,5 do
