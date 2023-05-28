@@ -204,13 +204,17 @@ function NAH_Blast_Charge_Skill:GetSkillEffect(p1, p2)
   		damage.sAnimation = "exploout2_"..dir
   		ret:AddQueuedDamage(damage)
     end
-	end
+  end
 
   local crack = SpaceDamage(p1)
   crack.bHide = true
   crack.iCrack = EFFECT_CREATE
   ret:AddQueuedDamage(crack)
-
+  
+  if chance > 0.5 then
+	  ret:AddVoice('Mission_Nautilus_BlastChargeExploded', -1)
+  end
+  
   return ret
 end
 
