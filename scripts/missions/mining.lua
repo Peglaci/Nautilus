@@ -1,7 +1,12 @@
+--for k,v in ipairs(GetCurrentMission().DigLocations) do LOG(k); LOG(v); end
 
 local this = {id = "Mission_Nautilus_Mining"}
 local mod = mod_loader.mods[modApi.currentMod]
 local previewer = mod.libs.weaponPreview
+
+--TODO:
+--Sounds
+--Tip Image and Description
 
 --IMAGES
 modApi:appendAsset("img/effects/burrow_openclose.png",mod.resourcePath.."img/effects/burrow_openclose.png") --Thanks to Metalocif for the animation
@@ -92,34 +97,34 @@ AddPawn("CrystalRock3")
 --MISSION
 Mission_Nautilus_Mining = Mission_Infinite:new{
   Name = "Mineral Excavation",
-  Objectives = Objective("Excavate 10 Units of Minerals",1),
+  Objectives = Objective("Excavate 6 Units of Minerals",2),
   DrillerPawn = "NAH_Driller",
   Driller = nil,
-  DigSite = Point(-1,-1),
-  PawnId = nil,
-  spawnPawn = nil,
-  DigLocations = {},
+  DigLocations = nil,
+  Crystals = 0,
+  CrystalsNeeded = 6, --Also change text
+  UseBonus = false,
 }
 
 function Mission_Nautilus_Mining:IsPointValid(space)
-  self.DigLocations = {}
   local tile = Board:GetTerrain(space)
-  local dist = Board:GetPawn(self.Driller):GetSpace():Manhattan(space)
+  --local dist = Board:GetPawn(self.Driller):GetSpace():Manhattan(space)
 	return Board:IsValid(space) and
 			not Board:IsPod(space) and
-			not Board:IsBuilding(space) and
-      not Board:GetPawn(space) and tile ~= TERRAIN_WATER
+			not Board:IsBlocked(space,PATH_GROUND) and
+      tile ~= TERRAIN_WATER
 end
 
 function Mission_Nautilus_Mining:StartMission()
   local loc = Board:AddPawn(self.DrillerPawn)
   self.Driller = Board:GetPawn(loc):GetId()
+  self.DigLocations = {}
 
   local choices = {}
-  local numDigSites = 20  -- Number of dig sites to generate
+  local numDigSites = self.CrystalsNeeded*2+2  -- Number of dig sites to generate
   for k = 1, numDigSites do
     local validPoints = {}
-    for i = 0, 7 do
+    for i = 1, 6 do
       for j = 0, 7 do
         local point = Point(i, j)
         if self:IsPointValid(point) then
@@ -130,44 +135,43 @@ function Mission_Nautilus_Mining:StartMission()
 
     if #validPoints > 0 then
       local choice = random_removal(validPoints)
-      Board:BlockSpawn(choice, BLOCKED_PERM)
+      --Board:BlockSpawn(choice, BLOCKED_PERM)
       self.DigLocations[#self.DigLocations + 1] = choice
-      local types = {{"ground_mineral.png", "CrystalRock1"}, {"ground_mineral.png", "CrystalRock2"}, {"ground_mineral.png", "CrystalRock3"}}
-      local type = random_removal(types)
-      Board:SetCustomTile(choice, type[1])
-      self.spawnPawn = type[2]
+      Board:ClearSpace(choice)
+      Board:SetCustomTile(choice, "ground_mineral.png")
     end
   end
 end
 
 
 function Mission_Nautilus_Mining:UpdateMission()
-  if self.DigSite then
-    Board:MarkSpaceDesc(self.DigSite,"NAH_Dig_Site")
+  for i, p in ipairs(self.DigLocations) do
+    Board:MarkSpaceDesc(p,"NAH_Minerals")
   end
 end
 
-
 function Mission_Nautilus_Mining:GetCompletedObjectives()
-  if self.DigSite == Point(-1,-1) and not Board:IsPawnAlive(self.PawnId) then
+  if self.Crystals >= self.CrystalsNeeded then
     return self.Objectives
+  elseif self.Crystals >= self.CrystalsNeeded/2 then
+    return Objective(string.format("Excavate 6 Units of Crystals (Mined: %s)",self.Crystals),1,2)
   else
     return self.Objectives:Failed()
   end
 end
 
 function Mission_Nautilus_Mining:UpdateObjectives()
-  local status = (self.DigSite ~= Point(-1,-1) and not Board:IsPawnAlive(self.Driller) and OBJ_FAILED) or
-  (self.DigSite == Point(-1,-1) and not Board:IsPawnAlive(self.PawnId) and OBJ_COMPLETE) or
+  local status = self.Crystals < self.CrystalsNeeded and not Board:IsPawnAlive(self.Driller) and OBJ_FAILED or
+  (self.Crystals >= self.CrystalsNeeded and OBJ_COMPLETE) or
   OBJ_STANDARD
-  Game:AddObjective("Excavate 10 Units of Minerals", status, REWARD_REP, 1) --REWARD_TECH
+  Game:AddObjective(string.format("Excavate 6 Units of Crystals (Mined: %s)",self.Crystals), status, REWARD_REP, 2) --REWARD_TECH
 end
 
 NAH_Driller = {
   Name = "Driller",
   Health = 2,
   MoveSpeed = 4,
-  Image = "Nautilus_Driller", --Change
+  Image = "Nautilus_Driller",
   SoundLocation = "/support/civilian_tank/", --Probably Change
   DefaultTeam = TEAM_PLAYER,
   SkillList = {"NAH_DrillerSkill"},
@@ -189,70 +193,70 @@ NAH_DrillerSkill = Skill:new{
   }
 }
 
+function NAH_DrillerSkill:GetTargetArea(point)
+  local ret = PointList()
+
+	for i = DIR_START, DIR_END do
+		for k = 1, 8 do
+			local curr = DIR_VECTORS[i]*k + point
+			if Board:IsValid(curr) and not Board:IsBlocked(curr, Pawn:GetPathProf()) then
+				ret:push_back(DIR_VECTORS[i]*k + point)
+      elseif Board:IsValid(curr) then
+        ret:push_back(DIR_VECTORS[i]*k + point)
+        break
+			else
+				break
+			end
+		end
+	end
+
+	return ret
+end
+
 function NAH_DrillerSkill:GetSkillEffect(p1,p2)
   local ret = SkillEffect()
   local pawn = Board:GetPawn(p1)
   local mission = GetCurrentMission()
-  local spawnPawn = nil
-  if (mission.DigSite and p1 == mission.DigSite) then --Board:IsTipImage() or
-    spawnPawn = mission.spawnPawn
+
+  local dir = GetDirection(p2 - p1)
+  local pathing = Pawn:GetPathProf()
+  local target = GetProjectileEnd(p1,p2,pathing)
+  local damage = nil
+  local doDamage = true
+
+  if not Board:IsBlocked(target,pathing) then -- dont attack an empty edge square, just run to the edge
+		doDamage = false
+		target = target + DIR_VECTORS[dir]
+	end
+
+  local distance = p1:Manhattan(target)
+
+	ret:AddCharge(Board:GetSimplePath(p1, target - DIR_VECTORS[dir]), NO_DELAY)
+
+  for i = 0, distance-2 do
+		ret:AddDelay(0.06)
+    local point = p1 + DIR_VECTORS[dir]*i
+		ret:AddBounce(point, -3)
+
+    local DigLocation = mission.DigLocations and list_contains(mission.DigLocations, point)
+    if DigLocation then
+      damage = SpaceDamage(point)
+      damage.sPawn = "CrystalRock1"
+      ret:AddDamage(damage)
+      ret:AddScript(string.format([[
+        local mission = GetCurrentMission()
+        local point = %s
+        Board:SetCustomTile(point,"ground_buried_empty.png")
+        remove_element(point, mission.DigLocations)
+        mission.Crystals = mission.Crystals + 1
+      ]],point:GetString()))
+    end
   end
 
-  if not spawnPawn then
-    spawnPawn = "CrystalRock"
+  if doDamage then
+    damage = SpaceDamage(target,1)
+    ret:AddDamage(damage)
   end
-
-  --Animation:
-  ret:AddScript(string.format([[
-    Board:AddAnimation(%s,%q,ANIM_NO_DELAY)
-  ]],p1:GetString(),self.Animation))
-
-  ret:AddDelay(0.07*7) --Time of animation half way through
-
-  --Send Self Away and Spawn Pawn
-  ret:AddScript(string.format([[
-    local pawn = Board:GetPawn(%s)
-    local point = pawn:GetSpace()
-    pawn:SetSpace(Point(-1,-1))
-    Board:AddPawn(%q,point)
-    GetCurrentMission().PawnId = Board:GetPawn(point):GetId()
-  ]],tostring(pawn:GetId()),spawnPawn))
-
-  local preview = SpaceDamage(p2,0)
-  preview.sPawn = spawnPawn
-  previewer:AddDamage(preview)
-
-  --Add Leap
-  ret:AddScript(string.format([[
-    local effect = SkillEffect()
-    local move = PointList()
-    move:push_back(%s)
-    move:push_back(%s)
-    effect:AddLeap(move,NO_DELAY)
-    Board:AddEffect(effect)
-  ]],p1:GetString(),p2:GetString()))
-
-  --Put self back
-  ret:AddScript(string.format([[
-    local pawn = Board:GetPawn(%s)
-    pawn:SetSpace(%s)
-  ]],tostring(pawn:GetId()),p1:GetString() ))
-
-  --LOG(GetCurrentMission().DigSite)
-  --Mission things
-  if mission.DigSite and p1 == mission.DigSite then
-    ret:AddScript([[
-      local mission = GetCurrentMission()
-      Board:SetCustomTile(mission.DigSite,"ground_buried_empty.png")
-      mission.DigSite = nil
-    ]])
-  end
-
-  --Reset Terrain and Crack Tile, animations etc.
-  local damage = SpaceDamage(p1,0)
-  damage.iTerrain = TERRAIN_ROAD
-  damage.iCrack = EFFECT_CREATE
-  ret:AddDamage(damage)
 
   return ret
 end

@@ -34,4 +34,6 @@ TILE_TOOLTIPS = {
 
   NAH_Tremor = {"Tremor", "This tile will become cracked."},
 
+  NAH_Minerals = {"Crystal Site","Run the driller over this location to mine its crystal."},
+
 }
