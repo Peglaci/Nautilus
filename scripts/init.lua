@@ -17,6 +17,7 @@ function mod:init()
 	self.libs.modApiExt = modapiext
 	self.libs.weaponPreview = require(self.scriptPath.."libs/weaponPreview")
 	self.libs.customAnim = require(mod.scriptPath.."libs/customAnim")
+	self.libs.worldConstants = require(mod.scriptPath.."libs/worldConstants")
 
 	require(mod.scriptPath.."libs/boardEvents")
 

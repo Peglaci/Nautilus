@@ -3,6 +3,7 @@
 local this = {id = "Mission_Nautilus_Mining"}
 local mod = mod_loader.mods[modApi.currentMod]
 local previewer = mod.libs.weaponPreview
+local worldConstants = mod.libs.worldConstants
 
 --TODO:
 --Sounds
@@ -231,10 +232,13 @@ function NAH_DrillerSkill:GetSkillEffect(p1,p2)
 
   local distance = p1:Manhattan(target)
 
+  local new_speed = .25
+  worldConstants:setSpeed(ret,new_speed)
 	ret:AddCharge(Board:GetSimplePath(p1, target - DIR_VECTORS[dir]), NO_DELAY)
+  worldConstants:resetSpeed(ret)
 
   for i = 0, distance-2 do
-		ret:AddDelay(0.06)
+    --First one is no delay so the delay is at the end
     local point = p1 + DIR_VECTORS[dir]*i
 		ret:AddBounce(point, -3)
 
@@ -251,10 +255,13 @@ function NAH_DrillerSkill:GetSkillEffect(p1,p2)
         mission.Crystals = mission.Crystals + 1
       ]],point:GetString()))
     end
+
+    ret:AddDelay(0.08*worldConstants:getDefaultSpeed()/new_speed)
   end
 
   if doDamage then
     damage = SpaceDamage(target,1)
+    damage.sAnimation = "explopush1_"..dir
     ret:AddDamage(damage)
   end
 
