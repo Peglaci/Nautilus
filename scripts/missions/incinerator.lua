@@ -54,7 +54,8 @@ function Mission_Nautilus_Incinerator:IsValidTarget(space)
 end
 
 function Mission_Nautilus_Incinerator:StartMission()
-	self.Objectives = Objective("Incinerate "..self:GetRequirement().." Vek",1)
+	self.Objectives.text = "Incinerate "..self:GetRequirement().." Vek"
+	--self.Objectives = Objective("Incinerate "..self:GetRequirement().." Vek",1)
 
   local choices = {}
   --Find all possible places

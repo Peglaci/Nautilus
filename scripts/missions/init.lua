@@ -41,7 +41,7 @@ function this:init(mod)
 
 	--overrides
 	require(path.."trapped_override")
-	require(path.."objective_override")
+	--require(path.."objective_override")
 
   for _, table in ipairs(BASE_MISSIONS) do
     local name = "Mission_"..table[1]
