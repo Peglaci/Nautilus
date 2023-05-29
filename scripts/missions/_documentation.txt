@@ -89,6 +89,11 @@ int: The type of reward, REWARD_REP or REWARD_POWER
 int: How many of the reward. This should match the previous.
 int: How many of those stars are currently failed
 
+Mission:GetObjectives()
+This is run at the start of the mission to add it to the mission select screen
+The default is return self.Objectives and works 99% of the time
+However, it's used in incinerator for objectives that change based on difficulty so you can use that as an example
+
 What I haven't looked into:
 Multiple Objectives in a mission
 

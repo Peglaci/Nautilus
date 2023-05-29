@@ -19,7 +19,8 @@ ANIMS.Incinerator = Animation:new {
 
 Mission_Nautilus_Incinerator = Mission_Auto:new{
   Name = "Incinerator",
-  Objectives = Objective("Incinerate 2 Vek",1),
+  EasyObjective = Objective("Incinerate 1 Vek",1),
+	Objectives = Objective("Incinerate 2 Vek",1),
 	Incinerator = Point(-1,-1),
   Incinerated = 0,
   VekN = 2
@@ -54,8 +55,6 @@ function Mission_Nautilus_Incinerator:IsValidTarget(space)
 end
 
 function Mission_Nautilus_Incinerator:StartMission()
-	self.Objectives.text = "Incinerate "..self:GetRequirement().." Vek"
-	--self.Objectives = Objective("Incinerate "..self:GetRequirement().." Vek",1)
 
   local choices = {}
   --Find all possible places
@@ -106,14 +105,27 @@ function Mission_Nautilus_Incinerator:UpdateMission()
 	-- end
 end
 
-function Mission_Nautilus_Incinerator:GetCompletedObjectives()
-  if self.Incinerated >= self:GetRequirement() then
-    return self.Objectives
-  else
-    return self.Objectives:Failed()
-  end
+--mission select objecitve
+function Mission_Nautilus_Incinerator:GetObjectives()
+	if GetDifficulty() == DIFF_EASY then
+		return self.EasyObjective
+	else
+		return self.Objectives
+	end
 end
 
+--mission end objective
+function Mission_Nautilus_Incinerator:GetCompletedObjectives()
+	local obj = self:GetObjectives()
+
+	if self.Incinerated >= self:GetRequirement() then
+		return obj
+	else
+		return obj:Failed()
+	end
+end
+
+--In game objective
 function Mission_Nautilus_Incinerator:UpdateObjectives()
 	local status = self.Incinerated >= self:GetRequirement() and OBJ_COMPLETE or OBJ_STANDARD
 	Game:AddObjective(string.format("Incinerate %i Vek (%s/%i incinerated)",self:GetRequirement(),tostring(self.Incinerated),self:GetRequirement()),status, REWARD_REP, 1)
