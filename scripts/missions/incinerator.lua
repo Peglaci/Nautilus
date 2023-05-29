@@ -13,7 +13,7 @@ ANIMS.Incinerator = Animation:new {
 	PosX = -29,
 	PosY = 0,
   Loop = true,
-  Layer = ANIMS.LAYER_BACK,
+  Layer = ANIMS.LAYER_FLOOR--LAYER_BACK,
 }
 
 
@@ -122,7 +122,8 @@ end
 local HOOK_onTileHighlighted = function(mission, point)
 	-- Override chasm tile tooltip when highlighting Incinerator
 	-- Board:MarkSpaceDesc is used by environment effects and could conflict
-	if mission and point == mission.Incinerator and Board:GetTerrain(point) == TERRAIN_HOLE then
+	mission = GetCurrentMission()
+	if mission and mission.Incinerator and point == mission.Incinerator and Board:GetTerrain(point) == TERRAIN_HOLE then
 		modApi.modLoaderDictionary["Tile_chasm_Title"] = TILE_TOOLTIPS.Nautilus_Incinerator[1]
 		modApi.modLoaderDictionary["Tile_chasm_Text"] = TILE_TOOLTIPS.Nautilus_Incinerator[2]
 	else

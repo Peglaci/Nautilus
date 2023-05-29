@@ -609,8 +609,8 @@ local extraDialog = {
 			"Not ideal, but it works.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"This is almost fun, you know."
-			"I can work with that."
+			"This is almost fun, you know.",
+			"I can work with that.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
 			"Looks... salvageable?",
