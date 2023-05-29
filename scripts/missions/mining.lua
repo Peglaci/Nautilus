@@ -182,16 +182,20 @@ AddPawn("NAH_Driller")
 
 NAH_DrillerSkill = Skill:new{
   Name = "Driller",
-  Description = "Crack the tile beneath you and throw a rock. If on the dig site, throw the Vek in it instead.",
+  Description = "Charges forward, excavating crystals as it goes.",
   Class = "",
   Icon = "weapons/excavatorbucket.png",
-  Damage = 0,
+  Damage = 1,
   LaunchSound = "/weapons/shift",
   Animation = "BurrowOpenClose",
+  CustomTipImage = "NAH_DrillerSkill_Tip",
+  TipDigSpace = Point(2,3),
   TipImage = {
-    Unit = Point(2,2),
-    Target = Point(2,1),
-  }
+		Unit = Point(2,4),
+		Enemy = Point(2,1),
+		Target = Point(2,1),
+    CustomPawn = "NAH_Driller"
+	}
 }
 
 function NAH_DrillerSkill:GetTargetArea(point)
@@ -260,7 +264,7 @@ function NAH_DrillerSkill:GetSkillEffect(p1,p2)
   end
 
   if doDamage then
-    damage = SpaceDamage(target,1)
+    damage = SpaceDamage(target,self.Damage)
     damage.sAnimation = "explopush1_"..dir
     ret:AddDamage(damage)
   end
@@ -268,6 +272,50 @@ function NAH_DrillerSkill:GetSkillEffect(p1,p2)
   return ret
 end
 
-function this:init(mod)
 
+NAH_DrillerSkill_Tip = NAH_DrillerSkill:new{
+}
+
+--Lots of copy and paste in here, but things are different
+function NAH_DrillerSkill_Tip:GetSkillEffect(p1,p2)
+  local ret = SkillEffect()
+  local pawn = Board:GetPawn(p1)
+
+  local tip_dig_space = self.TipDigSpace
+  Board:SetCustomTile(tip_dig_space, "ground_mineral.png")
+
+  local dir = GetDirection(p2 - p1)
+  local pathing = Pawn:GetPathProf()
+  local target = GetProjectileEnd(p1,p2,pathing)
+  local damage = nil
+
+  local distance = p1:Manhattan(target)
+
+  local new_speed = .25
+  worldConstants:setSpeed(ret,new_speed)
+	ret:AddCharge(Board:GetSimplePath(p1, target - DIR_VECTORS[dir]), NO_DELAY)
+  worldConstants:resetSpeed(ret)
+
+  for i = 0, distance-2 do
+    --First one is no delay so the delay is at the end
+    local point = p1 + DIR_VECTORS[dir]*i
+		ret:AddBounce(point, -3)
+
+    if point == tip_dig_space then
+      damage = SpaceDamage(point)
+      damage.sPawn = "CrystalRock1"
+      ret:AddDamage(damage)
+      ret:AddScript(string.format([[
+        Board:SetCustomTile(%s,"ground_buried_empty.png")
+      ]],point:GetString()))
+    end
+
+    ret:AddDelay(0.08*worldConstants:getDefaultSpeed()/new_speed)
+  end
+
+  damage = SpaceDamage(target,self.Damage)
+  damage.sAnimation = "explopush1_"..dir
+  ret:AddDamage(damage)
+
+  return ret
 end
