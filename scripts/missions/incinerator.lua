@@ -5,6 +5,7 @@
 local mod = mod_loader.mods[modApi.currentMod]
 
 modApi:appendAsset("img/units/mission/incinerator.png",mod.resourcePath.."img/units/mission/incinerator.png")
+modApi:appendAsset("img/units/mission/incinerator_back.png",mod.resourcePath.."img/units/mission/incinerator_back.png")
 
 ANIMS.Incinerator = Animation:new {
 	Image = "units/mission/incinerator.png",
@@ -13,7 +14,12 @@ ANIMS.Incinerator = Animation:new {
 	PosX = -29,
 	PosY = 0,
   Loop = true,
-  Layer = ANIMS.LAYER_FLOOR--LAYER_BACK,
+  Layer = ANIMS.LAYER_BACK--LAYER_FLOOR,
+}
+
+ANIMS.Incinerator_Back = ANIMS.Incinerator:new {
+	Image = "units/mission/incinerator_back.png",
+	Layer = ANIMS.LAYER_FLOOR, --The back part is in front so falling Vek go beneath
 }
 
 
@@ -83,6 +89,7 @@ function Mission_Nautilus_Incinerator:StartMission()
 		local choice = random_removal(choices)
     self.Incinerator = choice
     Board:AddAnimation(choice,"Incinerator",ANIM_NO_DELAY) --This animation loops forever
+		Board:AddAnimation(choice,"Incinerator_Back",ANIM_NO_DELAY) --This animation loops forever
 		Board:SetTerrain(choice,TERRAIN_HOLE)
     Board:BlockSpawn(choice,BLOCKED_PERM)
 
