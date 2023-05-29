@@ -24,6 +24,7 @@ modApi:appendAsset("img/tileset/ground_buried_empty.png", mod.resourcePath .."im
 modApi:appendAsset("img/units/mission/rock1.png", mod.resourcePath .."img/units/mission/rock1.png")
 modApi:appendAsset("img/units/mission/rock2.png", mod.resourcePath .."img/units/mission/rock2.png")
 modApi:appendAsset("img/units/mission/rock3.png", mod.resourcePath .."img/units/mission/rock3.png")
+modApi:appendAsset("img/units/mission/rock_3_emerge.png", mod.resourcePath .."img/units/mission/rock_3_emerge.png")
 modApi:appendAsset("img/units/mission/rock1_death.png", mod.resourcePath .."img/units/mission/rock1_death.png")
 
 local a = ANIMS
@@ -35,9 +36,10 @@ a.Nautilus_Drillerw = a.Nautilus_Driller:new{Image = "units/mission/drill_w.png"
 a.CrystalRock1 = a.BaseUnit:new{Image = "units/mission/rock1.png", PosX = -18, PosY = -1}
 a.CrystalRock1d = a.CrystalRock1:new{ Image = "units/mission/rock1_death.png", PosX = -34, PosY = -9, NumFrames = 13, Time = 0.09, Loop = false }
 a.CrystalRock2 = a.BaseUnit:new{Image = "units/mission/rock2.png", PosX = -18, PosY = -1}
-a.CrystalRockd2 = a.CrystalRock2:new{ Image = "units/mission/rock1_death.png", PosX = -34, PosY = -9, NumFrames = 13, Time = 0.09, Loop = false }
+a.CrystalRock2d = a.CrystalRock2:new{ Image = "units/mission/rock1_death.png", PosX = -34, PosY = -9, NumFrames = 13, Time = 0.09, Loop = false }
 a.CrystalRock3 = a.BaseUnit:new{Image = "units/mission/rock3.png", PosX = -18, PosY = -1}
-a.CrystalRockd3 = a.CrystalRock3:new{ Image = "units/mission/rock1_death.png", PosX = -34, PosY = -9, NumFrames = 13, Time = 0.09, Loop = false }
+a.CrystalRock3d = a.CrystalRock3:new{ Image = "units/mission/rock1_death.png", PosX = -34, PosY = -9, NumFrames = 13, Time = 0.09, Loop = false }
+a.CrystalRock3e = a.BaseUnit:new{Image = "units/mission/rock_3_emerge.png", PosX = -23, PosY = 2, NumFrames = 6, Time = 0.07, Loop = false}
 
 ANIMS.BurrowOpenClose = Animation:new{
     Image = "effects/burrow_openclose.png",
@@ -249,7 +251,7 @@ function NAH_DrillerSkill:GetSkillEffect(p1,p2)
     local DigLocation = mission.DigLocations and list_contains(mission.DigLocations, point)
     if DigLocation then
       damage = SpaceDamage(point)
-      damage.sPawn = "CrystalRock1"
+      damage.sPawn = "CrystalRock3"
       ret:AddDamage(damage)
       ret:AddScript(string.format([[
         local mission = GetCurrentMission()
@@ -303,7 +305,7 @@ function NAH_DrillerSkill_Tip:GetSkillEffect(p1,p2)
 
     if point == tip_dig_space then
       damage = SpaceDamage(point)
-      damage.sPawn = "CrystalRock1"
+      damage.sPawn = "CrystalRock3"
       ret:AddDamage(damage)
       ret:AddScript(string.format([[
         Board:SetCustomTile(%s,"ground_buried_empty.png")
