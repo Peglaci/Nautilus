@@ -40,6 +40,58 @@ local order = {3,0,1,2} -- needed to align waterfall position and sprite display
 -- FUNCTIONS --
 ---------------
 
+--exception list
+local function exceptionList(point)
+	local mission = GetCurrentMission()
+	if
+		mission and mission.Incinerator and mission.Incinerator == point
+	then
+		return false
+	else
+		return true
+	end
+end
+
+local function waterfallTile(point)
+	for i,j in ipairs(order) do -- re-do waterfalls on tile
+		customAnim:rem(point,(i-1)..WATERFALL)
+		if Board:GetTerrain(point) == TERRAIN_HOLE then
+			local curr = point + DIR_VECTORS[j]
+			if Board:IsValid(curr) then
+				if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
+					if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
+						if exceptionList(point) then
+							customAnim:add(point,(i-1)..WATERFALL)
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+local function waterfallAdjacent(point)
+	for d = DIR_START, DIR_END do -- re-do waterfalls on adjacent
+		local loc = point + DIR_VECTORS[d]
+		for i,j in ipairs(order) do
+			customAnim:rem(loc,(i-1)..WATERFALL)
+			if Board:IsValid(loc) and Board:GetTerrain(loc) == TERRAIN_HOLE then
+				local curr = loc + DIR_VECTORS[j]
+				if Board:IsValid(curr) then
+					if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
+						if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
+							if exceptionList(loc) then
+								customAnim:add(loc,(i-1)..WATERFALL)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+
 local EVENT_onTerrainChanged = function(point, newTerrain, oldTerrain)
 	if modApi:getCurrentTileset() == TILESET then
 		if false
@@ -48,35 +100,8 @@ local EVENT_onTerrainChanged = function(point, newTerrain, oldTerrain)
 			or oldTerrain == TERRAIN_WATER
 			or oldTerrain == TERRAIN_HOLE
 		then
-			for i,j in ipairs(order) do -- re-do waterfalls on tile
-				customAnim:rem(point,(i-1)..WATERFALL)
-				if Board:GetTerrain(point) == TERRAIN_HOLE then
-					local curr = point + DIR_VECTORS[j]
-					if Board:IsValid(curr) then
-						if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-							if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-								customAnim:add(point,(i-1)..WATERFALL)
-							end
-						end
-					end
-				end
-			end
-			for d = DIR_START, DIR_END do -- re-do waterfalls on adjacent
-				local loc = point + DIR_VECTORS[d]
-				for i,j in ipairs(order) do
-					customAnim:rem(loc,(i-1)..WATERFALL)
-					if Board:IsValid(loc) and Board:GetTerrain(loc) == TERRAIN_HOLE then
-						local curr = loc + DIR_VECTORS[j]
-						if Board:IsValid(curr) then
-							if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-								if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-									customAnim:add(loc,(i-1)..WATERFALL)
-								end
-							end
-						end
-					end
-				end
-			end
+			waterfallTile(point)
+			waterfallAdjacent(point)
 		end
 	end
 end
@@ -89,35 +114,8 @@ local EVENT_onTerrainChanged = function(point, newTerrain, oldTerrain)
 			or oldTerrain == TERRAIN_WATER
 			or oldTerrain == TERRAIN_HOLE
 		then
-			for i,j in ipairs(order) do -- re-do waterfalls on tile
-				customAnim:rem(point,(i-1)..WATERFALL)
-				if Board:GetTerrain(point) == TERRAIN_HOLE then
-					local curr = point + DIR_VECTORS[j]
-					if Board:IsValid(curr) then
-						if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-							if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-								customAnim:add(point,(i-1)..WATERFALL)
-							end
-						end
-					end
-				end
-			end
-			for d = DIR_START, DIR_END do -- re-do waterfalls on adjacent
-				local loc = point + DIR_VECTORS[d]
-				for i,j in ipairs(order) do
-					customAnim:rem(loc,(i-1)..WATERFALL)
-					if Board:IsValid(loc) and Board:GetTerrain(loc) == TERRAIN_HOLE then
-						local curr = loc + DIR_VECTORS[j]
-						if Board:IsValid(curr) then
-							if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-								if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-									customAnim:add(loc,(i-1)..WATERFALL)
-								end
-							end
-						end
-					end
-				end
-			end
+			waterfallTile(point)
+			waterfallAdjacent(point)
 		end
 	end
 end
@@ -125,35 +123,8 @@ end
 local EVENT_onAcidLava = function(point)
 	if modApi:getCurrentTileset() == TILESET then
 		if Board:GetTerrain(point) == TERRAIN_WATER then
-			for i,j in ipairs(order) do -- re-do waterfalls on tile
-				customAnim:rem(point,(i-1)..WATERFALL)
-				if Board:GetTerrain(point) == TERRAIN_HOLE then
-					local curr = point + DIR_VECTORS[j]
-					if Board:IsValid(curr) then
-						if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-							if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-								customAnim:add(point,(i-1)..WATERFALL)
-							end
-						end
-					end
-				end
-			end
-			for d = DIR_START, DIR_END do -- re-do waterfalls on adjacent
-				local loc = point + DIR_VECTORS[d]
-				for i,j in ipairs(order) do
-					customAnim:rem(loc,(i-1)..WATERFALL)
-					if Board:IsValid(loc) and Board:GetTerrain(loc) == TERRAIN_HOLE then
-						local curr = loc + DIR_VECTORS[j]
-						if Board:IsValid(curr) then
-							if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-								if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-									customAnim:add(loc,(i-1)..WATERFALL)
-								end
-							end
-						end
-					end
-				end
-			end
+			waterfallTile(point)
+			waterfallAdjacent(point)
 		end
 	end
 end
@@ -162,19 +133,7 @@ local function HOOK_mapEntered(mission)
 	for x = 0, 7 do
 		for y = 0, 7 do
 			local point = Point(x,y)
-			for i,j in ipairs(order) do -- re-do waterfalls on tile
-				customAnim:rem(point,(i-1)..WATERFALL)
-				if modApi:getCurrentTileset() == TILESET and Board:GetTerrain(point) == TERRAIN_HOLE then
-					local curr = point + DIR_VECTORS[j]
-					if Board:IsValid(curr) then
-						if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-							if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-								customAnim:add(point,(i-1)..WATERFALL)
-							end
-						end
-					end
-				end
-			end
+			waterfallTile(point)
 		end
 	end
 end
@@ -183,19 +142,7 @@ local function HOOK_missionEnd(mission)
 	for x = 0, 7 do
 		for y = 0, 7 do
 			local point = Point(x,y)
-			for i,j in ipairs(order) do -- re-do waterfalls on tile
-				customAnim:rem(point,(i-1)..WATERFALL)
-				if modApi:getCurrentTileset() == TILESET and Board:GetTerrain(point) == TERRAIN_HOLE then
-					local curr = point + DIR_VECTORS[j]
-					if Board:IsValid(curr) then
-						if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-							if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-								Board:AddAnimation(point,(i-1)..WATERFALL,1)
-							end
-						end
-					end
-				end
-			end
+			waterfallTile(point)
 		end
 	end
 end
@@ -203,21 +150,14 @@ end
 -- for use outside of this script
 function AddCustomWaterfall(point)
 	if modApi:getCurrentTileset() == TILESET then
-		for i,j in ipairs(order) do -- re-do waterfalls on tile
-			customAnim:rem(point,(i-1)..WATERFALL)
-			local curr = point + DIR_VECTORS[j]
-			if Board:IsValid(curr) then
-				if Board:GetTerrain(curr) == TERRAIN_WATER and Board:GetTerrain(curr) ~= TERRAIN_ICE then
-					if not Board:IsTerrain(curr,TERRAIN_LAVA) and not Board:IsAcid(curr) then
-						customAnim:add(curr,(i-1)..WATERFALL)
-					end
-				end
-			end
-		end
+		waterfallTile(point)
 	end
 end
 
--- add hooks
+-----------
+-- HOOKS --
+-----------
+
 local function EVENT_onModsLoaded()
 	modApi:addTestMechEnteredHook(HOOK_mapEntered)
 	modApi:addMissionStartHook(HOOK_mapEntered)
