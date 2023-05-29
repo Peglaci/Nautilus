@@ -17,7 +17,6 @@ local BASE_MISSIONS = {
   {"Trapped", LOW_THREAT},
 	{"Survive", LOW_THREAT},
 }
-require(path.."trapped_override")
 
 local Nautilus_Missions = {
   {"Incinerator",LOW_THREAT}, --Incomplete
@@ -39,6 +38,10 @@ function this:init(mod)
   -- create mission list
   local missionList = easyEdit.missionList:add("Nautilus_mission_list_id")
   missionList.name = "Nautilus"
+
+	--overrides
+	require(path.."trapped_override")
+	require(path.."objective_override")
 
   for _, table in ipairs(BASE_MISSIONS) do
     local name = "Mission_"..table[1]

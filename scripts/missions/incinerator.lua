@@ -16,6 +16,7 @@ ANIMS.Incinerator = Animation:new {
   Layer = ANIMS.LAYER_BACK,
 }
 
+
 Mission_Nautilus_Incinerator = Mission_Auto:new{
   Name = "Incinerator",
   Objectives = Objective("Incinerate 2 Vek",1),
@@ -25,12 +26,11 @@ Mission_Nautilus_Incinerator = Mission_Auto:new{
 }
 
 function Mission_Nautilus_Incinerator:GetRequirement()
-	return 2 --Cause of weird save data bug
-	--if GetDifficulty() == DIFF_EASY then
-	--	return 1
-	--else
-	--	return 2
-	--end
+	if GetDifficulty() == DIFF_EASY then
+		return 1
+	else
+		return 2
+	end
 end
 
 function Mission_Nautilus_Incinerator:IsValidTarget(space)
@@ -54,7 +54,7 @@ function Mission_Nautilus_Incinerator:IsValidTarget(space)
 end
 
 function Mission_Nautilus_Incinerator:StartMission()
-	--self.Objectives = Objective("Incinerate "..self:GetObjective().." Vek",1)
+	self.Objectives = Objective("Incinerate "..self:GetRequirement().." Vek",1)
 
   local choices = {}
   --Find all possible places
