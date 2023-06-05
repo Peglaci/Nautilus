@@ -211,6 +211,7 @@ function NAH_Blast_Charge_Skill:GetSkillEffect(p1, p2)
   crack.iCrack = EFFECT_CREATE
   ret:AddQueuedDamage(crack)
   
+  local chance = math.random()
   if chance > 0.5 then
 	  ret:AddVoice('Mission_Nautilus_BlastChargeExploded', -1)
   end
