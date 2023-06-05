@@ -6,7 +6,7 @@ local mod = modApi:getCurrentMod()
 local resourcePath = mod.resourcePath
 
 -- add pilot images
-modApi:appendAsset("img/portraits/npcs/Nautilus1.png", resourcePath.."img/corp/pilot.png")
+modApi:appendAsset("img/portraits/npcs/Nautilus.png", resourcePath.."img/corp/pilot.png")
 modApi:appendAsset("img/portraits/npcs/Nautilus_2.png", resourcePath.."img/corp/pilot_2.png")
 modApi:appendAsset("img/portraits/npcs/Nautilus_blink.png", resourcePath.."img/corp/pilot_blink.png")
 
