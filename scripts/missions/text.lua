@@ -28,12 +28,12 @@ TILE_TOOLTIPS = {
 
   Nautilus_Spike_Text = {"Crystal Spikes", "Deals 1 Damage to units entering the tile."},
 
-  NAH_Blast_Charge_Unpowered = {"Unpowerd Blast Charge", "Friendly units activate blast charges if they stand next to them at the end of your turn."},
+  NAH_Blast_Charge_Unpowered = {"Unpowered Blast Charge", "Friendly units activate blast charges if they stand next to them at the end of your turn."},
 
   NAH_Blast_Charge_Powered = {"Powered Blast Charge", "Preparing to explode, destroying itself and all surrounding units."},
 
   NAH_Tremor = {"Tremor", "This tile will become cracked."},
 
-  NAH_Minerals = {"Crystal Site","Run the driller over this location to mine its crystal."},
+  NAH_Minerals = {"Crystal Site","Run the Driller over this location to mine its crystal."},
 
 }
