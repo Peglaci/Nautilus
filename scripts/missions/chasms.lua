@@ -1,9 +1,9 @@
 
-local objText = "End with at least 8 chasm tiles"
+local objText = "End With 8 Chasm Tiles"
 
 Mission_Nautilus_Chasms = Mission_Infinite:new{
 	Name = "Chasms",
-	CrackCount = 16, 
+	CrackCount = 16,
 	GoalChasms = 8,
 	Objectives = Objective(objText,2,2),
 	UseBonus = false,
@@ -18,7 +18,7 @@ function Mission_Nautilus_Chasms:StartMission()
 			end
 		end
 	end
-	
+
 	self.CrackCount = math.min(#choices,self.CrackCount)
 	for i = 1, self.CrackCount do
 		local point = random_removal(choices)
@@ -27,7 +27,7 @@ function Mission_Nautilus_Chasms:StartMission()
 end
 
 function Mission_Nautilus_Chasms:GetChasmCount()
-	
+
 	local count = 0
 	for i = 0, 7 do
 		for j = 0, 7 do
@@ -36,9 +36,9 @@ function Mission_Nautilus_Chasms:GetChasmCount()
 			end
 		end
 	end
-	
+
 	return count
-	
+
 end
 
 function Mission_Nautilus_Chasms:GetCompletedObjectives()

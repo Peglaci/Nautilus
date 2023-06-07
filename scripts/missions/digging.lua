@@ -90,7 +90,7 @@ ANIMS.BurrowOpenClose = Animation:new{
 --MISSION
 Mission_Nautilus_Digging = Mission_Infinite:new{
   Name = "Vek Excavation",
-  Objectives = Objective("Dig up and kill the Fossilized Vek",2),
+  Objectives = Objective("Dig up and Kill the Fossilized Vek",2),
   ExcavatorPawn = "NAH_Excavator",
   Excavator = nil,
   DigSite = Point(-1,-1),
@@ -146,7 +146,7 @@ function Mission_Nautilus_Digging:GetCompletedObjectives()
   if self.DigSite == Point(-1,-1) and not Board:IsPawnAlive(self.PawnId) then
     return self.Objectives
   elseif Board:IsPawnAlive(self.PawnId) then
-    return Objective("Dig up and kill the Fossilized Vek (not killed)",1,2)
+    return Objective("Dig up and Kill the Fossilized Vek (not killed)",1,2)
   else
     return self.Objectives:Failed()
   end
@@ -290,7 +290,7 @@ NAH_ExcavatorSkill = Skill:new{
   Icon = "weapons/excavatorbucket.png",
   Damage = 0,
   LaunchSound = "/weapons/shift",
-  --EnemyPawn = "GlowingScorpion",
+  ImpactSound = "/impact/dynamic/rock", --Doesn't seem to work properly; it's just in the effect now
   Animation = "BurrowOpenClose",
   TipImage = {
     Unit = Point(2,2),
@@ -365,7 +365,8 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
 
   --LOG(GetCurrentMission().DigSite)
   --Mission things
-  if mission.DigSite and p1 == mission.DigSite then
+  local dig_site = mission.DigSite and p1 == mission.DigSite
+  if dig_site then
     ret:AddScript([[
       local mission = GetCurrentMission()
       Board:SetCustomTile(mission.DigSite,"ground_buried_empty.png")
@@ -378,6 +379,10 @@ function NAH_ExcavatorSkill:GetSkillEffect(p1,p2)
   damage.iTerrain = TERRAIN_ROAD
   damage.iCrack = EFFECT_CREATE
   ret:AddDamage(damage)
+
+  --Add impact sound
+  ret:AddDelay(.8)
+  ret:AddSound("/impact/dynamic/rock")
 
   return ret
 end
