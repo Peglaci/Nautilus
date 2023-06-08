@@ -129,7 +129,7 @@ function Env_Nautilus_Crumbling:ApplyStart() --Runs once before the effect
     end
   end)
 end
---TEST CRUBMLING THIGN
+
 function Env_Nautilus_Crumbling:GetAttackEffect(location,effect) --When instant, passes in effect
   local damage = SpaceDamage(location)
   if location ~= Point(0,0) then --Could be better
@@ -142,7 +142,7 @@ function Env_Nautilus_Crumbling:GetAttackEffect(location,effect) --When instant,
     damage.iDamage = 1
     effect:AddDamage(damage)
   end
-
+	effect:AddBurst(location,"Emitter_Crack_Start2",DIR_NONE)
   effect:AddScript(string.format("AddCustomWaterfall(%s)",location:GetString()))
   return effect
 end

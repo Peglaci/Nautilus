@@ -188,7 +188,7 @@ NAH_DrillerSkill = Skill:new{
   Class = "",
   Icon = "weapons/excavatorbucket.png",
   Damage = 1,
-  LaunchSound = "/weapons/shift",
+  LaunchSound = "/support/train/move",
   Animation = "BurrowOpenClose",
   CustomTipImage = "NAH_DrillerSkill_Tip",
   TipDigSpace = Point(2,3),
@@ -252,6 +252,7 @@ function NAH_DrillerSkill:GetSkillEffect(p1,p2)
     if DigLocation then
       damage = SpaceDamage(point)
       damage.sPawn = "CrystalRock3"
+      damage.sSound = "/enemy/digger_1/attack_queued" --Digger rock created
       ret:AddDamage(damage)
       ret:AddScript(string.format([[
         local mission = GetCurrentMission()
@@ -268,6 +269,7 @@ function NAH_DrillerSkill:GetSkillEffect(p1,p2)
   if doDamage then
     damage = SpaceDamage(target,self.Damage)
     damage.sAnimation = "explopush1_"..dir
+    damage.sSound = "/impact/generic/explosion"
     ret:AddDamage(damage)
   end
 
