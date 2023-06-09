@@ -25,7 +25,7 @@ CreatePilot{
 	Personality = "Nautilus_pilot_personality_id",
 	Rarity = 0,
 	Cost = 1,
-	Portrait = "npcs/Nautilus1",
+	Portrait = "npcs/Nautilus",
 	Voice = "/voice/rust",
 }
 
