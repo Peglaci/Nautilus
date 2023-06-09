@@ -52,6 +52,15 @@ function Env_Nautilus_Crumbling:IsValidTarget(space)
       tile ~= TERRAIN_RUBBLE
 end
 
+function Env_Nautilus_Crumbling:BlockSpawns()
+	local board_size = Board:GetSize()
+  for i, point in ipairs(Board) do
+    if self:PointIsEdge(point) then
+      Board:BlockSpawn(point,BLOCKED_PERM) --Is working?
+    end
+  end
+end
+
 function Env_Nautilus_Crumbling:PointIsEdge(point)
   local offset = Point(self.Distance,self.Distance)
   return false or
@@ -76,24 +85,13 @@ function Env_Nautilus_Crumbling:IsEffect()
 	return self:IsTurn() and #self.Locations ~= 0
 end
 
---Block initial location
-function Env_Nautilus_Crumbling:Start()
-  local board_size = Board:GetSize()
-  for i=0,board_size.x-1 do
-    for j=0,board_size.y-1 do
-      local point = Point(i,j)
-      if self:PointIsEdge(point) then
-        Board:BlockSpawn(point,BLOCKED_PERM) --Is working?
-      end
-    end
-  end
-end
-
 Env_Nautilus_Crumbling.BasePlan = Env_Nautilus_Crumbling.Plan
 
 function Env_Nautilus_Crumbling:Plan()
 	if not self:IsTurn() then --We plan on the previous turn, so we want to see if it's not the right turn
-    return self:BasePlan(self)
+    local base = self:BasePlan(self)
+		self:BlockSpawns() --Block spawns after you plan!
+		return base
   end
   return false
 end
@@ -104,30 +102,10 @@ function Env_Nautilus_Crumbling:ApplyStart() --Runs once before the effect
   effect:AddBoardShake(1.5)
   effect:AddSound("/props/ground_break_line")
   if Game:GetTurnCount() == 1 then
-	effect:AddDelay(2)
-	effect:AddScript("PrepareVoiceEvent('Mission_Nautilus_CrumblingReaction')")
+		effect:AddDelay(2)
+		effect:AddScript("PrepareVoiceEvent('Mission_Nautilus_CrumblingReaction')")
   end
   Board:AddEffect(effect)
-
-  local turn = Board:GetTurn()
-  --BLOCK NEW SPAWNS
-  modApi:conditionalHook( --THIS IS REALLY HACKY AND BAD IT NEEDS TO MOVE SOMEWEHERE ELSE
-  function()
-    return not Board or Board:GetTurn() > turn+1--We got to wait like, forever cause block spawn hates me
-  end,
-  function()
-    if Board then
-      local board_size = Board:GetSize()
-      for i=0,board_size.x-1 do
-        for j=0,board_size.y-1 do
-          local point = Point(i,j)
-          if self:PointIsEdge(point) then
-            Board:BlockSpawn(point,BLOCKED_PERM)--Is working?
-          end
-        end
-      end
-    end
-  end)
 end
 
 function Env_Nautilus_Crumbling:GetAttackEffect(location,effect) --When instant, passes in effect
@@ -154,9 +132,8 @@ function Env_Nautilus_Crumbling:SelectSpaces()
   for i=0,board_size.x-1 do
     for j=0,board_size.y-1 do
       local point = Point(i,j)
-      if self:PointIsEdge(point) and self:IsValidTarget(point) then --custom is valid needed
+      if self:PointIsEdge(point) and self:IsValidTarget(point) then
         ret[#ret+1] = point
-        --Board:BlockSpawn(point,BLOCKED_PERM)
       end
     end
   end
