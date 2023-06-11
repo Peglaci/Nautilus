@@ -3,8 +3,9 @@
 local mod = {
 	id = "Nautilus",
 	name = "Nautilus",
-	description = "A subterranean mining operation plagued by Vek, helmed by a man who wants you gone - or else wants your technology. Will you answer the call? ",
+	description = "A subterranean mining operation plagued by Vek, helmed by a man who wants you gone - or else wants your technology. Will you answer the call?",
 	icon = "scripts/icon.png",
+	version = "1.0.0",
 	dependencies = {
 		modApiExt = "1.18",
 		memedit = "1.0.2",
