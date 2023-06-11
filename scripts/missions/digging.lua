@@ -295,6 +295,7 @@ NAH_ExcavatorSkill = Skill:new{
   TipImage = {
     Unit = Point(2,2),
     Target = Point(2,1),
+    CustomPawn = "NAH_Excavator",
   }
 }
 
