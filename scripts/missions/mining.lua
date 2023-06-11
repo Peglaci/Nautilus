@@ -124,7 +124,7 @@ function Mission_Nautilus_Mining:StartMission()
   self.DigLocations = {}
 
   local choices = {}
-  local numDigSites = self.CrystalsNeeded*2+2  -- Number of dig sites to generate
+  local numDigSites = self.CrystalsNeeded*2+4  -- Number of dig sites to generate
   for k = 1, numDigSites do
     local validPoints = {}
     for i = 1, 6 do
