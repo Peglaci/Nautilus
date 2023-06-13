@@ -247,6 +247,7 @@ function NAH_DrillerSkill:GetSkillEffect(p1,p2)
     --First one is no delay so the delay is at the end
     local point = p1 + DIR_VECTORS[dir]*i
 		ret:AddBounce(point, -3)
+		ret:AddBurst(point, "Emitter_Crack_Start2", DIR_NONE)
 
     local DigLocation = mission.DigLocations and list_contains(mission.DigLocations, point)
     if DigLocation then
@@ -302,6 +303,7 @@ function NAH_DrillerSkill_Tip:GetSkillEffect(p1,p2)
     --First one is no delay so the delay is at the end
     local point = p1 + DIR_VECTORS[dir]*i
 		ret:AddBounce(point, -3)
+		ret:AddBurst(point, "Emitter_Crack_Start2", DIR_NONE)
 
     if point == tip_dig_space then
       damage = SpaceDamage(point)
