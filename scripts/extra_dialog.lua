@@ -41,8 +41,8 @@ local extraDialog = {
 			"Tanaka's Excavator is down.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"That Driller just blew up.",
+			"Tanaka's Driller is down.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
 			"Blast Charge disabled.",
@@ -76,10 +76,10 @@ local extraDialog = {
 			"[ Driller is offline ]",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"[ Blast Charge has been desabled ]"
+			"[ Blast Charge has been disabled ]",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"[ Blast Charge has been detonated ]"
+			"[ Blast Charge has been detonated ]",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
 			"[ Rail Layer is damaged ]",
@@ -97,12 +97,12 @@ local extraDialog = {
 			"This whole thing is going down!",
 		},
 		Mission_Nautilus_ExcavatorDestroyed = {
-			"That Excavator wasn't very durable.",
+			"We lost the Excavator.",
 			"We'll have to continue without the Excavator.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"We lost the Driller.",
+			"We'll have to continue without the Driller.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
 			"Blast Charge destroyed."
@@ -129,14 +129,13 @@ local extraDialog = {
 			"Update: Excavator unit destroyed",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Update: Driller unit destroyed",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Update: That Blast Charge was disabled.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Update: That Blast Charge has exploded.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
 			"Scanning: Rail Layer schematics\nDiagnostic: Recoverable",
@@ -153,23 +152,24 @@ local extraDialog = {
 			"The cave is collapsing. Unsurprising, given the precarious conditions it is maintained.",
 		},
 		Mission_Nautilus_ExcavatorDestroyed = {
-			"Excavator unit destroyed, what a waste.",
+			"Excavator unit destroyed, what a waste of resources.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Driller unit destroyed, what a waste of resources.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Blast Charge neutralized. Surely it could be used for something better?",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"A primitive yet remarkably effective technology.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"The Rail Layer has come to a halt.",
+			"I have radioed ahead and let Nautilus know their Rail Layer will be delayed.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"I have radioed ahead and let Nautilus know their Rail Layer will be delayed indefinitely.",
+			"That Rail Layer was exceedingly fragile, it is no surprise it was destroyed so easily.",
 		},
 	},
 	
@@ -183,14 +183,13 @@ local extraDialog = {
 			"The Excavator is destroyed.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"That Driller  is destroyed.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"Gone with a whimper."
+			"Gone with a whimper.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"Fulfilled its purpose."
+			"Blast Charge exploded.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
 			"The Rail Layer is damaged, but may be salvaged after the battle.",
@@ -212,20 +211,22 @@ local extraDialog = {
 			"Excavator unit's disabled!",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"No! We've lost the Driller!",
+			"Driller unit's disabled!",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Blast Charge safely disabled.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Blast Charge exploded!",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Rail Layer's wrecked - but not completely.",
+			"Based on my scans, I think the Rail Layer can still be repaired.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"There's... almost nothing left of the Rail Layer.",
+			"The poor crew. I... don't detect any survivors.",
 		},
 	},
 	
@@ -240,20 +241,22 @@ local extraDialog = {
 			"Did we really need that Excavator? We got this, #squad.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Okay, who let the Driller get destroyed?",
+			"Did we really need that Driller? We got this, #squad.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"One less Blast Charge.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Remind me to stay away from those things.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Well, the Rail Layer was slow before, but now it's not moving at all.",
+			"Nautilus should really put some weapons and armor on that thing.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"Now escort duty is over, let's have some fun!",
+			"If the Rail Layer wanted to survive, it would have moved faster, all right?",
 		},
 	},
 	
@@ -272,16 +275,18 @@ local extraDialog = {
 			"That Driller's scrap.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"That Blast Charge was disabled.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Blast Charge detonated. Stay sharp, #squad.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Protect the Rail Layer until the Vek are gone, might be salvageable.",
+			"Don't let the Rail Layer take another hit!",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"Dammit! We needed that Rail Layer intact!",
+			"Rail Layer's destroyed! We lost it.",
 		},
 	},
 	
@@ -328,20 +333,21 @@ local extraDialog = {
 			"Nautilus Excavator destroyed.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Unauthorized destruction of Nautilus property detected.",
+			"Nautilus Driller destroyed.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Blast Charge no longer functional.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Blast Charge ceased its own existence.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Nautilus Rail Layer partially disassembled.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"Nautilus Rail Layer disassembled.",
+			"Nautilus Rail Layer irrecoverable.",
 		},
 	},
 	
@@ -356,20 +362,22 @@ local extraDialog = {
 			"Dammit! We lost our Excavator.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Driller's wrecked!",
+			"Dammit! We lost our Driller.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Blast Charge neutralized.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Nautilus sure knows how to build explosives, I'll give them that.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Rail Layer's derailed, but Nautilus can get it running again.",
+			"Rail Layer's derailed, but from the looks of it, Nautilus can still fix it.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"Rail Layer's wrecked. Concentrate fire on the Vek.",
+			"Rail Layer's a lost cause - but this mission isn't.",
 		},
 	},
 	
@@ -384,20 +392,22 @@ local extraDialog = {
 			"Excavator unit recycled.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Driller unit has been recycled.",
+			"Driller unit recycled.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Blast Charge unit has been recycled.",
+			"Blast Charge unit recycled.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Blast Charge unit met its final destination.",
+			"Blast Charge unit unable to be recycled.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Rail Layer compromised but not destroyed.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"Rail Layer destroyed. Advise repurposing hull as a planter for saplings.",
 		},
 	},
 	
@@ -412,20 +422,22 @@ local extraDialog = {
 			"Such a waste! The Excavator looks beyond repair.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"I... I could repair the Driller, but the crew....",
+			"Such a waste! The Driller looks beyond repair.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"That Blast Charge was safely disassembled.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"The Blast Charges seem to work well.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Once the battle is over, I can get that Rail Layer running again.",
+			"Give me an engineering team, and I can get that Rail Layer up and running after the fight.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"...Even I couldn't repair that.",
+			"Just scraps left... no chance of repair.",
 		},
 	},
 	
@@ -440,20 +452,22 @@ local extraDialog = {
 			"Excavator's been lost, commander.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Driller's been destroyed, commander.",
+			"Driller's been lost, commander.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Blast Charge neutralized, commander.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Blast Charge detonated, commander.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Rail Layer took a hit, commander, but an engineering team could fix it.",
+			"Rail Layer's taken damage, commander, but Nautilus should be able to recover it.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"Rail Layer's destroyed, commander.",
+			"Not even all of Nautilus' engineering teams could put that back together again.",
 		},
 	},
 	
@@ -468,20 +482,22 @@ local extraDialog = {
 			"Excavator's hull integrity has been found lacking.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Driller's components have failed to defend it.",
+			"Driller's hull integrity has been found lacking.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Blast Charge components disassembled.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Blast Charge purpose fulfilled.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Nautilus Rail Layer has experienced an accident. Recommend execution and replacement of offending parts.",
+			"Nautilus Rail Layer is merely wounded. Defend our brother until the medics arrive.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"The Nautilus Rail Layer has fallen in battle. We must avenge it.",
+			"The Nautilus Rail Layer has sacrificed itself. Let this sacrifice not be in vain.",
 		},
 	},
 	
@@ -505,7 +521,7 @@ local extraDialog = {
 		},
 		Mission_Nautilus_BlastChargeExploded = {
 			"That Blast Charge went BOOM!",
-			"Kapow! That's what I'm talking about!"
+			"Kapow! That's what I'm talking about!",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
 			"Looks like the Rail Layer's stopped... but at least it's not completely destroyed!",
@@ -606,7 +622,7 @@ local extraDialog = {
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
 			"Well that's a bust.",
-			"Not ideal, but it works.",
+			"Not ideal, but it works for us.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
 			"This is almost fun, you know.",
@@ -633,20 +649,22 @@ local extraDialog = {
 			"That Excavator may be lost, but we keep fighting!",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"That Driller may be done for, but we're not!",
+			"That Driller may be lost, but we keep fighting!",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"Won't hurt anyone anymore.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Sounds like a blast!",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"It's not over yet #squad. But the Rail Layer can't take another hit!",
+			"The Rail Layer took a hit, but it's not over yet! Keep fighting!",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"Rail Layer is gone, but we've still got a chance to shine - defeat the Vek!",
+			"Let's not dwell on our failures. There are still people to protect!",
 		},
 	},
 
@@ -661,20 +679,22 @@ local extraDialog = {
 			"Excavator is down!",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"Driller has been destroyed!",
+			"Driller is down!",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"No more Blast Charge. A real shame.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Can I get one of those Blast Charges? For research purposes only.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"Nautilus can salvage their Rail Layer after we clean up the Vek.",
+			"Recovery teams won't be able to work safely until the Vek are gone.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"Things were hard enough for Nautilus without losing the Rail Layer too.",
+			"The Rail Layer was wrecked so easily. We'll need to research stronger materials.",
 		},
 	},
 
@@ -689,20 +709,22 @@ local extraDialog = {
 			"Feeble machine.",
 		},
 		Mission_Nautilus_DrillerDestroyed = {
-			"That Driller wasn't very durable.",
-			"That Driller's scrap.",
+			"We don't need that machine anyway!",
+			"Feeble machine.",
 		},
 		Mission_Nautilus_BlastChargeDestroyed = {
-			"That Blast Charge was destroyed without exploding."
+			"So easily broken.",
+			"Useless.",
 		},
 		Mission_Nautilus_BlastChargeExploded = {
-			"That Blast Charge went boom."
+			"Such crude weaponry.",
+			"Mildly amusing.",
 		},
 		Mission_Nautilus_RailLayerDamaged = {
-			"That Excavator wasn't very durable.",
+			"The Rail Layer has suffered damage, but perhaps it could be restored.",
 		},
 		Mission_Nautilus_RailLayerDestroyed = {
-			"That Excavator wasn't very durable.",
+			"...I shall leave the Rail Layer behind.",
 		},
 	}
 }

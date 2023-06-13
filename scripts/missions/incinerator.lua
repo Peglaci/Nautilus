@@ -162,9 +162,11 @@ local function HOOK_PawnKilled(mission,pawn)
 
 			local effect = SkillEffect()
 		  effect:AddBoardShake(1.5)
-			effect:AddDelay(1.8) --Add smoke
+			effect:AddSound("/props/ground_break_line")
+			effect:AddDelay(2)
 			local damage = SpaceDamage(mission.Incinerator)
 			damage.sAnimation = "ExploAir1"
+			damage.sSound = "/weapons/raining_volley_tile"
 			effect:AddDamage(damage)
 			Board:AddEffect(effect)
 		end

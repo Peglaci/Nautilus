@@ -55,19 +55,9 @@ function this:init(mod)
     local threat = table[2]
     require(path..string.lower(name))
     missionList:addMission(mission_name, threat)
-
-    --Icons
-    local icon = "img/strategy/mission/"..mission_name..".png"
-    local small_icon = "img/strategy/mission/small/"..mission_name..".png"
-
-    if file_exists(resourcePath..icon) then --Could convert to appendAssets?
-      modApi:appendAsset(icon, resourcePath..icon)
-    end
-    if file_exists(resourcePath..small_icon) then
-      modApi:appendAsset(small_icon, resourcePath..small_icon)
-    end
   end
 
+	require(path.."missionImages")
 	require(path.."text")
 end
 

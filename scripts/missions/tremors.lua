@@ -41,6 +41,7 @@ function Env_Tremors:GetAttackEffect(location, effect) --When instant, passes in
   damage.iCrack = EFFECT_CREATE
 	effect:AddDamage(damage)
   effect:AddBounce(location,2)
+  effect:AddBurst(location,"Emitter_Crack_Start",DIR_NONE)
   local odds = 50
   if math.random(1,100) <= odds then
     effect:AddDelay(.1)
@@ -68,7 +69,7 @@ function Env_Tremors:SelectSpaces()
   local ret = {}
   for k,v in ipairs(base) do
     local terrain = Board:GetTerrain(v)
-    if not Board:IsBuilding(v) and terrain ~= TERRAIN_WATER and terrain ~= TERRAIN_HOLE then
+    if not Board:IsBuilding(v) and not Board:IsPod(v) and terrain ~= TERRAIN_WATER and terrain ~= TERRAIN_HOLE then
       table.insert(ret,v)
     end
   end

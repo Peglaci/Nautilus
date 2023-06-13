@@ -31,14 +31,14 @@ ANIMS.Nautilus_spike_emerge = Animation:new{
 }
 
 local mine_damage = SpaceDamage(1)
-mine_damage.sSound = "Science_KO_Crack_OnKill"
+mine_damage.sSound = "/props/ice_break"
 mine_damage.sAnimation = "Nautilus_explo_spikes"
 Nautilus_Spike_Mine = { Image = "effects/spike.png", Damage = mine_damage, Tooltip = "Nautilus_Spike_Text", Icon = "effects/spikeicon.png", UsedImage = ""}
 Nautilus_Spike_Mine2 = { Image = "effects/spike2.png", Damage = mine_damage, Tooltip = "Nautilus_Spike_Text", Icon = "effects/spikeicon.png", UsedImage = ""}
 
-Mission_Nautilus_Spikes = Mission_Infinite:new{ 
+Mission_Nautilus_Spikes = Mission_Infinite:new{
 	Name = "Spikes",
-	MineCount = 9, 
+	MineCount = 9,
 	GlobalSpawnMod = 1,
 	SpawnStartMod = 0,
 	BonusPool = {BONUS_GRID, BONUS_MECHS, BONUS_KILL_FIVE, BONUS_BLOCK, BONUS_SELFDAMAGE},--removed pacifist (unreasonably hard) + debris (crowded map as-is)
@@ -54,18 +54,18 @@ function Mission_Nautilus_Spikes:StartMission()
 	for i,v in ipairs(self.BlockedUnits) do
 		self:GetSpawner():BlockPawns(v)
 	end
-	
+
 	local choices = {}
 	for i = 0, 7 do
 		for j = 0, 7 do
-			if 	Board:GetTerrain(Point(i,j)) == TERRAIN_ROAD or 
+			if 	Board:GetTerrain(Point(i,j)) == TERRAIN_ROAD or
 				Board:GetTerrain(Point(i,j)) == TERRAIN_FOREST or
 				Board:GetTerrain(Point(i,j)) == TERRAIN_SAND then
 			    choices[#choices+1] = Point(i,j)
 			end
 		end
 	end
-	
+
 	self.MineCount = math.min(#choices,self.MineCount)
 	for i = 1, self.MineCount do
 		local point = random_removal(choices)
@@ -77,18 +77,18 @@ function Mission_Nautilus_Spikes:StartMission()
 	for i,v in ipairs(self.BlockedUnits) do
 		self:GetSpawner():BlockPawns(v)
 	end
-	
+
 	local choices = {}
 	for i = 0, 7 do
 		for j = 0, 7 do
-			if 	Board:GetTerrain(Point(i,j)) == TERRAIN_ROAD or 
+			if 	Board:GetTerrain(Point(i,j)) == TERRAIN_ROAD or
 				Board:GetTerrain(Point(i,j)) == TERRAIN_FOREST or
 				Board:GetTerrain(Point(i,j)) == TERRAIN_SAND then
 			    choices[#choices+1] = Point(i,j)
 			end
 		end
 	end
-	
+
 	self.MineCount = math.min(#choices,self.MineCount)
 	for i = 1, self.MineCount do
 		local point = random_removal(choices)
@@ -96,4 +96,4 @@ function Mission_Nautilus_Spikes:StartMission()
 		Board:SetTerrain(point,TERRAIN_ROAD)
 		Board:SetItem(point,self.MineType2)
 	end
-end	
+end

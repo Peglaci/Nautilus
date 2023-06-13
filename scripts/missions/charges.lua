@@ -93,7 +93,8 @@ function Mission_Nautilus_Charges:NextTurn()
             modApi:runLater(function()
               Board:Ping(curr,GL_Color(255,162,0)) --Switches anim on same frame, kills ping
               Board:Ping(space,GL_Color(255,45,0))
-              Game:TriggerSound("/ui/battle/buff_armor")
+              Game:TriggerSound("/ui/map/flyin_rewards") --"/ui/battle/buff_armor"
+              --There's usually other sounds going on around it so this is not a big deal
             end)
             break
           end
@@ -172,6 +173,7 @@ NAH_Blast_Charge = Pawn:new{ --Maybe needs a description
 	IsPortrait = false,
   DefaultTeam = TEAM_NONE,
   ImpactMaterial = IMPACT_METAL,
+  SoundLocation = "/support/satellite/",
   SkillList = { "NAH_Blast_Charge_Skill" },
 }
 AddPawn("NAH_Blast_Charge")
@@ -194,6 +196,7 @@ function NAH_Blast_Charge_Skill:GetSkillEffect(p1, p2)
   local ret = SkillEffect()
 
   local damage = SpaceDamage(p1, DAMAGE_DEATH)
+  damage.sSound = "/impact/generic/explosion"
   --damage.sAnimation = "explo_fire1" --In death animation
   ret:AddQueuedDamage(damage)
 
@@ -210,11 +213,12 @@ function NAH_Blast_Charge_Skill:GetSkillEffect(p1, p2)
   crack.bHide = true
   crack.iCrack = EFFECT_CREATE
   ret:AddQueuedDamage(crack)
-  
+
+  local chance = math.random()
   if chance > 0.5 then
 	  ret:AddVoice('Mission_Nautilus_BlastChargeExploded', -1)
   end
-  
+
   return ret
 end
 

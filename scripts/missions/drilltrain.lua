@@ -40,6 +40,7 @@ function Mission_Nautilus_Drilltrain:StartMission()
 		for _,j in ipairs(order) do
 			local curr = Point(j,i)
 			Board:SetCustomTile(curr,"")
+			if j == 4 then Board:SetCustomTile(curr,"ground_pod_block.png") end
 			local obstacle = true
 			for j = DIR_START, DIR_END do
 				local adj = curr + DIR_VECTORS[j]

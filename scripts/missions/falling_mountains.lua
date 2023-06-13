@@ -59,6 +59,9 @@ function Env_Falling_Mountains:GetAttackEffect(location) --Runs for each locatio
 	]],location:GetString())
 
 	effect:AddDropper(damage,"units/mission/rock3.png")
+  effect:AddSound("/props/ground_break_tile")
+  effect:AddDelay(.8)
+  effect:AddSound("/impact/dynamic/rock")
 	return effect
 end
 
