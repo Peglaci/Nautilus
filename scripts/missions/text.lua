@@ -6,11 +6,8 @@ Global_Texts = {
   TipTitle_Env_Falling_Mountains = "Falling Mountains",
   TipText_Env_Falling_Mountains = "Mountains fall from the sky, killing any unit it lands on.",
 
-  TipTitle_Env_Nautilus_Spikes = "Crystal Spikes",
-  TipText_Env_Nautilus_Spikes = "Crystal spikes are littered across the terrain, dealing damage to the first unit to stand on them.",
-
-  TipTitle_Env_Nautilus_Spikes = "Tremors",
-  TipText_Env_Nautilus_Spikes = "Tremors cause cracks to form around a central point.",
+  TipTitle_Env_Nautilus_Tremors = "Tremors",
+  TipText_Env_Nautilus_Tremors = "Tremors cause cracks to form around a central point.",
 
 }
 
