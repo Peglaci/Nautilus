@@ -27,6 +27,8 @@ Mission_Nautilus_Incinerator = Mission_Auto:new{
   Name = "Incinerator",
   EasyObjective = Objective("Incinerate 1 Vek",1),
 	Objectives = Objective("Incinerate 2 Vek",1),
+	BonusPool = {BONUS_GRID, BONUS_MECHS, BONUS_KILL_FIVE, BONUS_SELFDAMAGE, BONUS_DEBRIS, BONUS_BLOCK},
+	--Took out BONUS_PACIFIST because it's hard for an already hard mission
 	Incinerator = Point(-1,-1),
   Incinerated = 0,
   VekN = 2
