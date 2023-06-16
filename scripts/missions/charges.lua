@@ -180,7 +180,7 @@ AddPawn("NAH_Blast_Charge")
 
 NAH_Blast_Charge_Skill = SelfTarget:new{
   Name = "Blast Charge",
-  Description = "Self destruct, destroying all adjacnt units. Building immune.",
+  Description = "Self destruct, destroying all adjacent units. Building immune.",
   Explosion = "",
   TipImage = {
     Unit = Point(2,2),
