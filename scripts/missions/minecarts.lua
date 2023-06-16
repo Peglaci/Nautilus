@@ -380,7 +380,7 @@ end
 local HOOK_pawnRevived = function(mission, pawn)
 	if mission and mission.ID == "Mission_Nautilus_Minecarts" then
 		if pawn:GetType():find("^Nautilus_Tunnel_Pawn") then
-			pawn:Kill()
+			pawn:Kill(false)
 		end
 	end
 end
