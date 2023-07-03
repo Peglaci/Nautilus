@@ -285,7 +285,7 @@ AddPawn("NAH_Excavator")
 
 NAH_ExcavatorSkill = Skill:new{
   Name = "Excavator",
-  Description = "Crack the tile beneath you and throw a rock. If on the dig site, throw the Vek in it instead.",
+  Description = "Crack the tile beneath you and throw a rock. If standing on the dig site, throw the Vek in it instead.",
   Class = "",
   Icon = "weapons/excavatorbucket.png",
   Damage = 0,

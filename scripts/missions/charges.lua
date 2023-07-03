@@ -47,7 +47,8 @@ function Mission_Nautilus_Charges:IsPointValid(space)
 			not Board:IsBuilding(space) and
       not Board:GetPawn(space) and
 			tile ~= TERRAIN_WATER and
-      tile ~= TERRAIN_MOUNTAIN
+      tile ~= TERRAIN_MOUNTAIN and
+      tile ~= TERRAIN_HOLE
 end
 
 function Mission_Nautilus_Charges:StartMission()

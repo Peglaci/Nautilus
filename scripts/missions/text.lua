@@ -9,6 +9,8 @@ Global_Texts["TipText_Env_Nautilus_Tremors"] = "Tremors cause cracks to form aro
 
 TILE_TOOLTIPS["NAH_Crumbling"] = {"Crumbling Tile","This tile will crumble out of existence."}
 
+TILE_TOOLTIPS["NAH_Dig_Site"] = {"Dig Site","Excavate the Vek by standing on this spot with the Excavator."}
+
 TILE_TOOLTIPS["NAH_Falling_Mountain"] = {"Falling Mountain","A mountain will fall here, killing any unit under it."}
 
 TILE_TOOLTIPS["Nautilus_Incinerator"] = {"Incinerator","Ground units pushed in will be shred by the incinerator."}
