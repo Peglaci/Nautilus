@@ -1,2 +1,8 @@
 Version 1.0.0
 Initial Release
+
+Version 1.0.1
+Minor fixes and changes, including:
+- Fixes some texts and typos
+- Small fixes/changes to missions: Mineral Excavation, Minecart Railway and Blast Charges. 
+- Prevents Pacifist (kill less than X Vek) to be paired with Incinerator
