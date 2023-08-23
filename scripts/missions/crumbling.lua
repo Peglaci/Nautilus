@@ -5,7 +5,7 @@ local mod = mod_loader.mods[modApi.currentMod]
 local path = mod.resourcePath
 
 -- add maps
-for i = 6, 9 do
+for i = 0, 9 do
 	modApi:addMap(path .."maps/crumbling".. i ..".map")
 end
 
