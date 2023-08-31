@@ -184,7 +184,7 @@ CrystalFirefly =
 		SkillList = { "FireflyAtk1" },
 		SoundLocation = "/enemy/firefly_soldier_1/",
 		DefaultTeam = TEAM_ENEMY,
-    Ranged = true,
+    Ranged = 1,
 		--Portrait = "portraits/scorpion.png",
 	}
 AddPawn("CrystalFirefly")
@@ -198,7 +198,7 @@ CrystalScarab =
 		SkillList = { "ScarabAtk1" },
 		SoundLocation = "/enemy/scarab_1/",
 		DefaultTeam = TEAM_ENEMY,
-    Ranged = true,
+    Ranged = 1,
 		--Portrait = "portraits/scorpion.png",
 	}
 AddPawn("CrystalScarab")
